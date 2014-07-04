@@ -1,0 +1,249 @@
+html, body {
+	width: 100%;
+	height: 100%;
+	font-family: "DINPro", "Museo Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.container {
+	margin-top: 5%;
+	max-height: 90%;
+	max-width: 100%;
+	display: inline;
+}
+
+											/* FIRST PAGE */
+
+div#inputs  {
+	width: 100%;
+	height: 100%;
+	/*background-color: gray;*/
+/*	position: fixed;*/
+	padding-top: 2%;
+}
+
+#inputs input,
+#inputs button,
+#inputs p {
+	text-transform: capitalize;
+	font-family: Helvetica Neue;
+	width: 80%;
+	margin: 1% 10% 1% 10%;
+	text-align: center;
+	font-size: 60px;
+
+	background-color: none;
+	box-shadow: none;
+	border-style: none;
+	border-bottom: 2px solid black;
+	line-height: 120px;
+}
+#inputs p {
+	font-size: 120px;
+	color: white;
+	border-bottom: none;
+}
+
+#inputs button {
+	border: solid 5px black;
+	width: 40%;
+	margin: 1% 30% 1% 30%;
+}
+
+#inputs button:hover {
+	background: yellow;
+}
+
+#inputs input:active {
+	cursor: text;
+}
+
+.secret {
+	background-image: url('../images/secret.png');
+	background-size: contain;
+	width: 100px;
+ 
+	opacity: 0.5;
+
+}
+
+										/* INTRODUCTION */
+#intro {
+	text-transform: capitalize;
+	font-family: "DINPro", "Museo Sans", Helvetica Neue;
+	width: 80%;
+	margin: 1% 10% 1% 10%;
+	text-align: center;
+	font-size: 60px;
+
+	background-color: none;
+	box-shadow: none;
+	border-style: none;
+	border-bottom: 2px solid black;
+	line-height: 120px;
+
+}
+
+#top
+ {
+	padding-top: 10%;
+	width: 100%;
+}
+
+/*+++ CORE GAME ++++*/
+
+h2, #num {
+	font-family: "DINPro";
+}
+
+.col {
+	display: inline-block;
+	width: 120px;
+	margin-left: 0.5%;
+	margin-right: 0.5%;
+	text-align: center;
+	opacity: 0;
+
+}
+
+
+#pix,
+#lex {
+	width: 100px;
+ 	height: 100px;
+	display: inline-block;
+	float: left;
+	align: center;
+	font-size: 100px;
+}
+
+#lex {
+	font-weight: 700;
+}
+
+#pix img {
+	min-height: 80%;
+	min-width: 80%;
+	opacity: 1;
+
+}
+
+
+#num {
+	text-align: center;
+	width: 100px;
+ 	height: 70px;
+ 	opacity: 0.5;
+ 	font-size: 40px;
+ 	margin-left: 5%;
+
+}
+
+
+
+.circle
+{
+/*width: 50px;
+height: 50px;
+line-height: 50px;
+border-radius: 25px;
+border-left: 12px;*/
+
+line-height: 100px;
+
+font-size: 32px;
+font-weight: 700;
+
+/*border: dotted 3px black;*/
+}
+	
+
+.circle-center
+{
+
+background-color: white;
+min-height: 120px;
+min-width: 120px;
+border-radius: 60px;
+
+text-align: center;
+padding: 1% 1% 1% 1%;
+
+opacity: 0.25;
+
+/*border: dotted 3px black;*/
+}
+	
+
+.letters {
+	position: fixed;
+	display: block;
+	text-align: center;
+	font-size: 120px;
+}
+
+
+/*++++ OLD REMNANTS +++++++*/
+#and p {
+	color: black;
+	padding: inherit;
+	opacity: 0;
+}
+
+
+@-webkit-keyframes demo {
+    0% {
+      
+    }
+    22% {
+        
+    }
+    77% {
+        
+    }
+    100% {
+        background-color: White;
+    }
+}
+    
+.active{
+  -webkit-animation-name: demo;
+    -webkit-animation-duration: 1000ms;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: linear;
+  -moz-animation-name: demo;
+    -moz-animation-duration: 1000ms;
+    -moz-animation-iteration-count: 1;
+    -moz-animation-timing-function: linear;
+}
+
+
+
+/*+++++++ AFTER GAME ++++++++*/
+
+#congrats {
+	top: -10%; /*hide it*/
+	left: 70%;
+	float: left;
+	display: none;
+	z-index: 5;
+	position: absolute;
+}
+
+#congrats img {
+		width: 140px;
+}
+
+#again p {
+	opacity: 0;
+	font-size: 50px;
+	float: right;
+	top: 0;
+	margin-right: 2%;
+	color: white;
+	border: solid 3px white;
+	font-weight: 700;
+	z-index: 5;
+	position: absolute;
+}
+
+
