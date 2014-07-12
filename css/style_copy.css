@@ -87,6 +87,8 @@ div#inputs  {
  {
 	padding-top: 10%;
 	width: 100%;
+	float:left;
+	left: 50%;
 }
 
 /*+++ CORE GAME ++++*/

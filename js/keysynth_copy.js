@@ -11,6 +11,19 @@ $(document).ready(function () {
 		// console.log(mouseY);
 	});
 
+
+	var KEYCODETOCHAR = {
+		// 8:"Backspace",9:"Tab",13:"Enter",16:"Shift",17:"Ctrl",18:"Alt",19:"Pause/Break",20:"Caps Lock",27:"Esc",32:"Space",33:"Page Up",34:"Page Down",35:"End",36:"Home",37:"Left",38:"Up",39:"Right",40:"Down",45:"Insert",46:"Delete",
+		// 48:"0",49:"1",50:"2",51:"3",52:"4",53:"5",54:"6",55:"7",56:"8",57:"9",
+		65:"A",66:"B",67:"C",68:"D",69:"E",70:"F",71:"G",72:"H",73:"I",74:"J",75:"K",76:"L",77:"M",78:"N",79:"O",80:"P",81:"Q",82:"R",83:"S",84:"T",85:"U",86:"V",87:"W",88:"X",89:"Y",90:"Z"
+	};
+
+	var KEYCHARTOCODE = {
+		// "Backspace":8,"Tab":9,"Enter":13,"Shift":16,"Ctrl":17,"Alt":18,"Pause/Break":19,"Caps Lock":20,"Esc":27,"Space":32,"Page Up":33,"Page Down":34,"End":35,"Home":36,"Left":37,"Up":38,"Right":39,"Down":40,"Insert":45,"Delete":46,
+		// "0":48,"1":49,"2":50,"3":51,"4":52,"5":53,"6":54,"7":55,"8":56,"9":57,
+		"A":65,"B":66,"C":67,"D":68,"E":69,"F":70,"G":71,"H":72,"I":73,"J":74,"K":75,"L":76,"M":77,"N":78,"O":79,"P":80,"Q":81,"R":82,"S":83,"T":84,"U":85,"V":86,"W":87,"X":88,"Y":89,"Z":90
+	};
+
 	var SOUNDS = {
 	
 			"A" : "audio/Eating apple soundsnap.wav" ,
@@ -51,7 +64,7 @@ $(document).ready(function () {
 			"9" : "audio/9.wav" ,
 			"success" : "audio/Peppa.mp3",
 			"failure" : "audio/3.wav"
-	}
+	};
 	var PICS = {
 		"A" : "apple2.svg",
 		"B" : "bee2.svg",
@@ -79,7 +92,9 @@ $(document).ready(function () {
 		"X" : "xylophone.svg",
 		"Y" : "yawn.svg",
 		"Z" : "zzz.svg"
-	}
+	};
+
+
 
 	var picArray = $.map(PICS, function(value, index) {
 	    return [value];
@@ -124,9 +139,24 @@ $(document).ready(function () {
     var hex = c.toString(16);
     return hex.length == 1 ? "0" + hex : hex;
 	}
+
 	function rgbToHex(r, g, b) { // http://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
 	    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 	}
+
+	function flashColours(div,timeOut,number) {
+						
+		for (var i = 0; i < number; i++) {
+			var hue = 'rgba(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.random() + 0.3) + ')';
+			var newhue = 'rgba(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.random() + 0.3) + ')';
+		
+			$(div).css("border-color", hue);
+			$(div).animate({
+				borderColor : newhue
+			}, timeOut);
+		};
+		
+	} 
 
 
 	function makeGaps(stringLength) {
@@ -161,6 +191,14 @@ $(document).ready(function () {
 		};
 
 		return colsString.join('');
+
+	};
+
+	function getOneRight(){
+
+	};
+
+	function loseALife() {
 
 	};
 
@@ -288,6 +326,8 @@ $(document).ready(function () {
 			randomColours.push(random_colour);
 						// .css("width", colWidth);	
 		};
+
+			$('#top').html
 		
 		$('.col').eq(0).addClass('offset-by-' + divOffsetWords)
 						.find("#pix")
@@ -363,12 +403,8 @@ $(document).ready(function () {
 				$('.col').css("opacity", 1);
 
 				var random_colour = ('#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6));
-
-				keyCodeToChar = {8:"Backspace",9:"Tab",13:"Enter",16:"Shift",17:"Ctrl",18:"Alt",19:"Pause/Break",20:"Caps Lock",27:"Esc",32:"Space",33:"Page Up",34:"Page Down",35:"End",36:"Home",37:"Left",38:"Up",39:"Right",40:"Down",45:"Insert",46:"Delete",48:"0",49:"1",50:"2",51:"3",52:"4",53:"5",54:"6",55:"7",56:"8",57:"9",65:"A",66:"B",67:"C",68:"D",69:"E",70:"F",71:"G",72:"H",73:"I",74:"J",75:"K",76:"L",77:"M",78:"N",79:"O",80:"P",81:"Q",82:"R",83:"S",84:"T",85:"U",86:"V",87:"W",88:"X",89:"Y",90:"Z"};
-
-				keyCharToCode = {"Backspace":8,"Tab":9,"Enter":13,"Shift":16,"Ctrl":17,"Alt":18,"Pause/Break":19,"Caps Lock":20,"Esc":27,"Space":32,"Page Up":33,"Page Down":34,"End":35,"Home":36,"Left":37,"Up":38,"Right":39,"Down":40,"Insert":45,"Delete":46,"0":48,"1":49,"2":50,"3":51,"4":52,"5":53,"6":54,"7":55,"8":56,"9":57,"A":65,"B":66,"C":67,"D":68,"E":69,"F":70,"G":71,"H":72,"I":73,"J":74,"K":75,"L":76,"M":77,"N":78,"O":79,"P":80,"Q":81,"R":82,"S":83,"T":84,"U":85,"V":86,"W":87,"X":88,"Y":89,"Z":90};
-
-				var letter = keyCodeToChar[e.which || e.keyCode];
+			
+				var letter = KEYCODETOCHAR[e.which || e.keyCode];
 				var letterSound = SOUNDS[letter];
 				var letterDivs = $('#lex p');
 
@@ -385,8 +421,6 @@ $(document).ready(function () {
 
 				}
 
-				
-			
 				letters_function(name1LettersArray); //  play the game
 
 				function letters_function (letters) {  // define the main game function
@@ -407,6 +441,9 @@ $(document).ready(function () {
 								 			fontSize: realFontSize
 										 		}, 3000)
 						;
+
+						$('#top').html
+
 
 						setTimeout(function() {
 										 			
@@ -433,31 +470,39 @@ $(document).ready(function () {
 
 						letters.splice(0, 1);
 
+					} else if (typeof letter === "undefined") {
+
+						    return;
+
 					} else {
 
 						var maths = Math.random();
+						console.log(maths);
+						var maths = (0.3 < maths || 0.8 > maths) ? maths : 0.5;
+						console.log(maths);
 	
 						var correctImg = (($.inArray(PICS[letter], availablePics))+1) ? PICS[letter] : "question.svg";
-						
-						if (typeof correctImg === "undefined") {
-						    correctImg = "question.svg";
-						}
 
 						$('.letters')
-							.html("<span id='pix'><img  src='images/" + correctImg + 
-												"' /></span>")
+							.html("<span id='pix'><img src='images/" + correctImg + 
+												"' /></span> <span id='pix'>" + letter  + "</span>")
 								 .css("display", "inline-block")
+								 .css("margin-left", "10%")
 								 .css("text-align", "center")
-								 .css("left", "-2%")
+								 // .css("left", "-2%")
 								 .css("opacity", "1")
 								 .css("background-color", random_colour)
-								 .css("border", "solid black 3px")
-								 
-								 .css("font-size", 20 + (Math.floor(maths * 256)) )
+								 .css("border", "solid white 20px")
+								 .css("font-size", "40px" )
 								 .animate(
-								 { marginLeft: (Math.floor(maths * screen.width)) + 'px' },
-								 { duration: 1000, easing: 'easeOutBounce'}
+								 { marginLeft: (Math.floor(maths * screen.width)) -200 + 'px' },
+								 { duration: 500
+								 	// , easing: 'easeOutBounce'
+								 }
 								 	);
+
+								 flashColours('.letters',200,20);
+
 			
 					};
 				};
