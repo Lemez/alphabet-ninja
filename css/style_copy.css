@@ -178,12 +178,17 @@ opacity: 0.25;
 
 .letters {
 	position: fixed;
+	/*width: 20%;*/
+	left: 10%;
 	display: block;
 	text-align: center;
 	font-size: 120px;
 }
 
-
+/*.letters span {
+	max-width: 200px;
+}
+*/
 /*++++ OLD REMNANTS +++++++*/
 #and p {
 	color: black;
