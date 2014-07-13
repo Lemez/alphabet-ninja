@@ -116,6 +116,13 @@ div#inputs  {
 
 /*+++ CORE GAME ++++*/
 
+#content {
+	width: 100%;
+	margin: 0 auto 0 auto;
+	text-align: center;
+}
+
+
 h2, #num {
 	font-family: "DINPro";
 }
@@ -124,6 +131,7 @@ h2, #num {
 	/*top: 30%;*/
 	display: inline-block;
 	width: 150px;
+	min-width: 120px;
 	margin-left: 0.5%;
 	margin-right: 0.5%;
 	text-align: center;
@@ -147,6 +155,7 @@ h2, #num {
 /*	width: 150px;
  	height: 150px;*/
  	font-size: 150px;
+ 	text-align: center;
 
 }
 
