@@ -206,8 +206,11 @@ h2, #num {
 }
 
 #pix img {
-	min-height: 70%;
-	min-width: 70%;
+	width: 100px;
+	height: 100px;
+
+	min-height: 100px;
+	min-width: 100px;
 	opacity: 1;
 
 }
