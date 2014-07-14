@@ -3,6 +3,8 @@
 
 $(document).ready(function () {
 
+	
+
 	$(document).mousemove(function (e) {
 	
 		var mouseX = e.pageX; // e.pageX - gives you the X position.
@@ -10,7 +12,6 @@ $(document).ready(function () {
 		// console.log(mouseX);
 		// console.log(mouseY);
 	});
-
 
 	var KEYCODETOCHAR = {
 		// 8:"Backspace",9:"Tab",13:"Enter",16:"Shift",17:"Ctrl",18:"Alt",19:"Pause/Break",20:"Caps Lock",27:"Esc",32:"Space",33:"Page Up",34:"Page Down",35:"End",36:"Home",37:"Left",38:"Up",39:"Right",40:"Down",45:"Insert",46:"Delete",
@@ -101,43 +102,43 @@ $(document).ready(function () {
 	};
 
 	var HEBREWSOUNDS = {
-				"א" : "audio/Male snoring with effects -sounds like a lion-_Nightingale Music Productions.wav" ,
-				"ב" : "audio/Animals duck quack -nature-_Nightingale Music Productions_13810.wav",
-				"ג" : "audio/Acoustic BPM 110 32_Shriek_2011.wav" ,
-				"ד" : "audio/human bee.wav" ,
-				"ה" : "audio/hippo.wav",
-				"ו" : "audio/HOSPITAL BED CURTAIN OP.wav",
-				"ז" : "audio/Horse two horses neigh step in dirt_BLASTWAVEFX_00173.wav" ,
-				"ח" : "audio/13 year old Tabby Cat - Meows-Irritated.wav" ,
-				"ט" : "audio/parrot 12007201.wav" ,
-				"י" : "audio/owl.wav" ,
-				"כ" : "audio/EFX INT Dog Panting 05 AAA.wav" ,
-				"ל" : "audio/Submarine sonar ping multiple_BLASTWAVEFX_18257.wav" ,
-				"מ" : "audio/rain car interior wind shield wipers on.wav" ,
-				"נ" : "audio/river churnet water 1998.wav",
-				"ס" : "audio/horse.wav" ,
-				"ע" : "audio/HUMAN VOICE YAWN 01.wav" ,
-				"פ" : "audio/CARTOON TROMBONE DEEP SLIDE 01.wav" ,
-				"צ" : "audio/Frogs croaking close in a loop.wav" ,
-				"ק" : "audio/LTMacaque.wav" ,
-				"ר" : "audio/Bartender shakes ice and drink in metal ice shaker_AOS01016.wav",
-				"ש" : "audio/Late 20s Woman Says Shhh-Shush-Soft-Choppy.wav" ,
-				"ת" : "audio/Eating apple soundsnap.wav" ,
-				// "I" : "audio/Slurp_BLASTWAVEFX_13030.wav" ,
-				// "J" : "audio/Water  fish swimming.wav" ,
-				// "K" : "audio/doing - mouth harp 8 clean two kinds.wav" ,
-				// "N" : "audio/Male blow nose_BLASTWAVEFX_19918.wav" ,
-				// "R" : "audio/chewing carrot.wav" ,
-				// "S" : "audio/sheep.wav" ,
-				// "T" : "audio/Trumpet-37 D BPM 77.wav" ,
-				// "V" : "audio/Violin G major scale up down_BLASTWAVEFX_27410.wav" ,
-				// "X" : "audio/Pretty xylophone melody_AOS00288.wav" ,
-				"success" : "audio/Peppa.mp3",
-				"other" : "audio/3.wav",
-				"correct" : "audio/p.wav",
-				"rocket"  : "audio/Rocket launch 05_SFXBible_ss06674.wav",
-				"tick"	: "audio/Data beep counter tick 1.wav"
-			};	
+		"א" : "audio/Male snoring with effects -sounds like a lion-_Nightingale Music Productions.wav" ,
+		"ב" : "audio/Animals duck quack -nature-_Nightingale Music Productions_13810.wav",
+		"ג" : "audio/Acoustic BPM 110 32_Shriek_2011.wav" ,
+		"ד" : "audio/human bee.wav" ,
+		"ה" : "audio/hippo.wav",
+		"ו" : "audio/HOSPITAL BED CURTAIN OP.wav",
+		"ז" : "audio/Horse two horses neigh step in dirt_BLASTWAVEFX_00173.wav" ,
+		"ח" : "audio/13 year old Tabby Cat - Meows-Irritated.wav" ,
+		"ט" : "audio/parrot 12007201.wav" ,
+		"י" : "audio/owl.wav" ,
+		"כ" : "audio/EFX INT Dog Panting 05 AAA.wav" ,
+		"ל" : "audio/Submarine sonar ping multiple_BLASTWAVEFX_18257.wav" ,
+		"מ" : "audio/rain car interior wind shield wipers on.wav" ,
+		"נ" : "audio/river churnet water 1998.wav",
+		"ס" : "audio/horse.wav" ,
+		"ע" : "audio/HUMAN VOICE YAWN 01.wav" ,
+		"פ" : "audio/CARTOON TROMBONE DEEP SLIDE 01.wav" ,
+		"צ" : "audio/Frogs croaking close in a loop.wav" ,
+		"ק" : "audio/LTMacaque.wav" ,
+		"ר" : "audio/Bartender shakes ice and drink in metal ice shaker_AOS01016.wav",
+		"ש" : "audio/Late 20s Woman Says Shhh-Shush-Soft-Choppy.wav" ,
+		"ת" : "audio/Eating apple soundsnap.wav" ,
+		// "I" : "audio/Slurp_BLASTWAVEFX_13030.wav" ,
+		// "J" : "audio/Water  fish swimming.wav" ,
+		// "K" : "audio/doing - mouth harp 8 clean two kinds.wav" ,
+		// "N" : "audio/Male blow nose_BLASTWAVEFX_19918.wav" ,
+		// "R" : "audio/chewing carrot.wav" ,
+		// "S" : "audio/sheep.wav" ,
+		// "T" : "audio/Trumpet-37 D BPM 77.wav" ,
+		// "V" : "audio/Violin G major scale up down_BLASTWAVEFX_27410.wav" ,
+		// "X" : "audio/Pretty xylophone melody_AOS00288.wav" ,
+		"success" : "audio/Peppa.mp3",
+		"other" : "audio/3.wav",
+		"correct" : "audio/p.wav",
+		"rocket"  : "audio/Rocket launch 05_SFXBible_ss06674.wav",
+		"tick"	: "audio/Data beep counter tick 1.wav"
+	};	
 
 	var HEBREWPICS = {
 		"א" : "lion 2.svg",
@@ -196,7 +197,7 @@ $(document).ready(function () {
 		"," : "ת",
 		"." : "ץ",
 		";" : "ף"
-	}
+	};
 
 	var HEBREWSOFIT = {
 		"I" : "ן",
@@ -204,12 +205,11 @@ $(document).ready(function () {
 		"." : "ץ",
 		";" : "ף"
 	};
-
 	
 	var LANGUAGETODICT = {
 		'english' : [PICS, SOUNDS],
 		'hebrew' : [HEBREWPICS, HEBREWSOUNDS]
-	}
+	};
 
 	// image condition
 	// Get the size of an object by using  defined function
@@ -227,7 +227,7 @@ $(document).ready(function () {
 	//     set: function (proxy, index, value) {
 	//         index = parseInt(index);
 	//         return index < 0 ? (arr[arr.length + index] = value) : (arr[index] = value);
-	//     },
+	//     }, 
 	//     get: function (proxy, index) {
 	//         index = parseInt(index);
 	//         return index < 0 ? arr[arr.length + index] : arr[index];
@@ -246,16 +246,16 @@ $(document).ready(function () {
 	function shadeRGBColor(color, percent) { // http://stackoverflow.com/questions/5560248/programmatically-lighten-or-darken-a-hex-color-or-rgb-and-blend-colors
     var f=color.split(","),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=parseInt(f[0].slice(4)),G=parseInt(f[1]),B=parseInt(f[2]);
     return "rgb("+(Math.round((t-R)*p)+R)+","+(Math.round((t-G)*p)+G)+","+(Math.round((t-B)*p)+B)+")";
-	}
+	};
 
 	function componentToHex(c) {
     var hex = c.toString(16);
     return hex.length == 1 ? "0" + hex : hex;
-	}
+	};
 
 	function rgbToHex(r, g, b) { // http://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
 	    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-	}
+	};
 
 	function flashColours(div,timeOut,number) {
 						
@@ -268,8 +268,7 @@ $(document).ready(function () {
 				borderColor : newhue
 			}, timeOut);
 		};
-	} 
-
+	};
 
 	function makeGaps(stringLength) {
 
@@ -303,7 +302,6 @@ $(document).ready(function () {
 		};
 
 		return colsString.join('');
-
 	};
 
 	function getOneRight(){
@@ -314,9 +312,9 @@ $(document).ready(function () {
 
 	function startRocket(time){
 		setTimeout(function() {
-			$('#intro').addClass("hovered");
+			$('#intro').addClass("shake");
 				},time);
-	}
+	};
 		
 	function getPosition(e) {
 		var coordinates = e.offset();
@@ -365,8 +363,9 @@ $(document).ready(function () {
 	$('#flags label img').on("click", function() {
 		$(this).addClass('selected');
 		$(this).parent().siblings().find('img').removeClass('selected');
-		
 	});
+
+
 
 	$('#inputs').keypress(function(e) { // MAKE enter work as submit button
         if(e.which == 13) {
@@ -378,6 +377,7 @@ $(document).ready(function () {
 	$('.submit').on("click", function() {
 
 		var language = $('input:radio:checked').val();
+		if (language=='hebrew') $('#intro h2').text(" ? מוכן ");
 		var dictsToUse = LANGUAGETODICT[language];
 		var MYPICS = dictsToUse[0];
 		var MYSOUNDS = dictsToUse[1];
@@ -396,6 +396,10 @@ $(document).ready(function () {
 	    	playSound('tick');
 
 	        var el = document.getElementById(element);
+
+	        // if(seconds<=3 && seconds!=0 )  {
+	        // 	$("div#rocket div").removeClass("shake").addClass("hovered");
+	        // };
 	        
 	        if(seconds == 0) {
 	            // el.innerHTML = "countdown's over!";    
@@ -408,6 +412,8 @@ $(document).ready(function () {
 	            	height: '150%',
 	            	opacity : 0
 	            },3000);
+
+	            $("div#rocket div").addClass("liftoff");
 
 	           
 				setTimeout(function() {
@@ -424,358 +430,280 @@ $(document).ready(function () {
 	        seconds--;
 	        
 	    }, 1000);
-	}
+	};
 		
-		var name1String = $('input:text:first').val();
+	var name1String = $('input:text:first').val();
 
-		if (language != 'hebrew') name1String = name1String.toUpperCase();
+	if (language != 'hebrew') name1String = name1String.toUpperCase();
 
-		var picArray = $.map(MYPICS, function(value, index) {return [value];});
-		var availablePics = [];
-		var size = Object.size(MYPICS);
-		for (var i = 0; i < size; i++) {var thing = picArray[i];availablePics.push(thing);}
+	var picArray = $.map(MYPICS, function(value, index) {return [value];});
+	var availablePics = [];
+	var size = Object.size(MYPICS);
+	for (var i = 0; i < size; i++) {var thing = picArray[i];availablePics.push(thing);}
 
+	var NumsCols = makeCols(name1String.length);
 
-									// var widths = ["zero","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve"];
-									// if ((name1String.length % 2) == 0) {
-									// 	var evenLength = name1String.length;
-									// } else {
-									// 	var evenLength = name1String.length + 1;
-									// };
-									// var offsetSize = (10 - evenLength);
-									// var name1WidthWords = widths[(evenLength/2)];  // sort out number of columns
-									// var GapsStringNameOne = makeGaps(name1String.length);
-									// var NumsStringNameOne = makeNums(name1String.length);
-									// var divOffset = offsetSize/2;
-									// var divOffsetWords = widths[divOffset];
-									// $('#name1').attr('class', name1WidthWords + ' columns').append(GapsStringNameOne);
+	$('#content').append(NumsCols);
+	var cols = $('.col');
 
-		var NumsCols = makeCols(name1String.length);
+	var name1LettersArray = [];
+	var name1LettersArray = name1String.split('');
+
+	var imageSources = [];
+	var randomColours = [];
+
+	for (var i = 0; i < name1LettersArray.length; i++) {
+
+		if (language == 'hebrew') {
+			var j = -(i+1);
+		} else {
+			var j = i;
+		}
+
+		var random_colour = ('#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6));
+		
+		var textValue = i+1;
+		imageSources.push(MYPICS[name1LettersArray[i]]);
+
+		cols.eq(j)
+					.append('<div id="num" class="row circle">' + textValue + '</div>')
+					.append('<div id="pix" class="row circle-center"><img src="images/question.svg" ></div>')
+					.append('<div id="lex" class="row"><p></p></div>');
+				
+		cols.eq(j).find("#num").css("color", random_colour);
+		randomColours.push(random_colour);			
+	};
 	
-		$('#content').append(NumsCols);
-		var cols = $('.col');
+	var i = 0;
+	if (language == 'hebrew') {var j = -1;} else {var j = i;};
 
-		var name1LettersArray = [];
-		var name1LettersArray = name1String.split('');
+	$('.col').eq(j)// .addClass('offset-by-' + divOffsetWords)
+					.find("#pix")
+					.css("opacity", "1");
 
-		var imageSources = []
-		var randomColours = []
+	var imageDivs = $('#pix img');
 
-		for (var i = 0; i < name1LettersArray.length; i++) {
+	$(imageDivs.get(j)).attr("src", "images/" + imageSources[i]);
+	
+	$('#inputs').hide();
+	$('.container').css("display", "inline");
+	
+	countdown('countdown', 5);
 
-			if (language == 'hebrew') {
-				var j = -(i+1);
-			} else {
-				var j = i;
-			}
+	startgame();
+
+	function startgame(){
+
+		$(document).on("keydown", function (e) {
+
+			if ($('#intro').css("display") == 'block') return false;
+			$('#intro').hide();
+			$('.letters').hide();
+			$('.col').css("opacity", 1);
 
 			var random_colour = ('#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6));
+		
+			if (language == 'hebrew') {var letter = HEBREWLETTERS[KEYCODETOCHAR[e.which || e.keyCode]]; }
+			else {var letter = KEYCODETOCHAR[e.which || e.keyCode];}
 			
-			var textValue = i+1;
-			imageSources.push(MYPICS[name1LettersArray[i]]);
+			var letterSound = MYSOUNDS[letter];
+			var letterDivs = $('#lex p');
 
-			// console.log(name1LettersArray);
-			// console.log(i);
-			// console.log(name1LettersArray[i]);
+			if (typeof letter === "undefined" ) {							    
+			   	// playSound(other);
+			} else {
+				playSound(letter); //  play the audio
+			}
 
-			cols.eq(j)
-						.append('<div id="num" class="row circle">' + textValue + '</div>')
-						.append('<div id="pix" class="row circle-center"><img src="images/question.svg" ></div>')
-						.append('<div id="lex" class="row"><p></p></div>');
+			letters_function(name1LettersArray); //  play the game
+
+			function letters_function (letters) {  // define the main game function
+
+				if ($.inArray(letter, letters) == 0) {
+
+					var realFontSize = $('#lex p').css("font-size");
+
+					var counter = (name1String.length - letters.length);
+					var nextCounter = counter + 1;
+
+					if (language == 'hebrew') {
+						counter = (name1LettersArray.length-1);
+						nextCounter = (counter-1);
+					}
+
+					letterDivs.eq(counter)
+									.text(letter) // problem here - get() does not work like eq()
+									.css("font-size", (Math.floor(Math.random() * 800))) // create random font-size to animate from
+									.css("display", "inline-block")
+							 		.css("color", randomColours[counter])
+							 		// .css("text-shadow", (5 + (Math.floor(maths * 10))) + "px " + (5 + (Math.floor(maths * 10))) + "px " + "darkgray")
+							 		.animate({
+							 			fontSize: realFontSize
+									 		}, 3000);
+
+					setTimeout(function() {							
+						var myImage = "images/" + imageSources[0];
 					
-			cols.eq(j).find("#num").css("color", random_colour);
-			randomColours.push(random_colour);
+						console.log(counter);
+						console.log(nextCounter);
+						console.log(imageSources);
+						console.log((imageSources[0]));
 						
-		};
-		
-		var i = 0;
-		if (language == 'hebrew') {var j = -1;} else {var j = i;}
 
-		$('.col').eq(j)// .addClass('offset-by-' + divOffsetWords)
-						.find("#pix")
-						.css("opacity", "1");
+						$(".col").eq(counter).find(".circle-center").css("background-color", randomColours[counter]);
+						$(".col").eq(counter).find("#pix").css("border-color", "rgba(255,255,255,0.25)")
+						$(".col").eq(nextCounter)
+									.find("#pix")
+									.animate({
+										opacity : 1},
+										2000);
 
-		var imageDivs = $('#pix img');
+						// imageDivs.eq(counter+1).css("border", "solid white 20px");
+						// flashColours($(".col").eq(counter+1)
+						// 			.find(".circle-center"),200,10);
 
-		$(imageDivs.get(j)).attr("src", "images/" + imageSources[i]);
+						if (name1LettersArray.length != 0) { 
+							imageDivs.eq(nextCounter)
+									.attr("src", myImage)
+											.animate({
+												opacity : 0},
+														1000)
+											.animate({
+												opacity : 1},
+													 	1000)
+											.animate({
+												opacity : 0},
+														1000)
+											.animate({
+												opacity : 1},
+													 	1000);
 
+							setTimeout(function() {
+								playSound("correct");
+										}, (4000));
+						}
+						
+					}, (3000));
 
-		// $('#content .col').eq(0)
-		// 				 .addClass('offset-by-' + divOffsetWords)
-		// ;
-		
-		// alert(divOffsetWords);
-		// $('#name2').attr('class','sixteen columns').append(NumsStringNameOne);
+					letters.splice(0, 1);
+					imageSources.splice(0, 1);
+					console.log(letters);
 
-		// makeGaps(name1LettersArray);
-		// makeNums(name1LettersArray);
-
-		// var imageDivs = $('#name1').find("img");
-		// var numDivs = $('#name2').find("span");
-		// var colSpansPix = $('#pix');
-		// var colSpansNum = $('#num');
-
-		// for (var i = 0; i < name1LettersArray.length; i++) {
-
-		// 	// numDivs.eq(i).html(i);
-		// 	colSpansPix.eq(i)
-		// 				.append('<img src= "images/' + MYPICS[name1LettersArray[i]] + '" />');
-		// 					// .css("width", 90/name1LettersArray.length + '%')
-		// 	// var colWidth = colSpansPix.eq(i).width;
-		// 	colSpansNum.eq(i)
-		// 				.text((i+1));
-		// 				// .find("#num")
-		// 				// .css("width", colWidth);				
-		// };
-			
-		// name2String = $('input:text:last').val().toUpperCase();
-
-		// var GapsStringNameTwo = makeGaps(name2String.length);
-
-		// var name2WidthWords = widths[name2String.length - 1];
-		// $('#name2').attr('class', name2WidthWords + ' columns').append(GapsStringNameTwo);
-
-		// var name2LettersArray = [];
-		// name2LettersArray = name2String.split('');
-		
-		$('#inputs').hide();
-		$('.container').css("display", "inline");
-		
-		countdown('countdown', 5);
-
-		startgame();
-
-		function startgame(){
-
-			$(document).on("keydown", function (e) {
-
-				if ($('#intro').css("display") == 'block') return false;
-				 
-				$('#intro').hide();
-				$('.letters').hide();
-				$('.col').css("opacity", 1);
-
-				var random_colour = ('#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6));
-			
-				if (language == 'hebrew') {var letter = HEBREWLETTERS[KEYCODETOCHAR[e.which || e.keyCode]]; }
-				else {var letter = KEYCODETOCHAR[e.which || e.keyCode];}
-
-				
-				var letterSound = MYSOUNDS[letter];
-				var letterDivs = $('#lex p');
-
-				
-				if (typeof letter === "undefined" ) {
-								    
-				   	// playSound(other);
-
+				} else if (typeof letter === "undefined" && language=="hebrew") {
+					    return;
 				} else {
 
-					playSound(letter); //  play the audio
+					var maths = Math.random();
+					var maths = (0.3 < maths || 0.8 > maths) ? maths : 0.5;
+					var correctImg = (($.inArray(MYPICS[letter], availablePics))+1) ? MYPICS[letter] : "question.svg";
 
-				}
+					$('.letters')
+						.html("<span id='letterpix'><img src='images/" + correctImg + 
+											"' /></span> <span id='letterpix'>" + letter  + "</span>")
+							 .css("display", "inline-block")
+							 .css("margin-left", "30%")
+							 .css("text-align", "center")
+							 // .css("height", "70px")
+							 .css("border-radius", "200px")
+							 .css("top", "60%")
+							 .css("opacity", "1")
+							 .css("background-color", "white")
+							 .css("border", "solid white 20px")
+							 // .css("font-size", "40px" )
+							 // .animate(
+							 // { marginLeft: (Math.floor(maths * screen.width)) -200 + 'px' },
+							 // { duration: 500
+							 // 	// , easing: 'easeOutBounce'
+							 // }
+							 	// )
+								;
 
-				letters_function(name1LettersArray); //  play the game
+					flashColours('.letters',200,10);
 
-				function letters_function (letters) {  // define the main game function
+					setTimeout(function() {
+						$('.letters').fadeOut(2000);
+													}, (3000));			
+				};
+			};
 
-					if ($.inArray(letter, letters) == 0) {
 
-						var realFontSize = $('#lex p').css("font-size");
+			// if (name1LettersArray.length == 0 && name2LettersArray.length != 0) {  // call the function for name2
 
-						var counter = (name1String.length - letters.length);
-						var nextCounter = counter + 1;
+			// 	$('#and p').animate({ opacity: 1}, 3000 );
+			// 	$('#name2').slideDown(2000);
+			// 	$('#congrats').css("display", "block")
+			// 					.animate({ top: 0}, 1000 );
 
-							if (language == 'hebrew') {
-								counter = (name1LettersArray.length-1);
-								nextCounter = (counter-1);
-							}
+			// 	var myDiv = '#name2';
+			// 	letters_function(name2LettersArray);
+			// };
 
-						// alert(letter);
-						letterDivs.eq(counter)
-										.text(letter) // problem here - get() does not work like eq()
-										.css("font-size", (Math.floor(Math.random() * 800))) // create random font-size to animate from
-										.css("display", "inline-block")
-								 		.css("color", randomColours[counter])
-								 		// .css("text-shadow", (5 + (Math.floor(maths * 10))) + "px " + (5 + (Math.floor(maths * 10))) + "px " + "darkgray")
-								 		.animate({
-								 			fontSize: realFontSize
-										 		}, 3000)
-						;
+			if (name1LettersArray.length == 0) gameEnd();
 
-						setTimeout(function() {							
-							var myImage = "images/" + imageSources[0];
+			function gameEnd() {
+
+				$('.letters').animate({   // make the single letter disappear
+									 	paddingTop: '800px'
+									 }, 1000)
+							.hide(1000);
+
+				var allPics = $('.col').find("img");
+				var allCircles = $('.col #pix');
+				var allLetters = $('.col #lex p');
+				var allNums = $('.col #num'); 
+
+				for (var i = 0; i < allPics.length; i++) { // make em dance
+				
+					var maths = Math.random();
+					// var colorsBackwards = randomColours.reverse();
+					var currentPic = allPics.eq(i);
+					var currentLetter = allLetters.eq(i);
+					var currentNumber = allNums.eq(i);
+					var currentCircle = allCircles.eq(i);
+
+					
+
+					if ((i+1)%2==0) {
 						
-							console.log(counter);
-							console.log(nextCounter);
-							console.log(imageSources);
-							console.log((imageSources[0]));
-							
-
-							$(".col").eq(counter).find(".circle-center").css("background-color", randomColours[counter]);
-							$(".col").eq(counter).find("#pix").css("border-color", "rgba(255,255,255,0.25)")
-							$(".col").eq(nextCounter)
-										.find("#pix")
-										.animate({
-											opacity : 1},
-											2000);
-
-							// imageDivs.eq(counter+1).css("border", "solid white 20px");
-							// flashColours($(".col").eq(counter+1)
-							// 			.find(".circle-center"),200,10);
-
-							if (name1LettersArray.length != 0) { 
-								imageDivs.eq(nextCounter)
-										.attr("src", myImage)
-												.animate({
-													opacity : 0},
-															1000)
-												.animate({
-													opacity : 1},
-														 	1000)
-												.animate({
-													opacity : 0},
-															1000)
-												.animate({
-													opacity : 1},
-														 	1000);
-
-							
-								setTimeout(function() {
-									playSound("correct");
-											}, (4000));
-							}
-							
-						}, (3000));
-
-						letters.splice(0, 1);
-						imageSources.splice(0, 1);
-						
-						console.log(letters);
-
-					} else if (typeof letter === "undefined" && language=="hebrew") {
-
-						    return;
+						currentPic.animate({   width: (Math.floor(maths * 1000)) + 'px'}, (Math.floor(maths * 60000)));
+						// currentCircle.animate({   	paddingLeft: (Math.floor(maths * 800)) + 'px'
+						// 							 }, (Math.floor(maths * 60000)));
+						currentLetter.animate({  fontSize : "500px", top: (Math.floor(maths * 800)) + 'px'}, (Math.floor(maths * 60000)));	
+						currentNumber.animate({  fontSize : "300px", bottom: (Math.floor(maths * 800)) + 'px'}, (Math.floor(maths * 60000)));		
 
 					} else {
-
-						var maths = Math.random();
-						// console.log(maths);
-						var maths = (0.3 < maths || 0.8 > maths) ? maths : 0.5;
-						// console.log(maths);
-	
-						var correctImg = (($.inArray(MYPICS[letter], availablePics))+1) ? MYPICS[letter] : "question.svg";
-
-						$('.letters')
-							.html("<span id='letterpix'><img src='images/" + correctImg + 
-												"' /></span> <span id='letterpix'>" + letter  + "</span>")
-								 .css("display", "inline-block")
-								 .css("margin-left", "30%")
-								 .css("text-align", "center")
-								 // .css("height", "70px")
-								 .css("border-radius", "200px")
-								 .css("top", "60%")
-								 .css("opacity", "1")
-								 .css("background-color", "white")
-								 .css("border", "solid white 20px")
-								 // .css("font-size", "40px" )
-								 // .animate(
-								 // { marginLeft: (Math.floor(maths * screen.width)) -200 + 'px' },
-								 // { duration: 500
-								 // 	// , easing: 'easeOutBounce'
-								 // }
-								 	// )
-									;
-
-						flashColours('.letters',200,10);
-
-						setTimeout(function() {
-							$('.letters').fadeOut(2000);
-														}, (3000));			
+						currentPic.animate({  height: (Math.floor(maths * 1000)) + 'px'}, (Math.floor(maths * 60000)));
+				// currentCircle.animate({   	paddingTop: (Math.floor(maths * 800)) + 'px'
+				// 									 }, (Math.floor(maths * 60000)));
+						currentLetter.animate({  fontSize : "500px", top: (Math.floor(maths * 800)) + 'px'}, (Math.floor(maths * 60000)));
+						currentNumber.animate({  fontSize : "700px", top: (Math.floor(maths * 200)) + 'px'}, (Math.floor(maths * 60000)));	
 					};
 				};
 
-	
-				// if (name1LettersArray.length == 0 && name2LettersArray.length != 0) {  // call the function for name2
+									
+				// $("#and p").animate({ fontSize: '500px', top: (Math.floor(Math.random() * 800)) + 'px'}, (Math.floor(Math.random() * 100000)));
+				// $("#congrats img").animate({ width: '500px', paddingTop: (Math.floor(Math.random() * 800)) + 'px'}, (Math.floor(Math.random() * 100000)));
+				$("#again p").animate({ fontSize: '100px', top: (Math.floor(Math.random() * 800)) + 'px', opacity: 1}, (Math.floor(Math.random() * 100000)));
 
-				// 	$('#and p').animate({ opacity: 1}, 3000 );
-				// 	$('#name2').slideDown(2000);
-				// 	$('#congrats').css("display", "block")
-				// 					.animate({ top: 0}, 1000 );
+				setTimeout(function() {
+					playSound("success");
+													}, (3000));
 
-				// 	var myDiv = '#name2';
-				// 	letters_function(name2LettersArray);
+				// checkPosition();
+
+				// function bounceIt(){
+
+				// 	$(this).animate({
+				// 		paddingTop: "-20px"},
+				// 		{ duration: 1000, easing: 'easeOutBounce'
+				// 	});
+
+				// 	setTimeout(bounce, 1);
 				// };
+			}
 
-				if (name1LettersArray.length == 0) gameEnd();
-
-				function gameEnd() {
-
-					$('.letters').animate({   // make the single letter disappear
-										 	paddingTop: '800px'
-										 }, 1000)
-								.hide(1000);
-
-					var allPics = $('.col').find("img");
-					var allCircles = $('.col #pix');
-					var allLetters = $('.col #lex p');
-					var allNums = $('.col #num'); 
-
-					for (var i = 0; i < allPics.length; i++) { // make em dance
-					
-						var maths = Math.random();
-						// var colorsBackwards = randomColours.reverse();
-						var currentPic = allPics.eq(i);
-						var currentLetter = allLetters.eq(i);
-						var currentNumber = allNums.eq(i);
-						var currentCircle = allCircles.eq(i);
-
-						
-
-						if ((i+1)%2==0) {
-							
-							currentPic.animate({   width: (Math.floor(maths * 1000)) + 'px'}, (Math.floor(maths * 60000)));
-							// currentCircle.animate({   	paddingLeft: (Math.floor(maths * 800)) + 'px'
-							// 							 }, (Math.floor(maths * 60000)));
-							currentLetter.animate({  fontSize : "500px", top: (Math.floor(maths * 800)) + 'px'}, (Math.floor(maths * 60000)));	
-							currentNumber.animate({  fontSize : "300px", bottom: (Math.floor(maths * 800)) + 'px'}, (Math.floor(maths * 60000)));		
-
-						} else {
-							currentPic.animate({  height: (Math.floor(maths * 1000)) + 'px'}, (Math.floor(maths * 60000)));
-					// currentCircle.animate({   	paddingTop: (Math.floor(maths * 800)) + 'px'
-					// 									 }, (Math.floor(maths * 60000)));
-							currentLetter.animate({  fontSize : "500px", top: (Math.floor(maths * 800)) + 'px'}, (Math.floor(maths * 60000)));
-							currentNumber.animate({  fontSize : "700px", top: (Math.floor(maths * 200)) + 'px'}, (Math.floor(maths * 60000)));	
-						};
-					};
-
-										
-					// $("#and p").animate({ fontSize: '500px', top: (Math.floor(Math.random() * 800)) + 'px'}, (Math.floor(Math.random() * 100000)));
-					// $("#congrats img").animate({ width: '500px', paddingTop: (Math.floor(Math.random() * 800)) + 'px'}, (Math.floor(Math.random() * 100000)));
-					$("#again p").animate({ fontSize: '100px', top: (Math.floor(Math.random() * 800)) + 'px', opacity: 1}, (Math.floor(Math.random() * 100000)));
-
-					setTimeout(function() {
-						playSound("success");
-														}, (3000));
-
-					// checkPosition();
-
-					// function bounceIt(){
-
-					// 	$(this).animate({
-					// 		paddingTop: "-20px"},
-					// 		{ duration: 1000, easing: 'easeOutBounce'
-					// 	});
-
-					// 	setTimeout(bounce, 1);
-					// };
-
-
-				}
-
-			});
-
-		};
+		});
+	};
 
 	});
 			
