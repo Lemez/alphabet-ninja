@@ -11,7 +11,19 @@
 	<body>
 
 		 <div id="inputs">
-		 	<div id="top"> <!-- <div class="secret circle-center"></div> --></div>
+		 	<div id="flags">
+		 		<label>
+				  <input type="radio" name="flag" name="english" />
+				  <img src="images/uk_usa.svg" class="selected">
+				 </label>
+				 <label>
+				  <input type="radio" name="flag" name="hebrew" />
+				  <img src="images/israel.svg">
+				</label>
+		 	</div>
+
+		 	<!-- <div id="top"> 
+			</div> -->
 
 			<input type="text" placeholder="Enter a secret word" id="nameone" contenteditable="true"/><!-- <p>&</p><input type="text" placeholder='And then yours here' id="nametwo" contenteditable="true"/>-->
 			 <button class="submit">Let's Play!</button>
@@ -32,7 +44,7 @@
 
 			<div class="row" id="intro">
 				<h2>Are You Ready?</h2>	
-				<div id="rocket"><img src="images/rocket-ship-shooting-md.png" /> </div>
+				<div id="rocket"><div></div> </div>
 				<div id="countdown"></div>
 			</div>
 

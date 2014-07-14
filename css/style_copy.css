@@ -12,6 +12,37 @@ html, body {
 }
 
 											/* FIRST PAGE */
+#flags {
+	width: 100%;
+	height: 3em;
+	display: inline;
+}
+label > input{ /* HIDE RADIO */
+  display:none;
+}
+
+label > input + img{ /* IMAGE STYLES */
+  cursor:pointer;
+  border:2px solid transparent;
+}
+label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+
+}
+
+/*input[type="radio"]:checked+label{ font-weight: bold; } */
+
+
+#flags label img {
+	width: 100px;
+	height: 100px;
+	float: left;
+	opacity: 0.5;
+}
+
+#flags label img.selected {
+	  opacity: 1;
+}
+
 
 div#inputs  {
 	width: 100%;
@@ -75,6 +106,7 @@ div#inputs  {
 	text-transform: capitalize;
 	font-family: "DINPro", "Museo Sans", Helvetica Neue;
 	margin: 1% 10% 1% 10%;
+	display: none;
 }
 
 #intro h2 {
@@ -86,25 +118,39 @@ div#inputs  {
 
 #rocket {
 	width: 45%;
-	float: left;
+	/*float: right;*/
 }
 
-#rocket img {
+/*#rocket img {
 	float: right;
 	padding-right: 5%;
+}*/
+
+#rocket { position: absolute; -webkit-transition: 3s ease-in; -moz-transition: 3s ease-in; -o-transition: 3s ease-in; transition: 3s ease-in; } 
+
+#rocket div { width: 200px; height: 400px; background: url(../images/rocket-ship-shooting-md.png) no-repeat; -webkit-transition: 4s ease-in-out; -moz-transition: 4s ease-in-out; -o-transition: 4s ease-in-out; transition: 4s ease-in-out; 
+	/*float:right;*/
 }
+
+
+
+ #intro:hover div#rocket div,
+ #intro.hovered div#rocket div
+  { -webkit-transform: rotate(70deg); -moz-transform: rotate(70deg); -o-transform: rotate(70deg); -ms-transform: rotate(70deg); transform: rotate(70deg); }
+
+ #intro:hover div#rocket,
+  #intro.hovered div#rocket
+  { -webkit-transform: translate(1200px,-200px); -moz-transform: translate(1200px,-200px); -o-transform: translate(1200px,-200px); -ms-transform: translate(1200px,-200px); transform: translate(1200px,-200px); }
+
 
 #countdown {
 	width: 45%;
 	font-size: 120px;
 	text-align: left;
-	float: left;
+	float: right;
 	padding-left: 5%;
 	line-height: 2;
 }
-
-
-
 
 #top
  {

@@ -63,9 +63,12 @@ $(document).ready(function () {
 			"8" : "audio/8.wav" ,
 			"9" : "audio/9.wav" ,
 			"success" : "audio/Peppa.mp3",
-			"failure" : "audio/3.wav",
-			"correct" : "audio/p.wav"
+			"other" : "audio/3.wav",
+			"correct" : "audio/p.wav",
+			"rocket"  : "audio/Rocket launch 05_SFXBible_ss06674.wav",
+			"tick"	: "audio/Data beep counter tick 1.wav"
 	};
+
 	var PICS = {
 		"A" : "apple2.svg",
 		"B" : "bee2.svg",
@@ -96,7 +99,109 @@ $(document).ready(function () {
 		"rocket" : "rocket-ship-shooting-md.png"
 	};
 
+	var HEBREWSOUNDS = {
+				"ת" : "audio/Eating apple soundsnap.wav" ,
+				"ד" : "audio/human bee.wav" ,
+				"ח" : "audio/13 year old Tabby Cat - Meows-Irritated.wav" ,
+				"כ" : "audio/EFX INT Dog Panting 05 AAA.wav" ,
+				"פ" : "audio/CARTOON TROMBONE DEEP SLIDE 01.wav" ,
+				"צ" : "audio/Frogs croaking close in a loop.wav" ,
+				"ג" : "audio/Acoustic BPM 110 32_Shriek_2011.wav" ,
+				"ס" : "audio/horse.wav" ,
+				// "I" : "audio/Slurp_BLASTWAVEFX_13030.wav" ,
+				// "J" : "audio/Water  fish swimming.wav" ,
+				// "K" : "audio/doing - mouth harp 8 clean two kinds.wav" ,
+				"א" : "audio/Male snoring with effects -sounds like a lion-_Nightingale Music Productions.wav" ,
+				"ק" : "audio/LTMacaque.wav" ,
+				// "N" : "audio/Male blow nose_BLASTWAVEFX_19918.wav" ,
+				"י" : "audio/owl.wav" ,
+				"ט" : "audio/parrot 12007201.wav" ,
+				"ש" : "audio/Late 20s Woman Says Shhh-Shush-Soft-Choppy.wav" ,
+				// "R" : "audio/chewing carrot.wav" ,
+				// "S" : "audio/sheep.wav" ,
+				// "T" : "audio/Trumpet-37 D BPM 77.wav" ,
+				"מ" : "audio/rain car interior wind shield wipers on.wav" ,
+				// "V" : "audio/Violin G major scale up down_BLASTWAVEFX_27410.wav" ,
+				"ל" : "audio/Submarine sonar ping multiple_BLASTWAVEFX_18257.wav" ,
+				// "X" : "audio/Pretty xylophone melody_AOS00288.wav" ,
+				"ע" : "audio/HUMAN VOICE YAWN 01.wav" ,
+				"ז" : "audio/Horse two horses neigh step in dirt_BLASTWAVEFX_00173.wav" ,
+				"success" : "audio/Peppa.mp3",
+				"other" : "audio/3.wav",
+				"correct" : "audio/p.wav",
+				"rocket"  : "audio/Rocket launch 05_SFXBible_ss06674.wav",
+				"tick"	: "audio/Data beep counter tick 1.wav"
+		};
 
+	var HEBREWPICS = {
+		"ת" : "apple2.svg",
+		"ד" : "bee2.svg",
+		"ח" : "cat.svg",
+		"כ" : "dog.svg",
+		"פ" : "elephant.svg",
+		"צ" : "frog.svg",
+		"ג"	: "guitar.svg",
+		"ס" : "horse.svg",
+		// "I" : "icecream.svg",
+		// "מ" : "jellyfish.svg",
+		// "ק" : "kangaroo.svg",
+		"א" : "lion 2.svg",
+		"ק" : "monkey.svg",
+		// "N" : "nose.svg",
+		"י"	: "owl.svg",
+		"ט" : "parrot.svg",
+		"ש" : "quiet.svg",
+		// "R" : "rabbit.svg",
+		// "S" : "sheep.svg",
+		// "T" : "trumpet.svg",
+		"מ" : "umbrella.svg",
+		// "V" : "violin.svg",
+		"ל" : "whale.svg",
+		// "X" : "xylophone.svg",
+		"ע" : "yawn.svg",
+		"ז" : "zebra.svg",
+		"rocket" : "rocket-ship-shooting-md.png"
+	};
+
+	var HEBREWLETTERS = {
+		"A" : "ש",
+		"B" : "נ",
+		"C" : "ב",
+		"D" : "ג",
+		"E" : "ק",
+		"F" : "כ",
+		"G" : "ע",
+		"H" : "י",
+		"I" : "ן",
+		"J" : "ח",
+		"K" : "ל",
+		"L" : "ך",
+		"M" : "צ",
+		"N" : "מ",
+		"O" : "ם",
+		"P" : "פ",
+		"Q" : "",
+		"R" : "ר",
+		"S" : "ד",
+		"T" : "א",
+		"U" : "ו",
+		"V" : "ה",
+		"W" : "",
+		"X" : "ס",
+		"Y" : "ט",
+		"Z" : "ז",
+		"," : "ת",
+		"." : "ץ",
+		";" : "ף"
+	}
+
+	var HEBREWSOFIT = {
+		
+		"I" : "ן",
+		"L" : "ך",
+		"." : "ץ",
+		";" : "ף"
+	}
 
 	var picArray = $.map(PICS, function(value, index) {
 	    return [value];
@@ -207,22 +312,51 @@ $(document).ready(function () {
 
 	function countdown(element, seconds) {
 
-	    var interval = setInterval(function() {
+	    var interval = setInterval(function() {	
+
+	    	$('#intro').show();
+	    	startRocket(4000);
+	    	playSound('tick');
+
 	        var el = document.getElementById(element);
+	        
 	        if(seconds == 0) {
 	            // el.innerHTML = "countdown's over!";    
 	            clearInterval(interval);
-	            $('#intro').hide();
-				$('.col').css("opacity", 1);
-	            return;
+	            playSound("rocket");
+
+	            $('#countdown, #prepare h2').animate({
+	            	fontSize : '600px',
+	            	width : '500%',
+	            	height: '150%',
+	            	opacity : 0
+	            },3000);
+
+	           
+				setTimeout(function() {
+					$('#intro').hide();
+					$('.col').css("opacity", 1);
+					return;	
+				},3000);
 	        }
 	        
 	        if (seconds < 10) seconds = "0" + seconds; 
+	        // if (seconds <= 0 && seconds >= -4) seconds = "00"; 
 
 	        el.innerHTML = seconds;
 	        seconds--;
+	        
 	    }, 1000);
 	}
+
+	function startRocket(time){
+		setTimeout(function() {
+			$('#intro').addClass("hovered");
+				},time);
+
+	}
+
+
 		
 	function getPosition(e) {
 		var coordinates = e.offset();
@@ -266,12 +400,23 @@ $(document).ready(function () {
 	$('.container').css("display", "none");
 	$('.letters').hide();
 
+	$('#flags label img').on("click", function() {
+		$(this).addClass('selected');
+		$(this).parent().siblings().find('img').removeClass('selected');
+		
+	});
+
 	$('#inputs').keypress(function(e) { // MAKE enter work as submit button
         if(e.which == 13) {
             jQuery(this).blur();
             jQuery('.submit').focus().click();
         }
     });
+
+    function playSound(s) {
+		$('.sounds').html('<audio id="' + s + '" src="' + SOUNDS[s] + '" preload="auto"></audio>');
+		document.getElementById(s).play();
+	};
 
 
 	$('.submit').on("click", function() {
@@ -381,7 +526,12 @@ $(document).ready(function () {
 		var imageDivs = $('#pix img');
 		imageDivs.eq(0).attr("src", "images/" + imageSources[0]);
 
+
 		countdown('countdown', 5);
+
+		
+		
+		
 		startgame();
 
 		// function bounceIt(){
@@ -400,6 +550,8 @@ $(document).ready(function () {
 		function startgame(){
 
 			$(document).on("keydown", function (e) {
+
+				if ($('#intro').css("display") == 'block') return false;
 				 
 				$('#intro').hide();
 				$('.letters').hide();
@@ -414,13 +566,11 @@ $(document).ready(function () {
 				
 				if (typeof letter === "undefined") {
 								    
-				    $('.sounds').html('<audio id="failure" src="' + SOUNDS["other"] + '" preload="auto"></audio>');
-					document.getElementById("failure").play();
+				   	// playSound(other);
 
 				} else {
 
-					$('.sounds').html('<audio id=' + letter + ' src="' + SOUNDS[letter] + '" preload="auto"></audio>');
-					document.getElementById(letter).play(); //  play the audio
+					playSound(letter); //  play the audio
 
 				}
 
@@ -482,8 +632,7 @@ $(document).ready(function () {
 
 							if (name1LettersArray.length != 0) { 
 								setTimeout(function() {
-									$('.sounds').html('<audio id="correct" src="' + SOUNDS["correct"] + '" preload="auto"></audio>');
-									document.getElementById("correct").play();
+									playSound("correct");
 											}, (4000));
 							}
 
@@ -592,18 +741,13 @@ $(document).ready(function () {
 						};
 					};
 
-					
-					
-
-
-					
+										
 					// $("#and p").animate({ fontSize: '500px', top: (Math.floor(Math.random() * 800)) + 'px'}, (Math.floor(Math.random() * 100000)));
 					// $("#congrats img").animate({ width: '500px', paddingTop: (Math.floor(Math.random() * 800)) + 'px'}, (Math.floor(Math.random() * 100000)));
 					$("#again p").animate({ fontSize: '100px', top: (Math.floor(Math.random() * 800)) + 'px', opacity: 1}, (Math.floor(Math.random() * 100000)));
 
 					setTimeout(function() {
-						$('.sounds').html('<audio id="success" src="' + SOUNDS["success"] + '" preload="auto"></audio>');
-						document.getElementById("success").play();
+						playSound("success");
 														}, (3000));
 					
 
