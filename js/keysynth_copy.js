@@ -13,12 +13,22 @@ $(document).ready(function () {
 		// console.log(mouseY);
 	});
 
-	var KEYCODETOCHAR = {
+	var KEYCODETOCHAR_UK = {
+		// 8:"Backspace",9:"Tab",13:"Enter",16:"Shift",17:"Ctrl",18:"Alt",19:"Pause/Break",20:"Caps Lock",27:"Esc",32:"Space",33:"Page Up",34:"Page Down",35:"End",36:"Home",37:"Left",38:"Up",39:"Right",40:"Down",45:"Insert",46:"Delete",
+		// 48:"0",49:"1",50:"2",51:"3",52:"4",53:"5",54:"6",55:"7",56:"8",57:"9",
+		65:"A",66:"B",67:"C",68:"D",69:"E",70:"F",71:"G",72:"H",73:"I",74:"J",75:"K",76:"L",77:"M",78:"N",79:"O",80:"P",81:"Q",82:"R",83:"S",84:"T",85:"U",86:"V",87:"W",88:"X",89:"Y",90:"Z"	};
+
+	var KEYCODETOCHAR_ISR = {
 		// 8:"Backspace",9:"Tab",13:"Enter",16:"Shift",17:"Ctrl",18:"Alt",19:"Pause/Break",20:"Caps Lock",27:"Esc",32:"Space",33:"Page Up",34:"Page Down",35:"End",36:"Home",37:"Left",38:"Up",39:"Right",40:"Down",45:"Insert",46:"Delete",
 		// 48:"0",49:"1",50:"2",51:"3",52:"4",53:"5",54:"6",55:"7",56:"8",57:"9",
 		65:"A",66:"B",67:"C",68:"D",69:"E",70:"F",71:"G",72:"H",73:"I",74:"J",75:"K",76:"L",77:"M",78:"N",79:"O",80:"P",81:"Q",82:"R",83:"S",84:"T",85:"U",86:"V",87:"W",88:"X",89:"Y",90:"Z",
 		188: "," 
 	};
+
+	var KEYCODES = {
+		'english' : KEYCODETOCHAR_UK,
+		'hebrew': KEYCODETOCHAR_ISR
+	}
 
 	var KEYCHARTOCODE = {
 		// "Backspace":8,"Tab":9,"Enter":13,"Shift":16,"Ctrl":17,"Alt":18,"Pause/Break":19,"Caps Lock":20,"Esc":27,"Space":32,"Page Up":33,"Page Down":34,"End":35,"Home":36,"Left":37,"Up":38,"Right":39,"Down":40,"Insert":45,"Delete":46,
@@ -377,7 +387,11 @@ $(document).ready(function () {
 	$('.submit').on("click", function() {
 
 		var language = $('input:radio:checked').val();
-		if (language=='hebrew') $('#intro h2').text(" ? מוכן ");
+		if (language=='hebrew') {
+			$('#intro h2').text(" ? מוכן ").css("font-size", "150px");
+
+		}
+
 		var dictsToUse = LANGUAGETODICT[language];
 		var MYPICS = dictsToUse[0];
 		var MYSOUNDS = dictsToUse[1];
@@ -503,8 +517,10 @@ $(document).ready(function () {
 
 			var random_colour = ('#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6));
 		
-			if (language == 'hebrew') {var letter = HEBREWLETTERS[KEYCODETOCHAR[e.which || e.keyCode]]; }
-			else {var letter = KEYCODETOCHAR[e.which || e.keyCode];}
+			var keycodeForLang = KEYCODES[language];
+
+			if (language == 'hebrew') {var letter = HEBREWLETTERS[keycodeForLang[e.which || e.keyCode]]; }
+			else {var letter = keycodeForLang[e.which || e.keyCode];}
 			
 			var letterSound = MYSOUNDS[letter];
 			var letterDivs = $('#lex p');
@@ -589,9 +605,11 @@ $(document).ready(function () {
 					imageSources.splice(0, 1);
 					console.log(letters);
 
-				} else if (typeof letter === "undefined" && language=="hebrew") {
-					    return;
-				} else {
+				} else if (typeof letter === "undefined"
+				 // && language=="hebrew"
+					) 
+				{return;}
+				 else {
 
 					var maths = Math.random();
 					var maths = (0.3 < maths || 0.8 > maths) ? maths : 0.5;
