@@ -22,7 +22,7 @@ $(document).ready(function () {
 		// 8:"Backspace",9:"Tab",13:"Enter",16:"Shift",17:"Ctrl",18:"Alt",19:"Pause/Break",20:"Caps Lock",27:"Esc",32:"Space",33:"Page Up",34:"Page Down",35:"End",36:"Home",37:"Left",38:"Up",39:"Right",40:"Down",45:"Insert",46:"Delete",
 		// 48:"0",49:"1",50:"2",51:"3",52:"4",53:"5",54:"6",55:"7",56:"8",57:"9",
 		65:"A",66:"B",67:"C",68:"D",69:"E",70:"F",71:"G",72:"H",73:"I",74:"J",75:"K",76:"L",77:"M",78:"N",79:"O",80:"P",81:"Q",82:"R",83:"S",84:"T",85:"U",86:"V",87:"W",88:"X",89:"Y",90:"Z",
-		188: "," 
+		188: ",", 190: ".", 186: ";" 
 	};
 
 	var KEYCODES = {
@@ -100,7 +100,7 @@ $(document).ready(function () {
 		"P" : "parrot.svg",
 		"Q" : "quiet.svg",
 		"R" : "rabbit.svg",
-		"S" : "sheep.svg",
+		"S" : "sheep.png",
 		"T" : "trumpet.svg",
 		"U" : "umbrella.svg",
 		"V" : "violin.svg",
@@ -125,12 +125,17 @@ $(document).ready(function () {
 		"כ" : "audio/EFX INT Dog Panting 05 AAA.wav" ,
 		"ל" : "audio/Submarine sonar ping multiple_BLASTWAVEFX_18257.wav" ,
 		"מ" : "audio/rain car interior wind shield wipers on.wav" ,
+		"ם" : "audio/Scissor cuts thick paper_AOS02714.wav" ,
 		"נ" : "audio/river churnet water 1998.wav",
+		"ּּן" : "audio/balloon.wav",
 		"ס" : "audio/horse.wav" ,
 		"ע" : "audio/HUMAN VOICE YAWN 01.wav" ,
 		"פ" : "audio/CARTOON TROMBONE DEEP SLIDE 01.wav" ,
+		"ף" : "audio/Drum snare fanfare_BLASTWAVEFX_14764.wav" ,
 		"צ" : "audio/Frogs croaking close in a loop.wav" ,
+		"ץ" : "audio/Bomb explosion medium distance muffled warped 01_SFXBible_ss06658.wav" , 
 		"ק" : "audio/LTMacaque.wav" ,
+		"ך" : "audio/trumpets fanfar.wav" ,
 		"ר" : "audio/Bartender shakes ice and drink in metal ice shaker_AOS01016.wav",
 		"ש" : "audio/Late 20s Woman Says Shhh-Shush-Soft-Choppy.wav" ,
 		"ת" : "audio/Eating apple soundsnap.wav" ,
@@ -173,6 +178,11 @@ $(document).ready(function () {
 		"ר" : "shaker.svg",
 		"ש" : "quiet.svg",
 		"ת" : "apple2.svg",
+		"ן" : "balloon.svg",
+		"ך" : "king.svg",
+		"ץ" : "explosion.svg",
+		"ף" : "drum.svg",
+		"ם" : "scissors.svg",
 	
 		"rocket" : "rocket-ship-shooting-md.png"
 	};
@@ -387,10 +397,7 @@ $(document).ready(function () {
 	$('.submit').on("click", function() {
 
 		var language = $('input:radio:checked').val();
-		if (language=='hebrew') {
-			$('#intro h2').text(" ? מוכן ").css("font-size", "150px");
-
-		}
+		if (language=='hebrew') {$('#intro h2').text(" ? מוכן ").css("font-size", "150px");}
 
 		var dictsToUse = LANGUAGETODICT[language];
 		var MYPICS = dictsToUse[0];
@@ -419,6 +426,7 @@ $(document).ready(function () {
 	            // el.innerHTML = "countdown's over!";    
 	            clearInterval(interval);
 	            playSound("rocket");
+	            $("div.shake").addClass("liftoff");
 
 	            $('#countdown, #prepare h2').animate({
 	            	fontSize : '600px',
@@ -427,7 +435,7 @@ $(document).ready(function () {
 	            	opacity : 0
 	            },3000);
 
-	            $("div#rocket div").addClass("liftoff");
+	            
 
 	           
 				setTimeout(function() {
@@ -690,7 +698,7 @@ $(document).ready(function () {
 						currentNumber.animate({  fontSize : "300px", bottom: (Math.floor(maths * 800)) + 'px'}, (Math.floor(maths * 60000)));		
 
 					} else {
-						currentPic.animate({  height: (Math.floor(maths * 1000)) + 'px'}, (Math.floor(maths * 60000)));
+						currentPic.animate({  width: (Math.floor(maths * 1000)) + 'px'}, (Math.floor(maths * 60000)));
 				// currentCircle.animate({   	paddingTop: (Math.floor(maths * 800)) + 'px'
 				// 									 }, (Math.floor(maths * 60000)));
 						currentLetter.animate({  fontSize : "500px", top: (Math.floor(maths * 800)) + 'px'}, (Math.floor(maths * 60000)));
