@@ -34,7 +34,7 @@ header {
 	margin: 10px 0 0 10px;
 }
 
-nav {
+nav, #top {
 	width: 100%;
 	text-align: center;
 }	
@@ -127,14 +127,10 @@ label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
 	font-size: 24px;	
 }
 
-#instr_write_a_word,
-#instr_dont_forget,
-#instr_play_game {
-	float: right;
-	top: 50%;
-	left: 50%;
+/*#ninja {
+	float: 
 }
-
+*/
 
 
 div#inputs  {

@@ -145,8 +145,8 @@ body {
 .joyride-tip-guide h6 { font-size: 14px; }
 .joyride-tip-guide p {
   margin: 0 0 18px 0;
-  font-size: 16px;
-  line-height: 18px;
+  font-size: 24px;
+  line-height: 28px;
 }
 .joyride-tip-guide a {
   color: rgb(255,255,255);
@@ -162,7 +162,7 @@ body {
 .joyride-tip-guide .joyride-next-tip {
   width: auto;
   padding: 6px 18px 4px;
-  font-size: 13px;
+  font-size: 18px;
   text-decoration: none;
   color: rgb(255,255,255);
   border: solid 1px rgb(0,60,180);
