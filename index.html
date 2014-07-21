@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<meta charset="UTF-8">
+
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/skeleton.css" />
+		<link rel="stylesheet" href="css/style_copy.css" />
+		<!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
+		
+		<!-- /* Attach the Joyride CSS file */ -->
+		<link rel=" stylesheet" type="text/css" href="css/joyride-2.1.css">
+
+	</head>
+	<body>
+		<header><nav><a  class="triangle-isosceles" id="instructions" href="#">How To Play</a></nav></header>
+		
+		<div id = 'background'>
+			<div id="inputs">
+			 	<div id="flags">
+			 		<label>
+					  <input type="radio" name="flag" value="english" checked  />
+					  <img src="images/uk_usa.svg" class="selected" id='firstflag'>
+					 </label>
+					 <label>
+					  <input type="radio" name="flag" value="hebrew" />
+					  <img src="images/israel.svg">
+					</label>
+			 	</div>
+
+				<input id='textbox' type="text" placeholder="Enter a secret word" id="nameone" contenteditable="true"/><!-- <p>&</p><input type="text" placeholder='And then yours here' id="nametwo" contenteditable="true"/>-->
+				 <button id="letsplay" class="submit">Let's Play!</button>
+
+			</div>
+
+			
+			
+				<!-- 	<button id='#intro-eng'>English</button>
+				<button id='#intro-heb'>יברית</button> -->
+
+		
+		    <ol id="joyRideTipContent">
+		      <li data-id="textbox" data-text="Next" class="custom" data-options="tipLocation:right;tipAnimation:fade">
+		  <h3>Enter a Word</h3>
+		        <p> Write a word in the text box -  a name works well, especially for little ones.</p>
+		      </li>
+		      <li data-id="firstflag" data-button="Next" data-options="tipLocation:bottom;tipAnimation:fade">
+		     
+		        <p>Tell us which language you want to use.</p> 
+		      </li>
+		      <li data-id="letsplay" data-button="Close" data-options="tipLocation:bottom">
+		        
+		        <p>Press play and help your little one to learn! </p>
+		      </li>
+		    </ol>
+				
+		</div>
+
+		<div class="sounds"><audio></audio></div>
+
+		<section class="icons"><div id="congrats"><!-- <img src="images/girl.png" /> --></div>
+		</section>
+
+		<section>
+			<div id="again">
+				<a href="home.html"><p>Play Again!</p></a>
+			</div>
+		</section>
+
+		<div id='prepare'>
+
+			<div class="row" id="intro">
+				<h2>Are You Ready?</h2>	
+				<div id="rocket" ><div class="shake"></div> </div>
+				<div id="countdown"></div>
+			</div>
+
+		</div>
+
+		<section class="container">
+			<div id='timer'></div>
+			<div class="row">
+				<div class="row letters circle-center"></div><!-- <div id="top"></div> -->
+				<div id="content"></div><!-- <div id="numbers"></div><div id="name1"></div><div id="name2"></div> -->
+			</div>
+
+		</section>
+
+	</body>
+
+
+		<!-- <script src="js/jquery.typer.js" ></script> -->
+		<script src="js/jquery.js" ></script>
+		<script src="js/keysynth_copy.js" ></script>
+		<script src="js/jquery.color.min.js" ></script>
+
+		<!-- /* Then attach the Joyride plugin */ -->
+		<script src="js/jquery.joyride-2.1.js"></script>
+		
+		<!--<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js" ></script>
+		 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" ></script>-->
+
+
+</html>
