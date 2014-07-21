@@ -3,7 +3,7 @@
 
 $(document).ready(function () {
 
-	
+
 
 	$(document).mousemove(function (e) {
 	
@@ -380,6 +380,19 @@ $(document).ready(function () {
 	$('.container').css("display", "none");
 	$('.letters').hide();
 
+	$('#instructions').on('click', function() {
+		 $("#joyRideTipContent").joyride({
+  				  /* Options will go here */
+ 				 });
+		return false;
+	});
+
+	
+
+	// $('#about').on('click', function() {
+	// 	$('#about').hide();
+	// });
+
 	$('#flags label img').on("click", function() {
 		$(this).addClass('selected');
 		$(this).parent().siblings().find('img').removeClass('selected');
@@ -404,7 +417,7 @@ $(document).ready(function () {
 		var MYSOUNDS = dictsToUse[1];
 
 		function playSound(s) {
-			$('.sounds').html('<audio id="' + s + '" src="' + MYSOUNDS[s] + '" preload="auto"></audio>');
+			$('.sounds').append('<audio id="' + s + '" src="' + MYSOUNDS[s] + '" preload="auto"></audio>');
 			document.getElementById(s).play();
 		};
 
@@ -413,6 +426,7 @@ $(document).ready(function () {
 	 	   var interval = setInterval(function() {	
 
 	    	$('#intro').show();
+	    	$('#instructions').hide();
 	    	startRocket(4000);
 	    	playSound('tick');
 
@@ -519,6 +533,7 @@ $(document).ready(function () {
 		$(document).on("keydown", function (e) {
 
 			if ($('#intro').css("display") == 'block') return false;
+			
 			$('#intro').hide();
 			$('.letters').hide();
 			$('.col').css("opacity", 1);
@@ -527,17 +542,26 @@ $(document).ready(function () {
 		
 			var keycodeForLang = KEYCODES[language];
 
+	// 			var keyStopper=false;
+	// window.onkeydown=function(e){
+	//  if(keyStopper)return e.keyCode;
+	//  keyStopper=true;
+	// console.log(myJSON);
+	// myJSON[parseInt(e.keyCode)].push(1);
+	// }
+	// window.onkeyup = function(e){
+	// keyStopper=false;
+	// }
+
 			if (language == 'hebrew') {var letter = HEBREWLETTERS[keycodeForLang[e.which || e.keyCode]]; }
 			else {var letter = keycodeForLang[e.which || e.keyCode];}
 			
 			var letterSound = MYSOUNDS[letter];
 			var letterDivs = $('#lex p');
 
-			if (typeof letter === "undefined" ) {							    
-			   	// playSound(other);
-			} else {
-				playSound(letter); //  play the audio
-			}
+			if (name1LettersArray.length == 0) 
+				{ return false;} 
+			else {playSound(letter);} //  play the audio
 
 			letters_function(name1LettersArray); //  play the game
 
@@ -619,6 +643,7 @@ $(document).ready(function () {
 				{return;}
 				 else {
 
+				 	if (name1LettersArray.length == 0) return false;
 					var maths = Math.random();
 					var maths = (0.3 < maths || 0.8 > maths) ? maths : 0.5;
 					var correctImg = (($.inArray(MYPICS[letter], availablePics))+1) ? MYPICS[letter] : "question.svg";
