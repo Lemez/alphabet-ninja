@@ -387,8 +387,6 @@ $(document).ready(function () {
 		return false;
 	});
 
-	
-
 	// $('#about').on('click', function() {
 	// 	$('#about').hide();
 	// });
@@ -397,7 +395,6 @@ $(document).ready(function () {
 		$(this).addClass('selected');
 		$(this).parent().siblings().find('img').removeClass('selected');
 	});
-
 
 
 	$('#inputs').keypress(function(e) { // MAKE enter work as submit button
@@ -416,8 +413,14 @@ $(document).ready(function () {
 		var MYPICS = dictsToUse[0];
 		var MYSOUNDS = dictsToUse[1];
 
+		function createSounds() {
+			Object.keys(MYSOUNDS).forEach(function (letter) { 
+	    		$('.sounds').append('<audio id="' + letter + '" src="' + MYSOUNDS[letter] + '" preload="auto"></audio>');
+			})
+		};
+
 		function playSound(s) {
-			$('.sounds').append('<audio id="' + s + '" src="' + MYSOUNDS[s] + '" preload="auto"></audio>');
+			// $('.sounds').append('<audio id="' + s + '" src="' + MYSOUNDS[s] + '" preload="auto"></audio>');
 			document.getElementById(s).play();
 		};
 
@@ -450,8 +453,6 @@ $(document).ready(function () {
 	            },3000);
 
 	            
-
-	           
 				setTimeout(function() {
 					$('#intro').hide();
 					$('.col').css("opacity", 1);
@@ -467,7 +468,8 @@ $(document).ready(function () {
 	        
 	    }, 1000);
 	};
-		
+	
+	createSounds();	
 	var name1String = $('input:text:first').val();
 
 	if (language != 'hebrew') name1String = name1String.toUpperCase();
