@@ -14,10 +14,15 @@
 
 	</head>
 	<body>
-		<header><nav><a  class="triangle-isosceles" id="instructions" href="#">How To Play</a></nav></header>
+		<header>
+			<nav>
+				<img id='ninja' src='images/Alphabet Ninja logo clear.png' width='200' height='60' />
+			 </nav>
+		</header>
+			 		
 		
 		<div id = 'background'>
-			<div id="inputs">
+
 			 	<div id="flags">
 			 		<label>
 					  <input type="radio" name="flag" value="english" checked  />
@@ -27,10 +32,20 @@
 					  <input type="radio" name="flag" value="hebrew" />
 					  <img src="images/israel.svg">
 					</label>
+
+					
+
+					<a class="triangle-isosceles" id="instructions" href="#">How To Play</a>
+		
 			 	</div>
 
-				<input id='textbox' type="text" placeholder="Enter a secret word" id="nameone" contenteditable="true"/><!-- <p>&</p><input type="text" placeholder='And then yours here' id="nametwo" contenteditable="true"/>-->
-				 <button id="letsplay" class="submit">Let's Play!</button>
+			 	<div id="inputs">
+			 		
+			 		
+
+					<input id='textbox' type="text" placeholder="Enter a secret word" id="nameone" contenteditable="true"/><!-- <p>&</p><input type="text" placeholder='And then yours here' id="nametwo" contenteditable="true"/>-->
+					<div id='message'></div>
+					 <button id="letsplay" class="submit">Let's Play!</button>
 
 			</div>
 
@@ -41,17 +56,21 @@
 
 		
 		    <ol id="joyRideTipContent">
-		      <li data-id="textbox" data-text="Next" class="custom" data-options="tipLocation:right;tipAnimation:fade">
-		  <h3>Enter a Word</h3>
-		        <p> Write a word in the text box -  a name works well, especially for little ones.</p>
+		    	 <li data-id="ninja" data-button="Next" data-options="">
+		        
+		        <p>(1) Welcome to our game for little ninjas and big ninjas to play together! </p>
+		      </li>
+		      <li data-id="textbox" data-text="Next" class="custom" data-options="tipAnimation:fade">
+
+		        <p> (2) Ask your little ninja what word they want to spell -  a name works really well</p>
 		      </li>
 		      <li data-id="firstflag" data-button="Next" data-options="tipLocation:bottom;tipAnimation:fade">
 		     
-		        <p>Tell us which language you want to use.</p> 
+		        <p>(3) Tell us which language you're using</p> 
 		      </li>
 		      <li data-id="letsplay" data-button="Close" data-options="tipLocation:bottom">
 		        
-		        <p>Press play and help your little one to learn! </p>
+		        <p>(4) Get ready to have fun together! </p>
 		      </li>
 		    </ol>
 				

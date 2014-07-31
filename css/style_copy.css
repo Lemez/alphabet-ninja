@@ -127,6 +127,12 @@ label img.selected {
 	  opacity: 1;
 }
 
+#message {
+	color: red;
+	text-align: center;
+	font-size: 16px;
+}
+
 #instructions
  {
 	text-decoration: none;
@@ -397,7 +403,7 @@ border: solid 14px white;
 	opacity: 0;
 }
 
-@-webkit-keyframes rocket {
+@-webkit-keyframes shake {
  0% {
     -webkit-transform: translate(2px, 1px) rotate(0deg);
     -moz-transform: translate(2px, 1px) rotate(0deg);
@@ -476,7 +482,7 @@ border: solid 14px white;
 	transform: translate(1px, -2px) rotate(-1deg); }
 }
 
-@keyframes rocket {
+@keyframes shake {
  0% {
     -webkit-transform: translate(2px, 1px) rotate(0deg);
     -moz-transform: translate(2px, 1px) rotate(0deg);
@@ -717,19 +723,19 @@ border: solid 14px white;
 }
 
 .shake {
-	-webkit-animation-name: rocket;
+	-webkit-animation-name: shake;
 	-webkit-animation-duration: 0.8s;
-	-webkit-transform-origin:50% 50%;
+	-webkit-transform-origin: 50% 50%;
 	-webkit-animation-iteration-count: infinite;
 	-webkit-animation-timing-function: linear;
-	-moz-animation-name: rocket;
+	-moz-animation-name: shake;
 	-moz-animation-duration: 0.8s;
 	-moz-transform-origin:50% 50%;
 	-moz-animation-iteration-count: infinite;
 	-moz-animation-timing-function: linear;
-	animation-name: rocket;
+	animation-name: shake;
 	animation-duration: 0.8s;
-	transform-origin:50% 50%;
+	transform-origin: 50% 50%;
 	animation-iteration-count: infinite;
 	animation-timing-function: linear;
 }

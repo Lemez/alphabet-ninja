@@ -231,6 +231,24 @@ $(document).ready(function () {
 		'hebrew' : [HEBREWPICS, HEBREWSOUNDS]
 	};
 
+	var LANGUAGETOMESSAGES = {
+		'english' : [
+					"Are You Ready?",
+					"Please click the box above and write a secret word",
+					"Shorter words work better :)" 
+		],
+		'hebrew' : [
+					"Kadima!",
+					"Bevakasha tiktav mashehu lmala",
+					"Pahot mi shmone otiyot yoter tov habibi"
+		]
+	};
+
+	var ADDITIONALFLAGS = {
+		 "hebrew" : "israel.svg"
+		 // "russia" : "russia.svg"
+	};
+
 	// image condition
 	// Get the size of an object by using  defined function
 
@@ -276,6 +294,13 @@ $(document).ready(function () {
 	function rgbToHex(r, g, b) { // http://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
 	    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 	};
+
+	function addFlags() {
+		for (var lang in ADDITIONALFLAGS) {
+			var imgLocation = ADDITIONALFLAGS[lang];
+			$('#flags').append("<label><input type='radio' name='flag' value='" + lang + "' /><img src='images/" + imgLocation + "'></label>");
+		}
+	}
 
 	function flashColours(div,timeOut,number) {
 						
@@ -377,37 +402,54 @@ $(document).ready(function () {
 
 	// **************************** START CODE ++++++++++++++++++++++++++++
 
-	$('.container').css("display", "none");
-	$('.letters').hide();
+	addFlags();
+	startTheGame('');
 
-	$('#instructions').on('click', function() {
-		 $("#joyRideTipContent").joyride({
-  				  /* Options will go here */
- 				 });
-		return false;
-	});
+	function startTheGame(message) {
+		
+		$('#message').text(message);
 
-	// $('#about').on('click', function() {
-	// 	$('#about').hide();
-	// });
+		$('.container').css("display", "none");
+		$('.letters').hide();
 
-	$('#flags label img').on("click", function() {
-		$(this).addClass('selected');
-		$(this).parent().siblings().find('img').removeClass('selected');
-	});
+		$('#instructions').on('click', function() {
+			 $("#joyRideTipContent").joyride({/* Options will go here */});
+			return false;
+		});
 
+		$('#flags label img').on("click", function() {
+			$(this).addClass('selected');
+			$(this).parent().siblings().find('img').removeClass('selected');
+		});
 
-	$('#inputs').keypress(function(e) { // MAKE enter work as submit button
-        if(e.which == 13) {
-            jQuery(this).blur();
-            jQuery('.submit').focus().click();
-        }
-    });
+		$('#inputs').keypress(function(e) { // MAKE enter work as submit button
+	        if(e.which == 13) {
+	            $(this).blur();
+	            $('.submit').focus().click();
+	        }
+	    });
+	};
 
 	$('.submit').on("click", function() {
 
 		var language = $('input:radio:checked').val();
-		if (language=='hebrew') {$('#intro h2').text(" ? מוכן ").css("font-size", "150px");}
+		var textInput = $('input:text:first').val();
+
+		if (textInput.length == 0) {
+			startTheGame(LANGUAGETOMESSAGES[language][1]);
+
+		} else if (textInput.length >7 ) {
+			startTheGame(LANGUAGETOMESSAGES[language][2]);
+
+		} else {
+			buildGame();
+		}
+
+	function buildGame(){
+
+		var language = $('input:radio:checked').val();
+
+		$('#intro h2').text(LANGUAGETOMESSAGES[language][0]);
 
 		var dictsToUse = LANGUAGETODICT[language];
 		var MYPICS = dictsToUse[0];
@@ -430,7 +472,8 @@ $(document).ready(function () {
 
 	    	$('#intro').show();
 	    	$('#instructions').hide();
-	    	startRocket(4000);
+	    	var msTime = seconds*1000;
+	    	startRocket(msTime - 1000);
 	    	playSound('tick');
 
 	        var el = document.getElementById(element);
@@ -457,7 +500,7 @@ $(document).ready(function () {
 					$('#intro').hide();
 					$('.col').css("opacity", 1);
 					return;	
-				},3000);
+				},2000);
 	        }
 	        
 	        if (seconds < 10) seconds = "0" + seconds; 
@@ -466,69 +509,70 @@ $(document).ready(function () {
 	        el.innerHTML = seconds;
 	        seconds--;
 	        
-	    }, 1000);
-	};
-	
-	createSounds();	
-	var name1String = $('input:text:first').val();
-
-	if (language != 'hebrew') name1String = name1String.toUpperCase();
-
-	var picArray = $.map(MYPICS, function(value, index) {return [value];});
-	var availablePics = [];
-	var size = Object.size(MYPICS);
-	for (var i = 0; i < size; i++) {var thing = picArray[i];availablePics.push(thing);}
-
-	var NumsCols = makeCols(name1String.length);
-
-	$('#content').append(NumsCols);
-	var cols = $('.col');
-
-	var name1LettersArray = [];
-	var name1LettersArray = name1String.split('');
-
-	var imageSources = [];
-	var randomColours = [];
-
-	for (var i = 0; i < name1LettersArray.length; i++) {
-
-		if (language == 'hebrew') {
-			var j = -(i+1);
-		} else {
-			var j = i;
-		}
-
-		var random_colour = ('#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6));
+		    }, 1000);
+		};
 		
-		var textValue = i+1;
-		imageSources.push(MYPICS[name1LettersArray[i]]);
+		createSounds();	
+		var name1String = $('input:text:first').val();
 
-		cols.eq(j)
-					.append('<div id="num" class="row circle">' + textValue + '</div>')
-					.append('<div id="pix" class="row circle-center"><img src="images/question.svg" ></div>')
-					.append('<div id="lex" class="row"><p></p></div>');
-				
-		cols.eq(j).find("#num").css("color", random_colour);
-		randomColours.push(random_colour);			
+		if (language != 'hebrew') name1String = name1String.toUpperCase();
+
+		var picArray = $.map(MYPICS, function(value, index) {return [value];});
+		var availablePics = [];
+		var size = Object.size(MYPICS);
+		for (var i = 0; i < size; i++) {var thing = picArray[i];availablePics.push(thing);}
+
+		var NumsCols = makeCols(name1String.length);
+
+		$('#content').append(NumsCols);
+		var cols = $('.col');
+
+		var name1LettersArray = [];
+		var name1LettersArray = name1String.split('');
+
+		var imageSources = [];
+		var randomColours = [];
+
+		for (var i = 0; i < name1LettersArray.length; i++) {
+
+			if (language == 'hebrew') {
+				var j = -(i+1);
+			} else {
+				var j = i;
+			}
+
+			var random_colour = ('#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6));
+			
+			var textValue = i+1;
+			imageSources.push(MYPICS[name1LettersArray[i]]);
+
+			cols.eq(j)
+						.append('<div id="num" class="row circle">' + textValue + '</div>')
+						.append('<div id="pix" class="row circle-center"><img src="images/question.svg" ></div>')
+						.append('<div id="lex" class="row"><p></p></div>');
+					
+			cols.eq(j).find("#num").css("color", random_colour);
+			randomColours.push(random_colour);			
+		};
+		
+		var i = 0;
+		if (language == 'hebrew') {var j = -1;} else {var j = i;};
+
+		$('.col').eq(j)// .addClass('offset-by-' + divOffsetWords)
+						.find("#pix")
+						.css("opacity", "1");
+
+		var imageDivs = $('#pix img');
+
+		$(imageDivs.get(j)).attr("src", "images/" + imageSources[i]);
+		
+		$('#inputs, #flags').hide();
+		$('.container').css("display", "inline");
+		
+		countdown('countdown', 5);
+
+		startgame();
 	};
-	
-	var i = 0;
-	if (language == 'hebrew') {var j = -1;} else {var j = i;};
-
-	$('.col').eq(j)// .addClass('offset-by-' + divOffsetWords)
-					.find("#pix")
-					.css("opacity", "1");
-
-	var imageDivs = $('#pix img');
-
-	$(imageDivs.get(j)).attr("src", "images/" + imageSources[i]);
-	
-	$('#inputs, #flags').hide();
-	$('.container').css("display", "inline");
-	
-	countdown('countdown', 5);
-
-	startgame();
 
 	function startgame(){
 
