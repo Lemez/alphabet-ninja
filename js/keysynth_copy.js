@@ -523,7 +523,7 @@ $(document).ready(function () {
 
 	$(imageDivs.get(j)).attr("src", "images/" + imageSources[i]);
 	
-	$('#inputs').hide();
+	$('#inputs, #flags').hide();
 	$('.container').css("display", "inline");
 	
 	countdown('countdown', 5);
