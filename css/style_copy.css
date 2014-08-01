@@ -92,6 +92,9 @@ nav, #top {
 }
 */
 
+fb:login-button {
+	float: right;
+}
 
 #flags {
 	width: 100%;
