@@ -232,17 +232,35 @@ $(document).ready(function () {
 	};
 
 	var LANGUAGETOMESSAGES = {
-		'english' : [
-					"Are You Ready?",
-					"Please click the box above and write a secret word",
-					"Shorter words work better :)" 
-		],
-		'hebrew' : [
-					"Kadima!",
-					"Bevakasha tiktav mashehu lmala",
-					"Pahot mi shmone otiyot yoter tov habibi"
-		]
+		'english' : { 
+					ready : "Are You Ready?",
+					clickbox : "Please click the box above and write a secret word",
+					toolong : "Shorter words work better :)",
+					howtoplay : "How To Play",
+					placeholder : "Enter A Secret Word",
+					buttontext : "Let's Play" 
+		},
+		'hebrew' : {
+					ready : "Kadima!",
+					clickbox :"Bevakasha tiktav mashehu lmala",
+					toolong :"Pahot mi shmone otiyot yoter tov habibi",
+					howtoplay :"Eich lsahek",
+					placeholder :"Likhtov mila pratit",
+					buttontext :"Yalla nsahek"
+		}
 	};
+
+	function translateText(language) {
+		var d = LANGUAGETOMESSAGES;
+		$('#textbox').attr('placeholder', d[language].placeholder);
+		$('#letsplay').text(d[language].buttontext);
+		$('#instructions').text(d[language].howtoplay);
+
+		// change show/hide the text for instructions
+
+		startTheGame('');
+
+	}
 
 	var ADDITIONALFLAGS = {
 		 "hebrew" : "israel.svg"
@@ -298,7 +316,7 @@ $(document).ready(function () {
 	function addFlags() {
 		for (var lang in ADDITIONALFLAGS) {
 			var imgLocation = ADDITIONALFLAGS[lang];
-			$('#flags').append("<label><input type='radio' name='flag' value='" + lang + "' /><img src='images/" + imgLocation + "'></label>");
+			$('#flags').append("<label><input type='radio' name='flag' value='" + lang + "' /><img src='images/" + imgLocation + "' value='" + lang + "'></label>");
 		}
 	}
 
@@ -420,6 +438,9 @@ $(document).ready(function () {
 		$('#flags label img').on("click", function() {
 			$(this).addClass('selected');
 			$(this).parent().siblings().find('img').removeClass('selected');
+			var flagLang = $(this).attr('value');
+			translateText(flagLang);
+			
 		});
 
 		$('#inputs').keypress(function(e) { // MAKE enter work as submit button
@@ -430,26 +451,21 @@ $(document).ready(function () {
 	    });
 	};
 
+
 	$('.submit').on("click", function() {
 
 		var language = $('input:radio:checked').val();
 		var textInput = $('input:text:first').val();
 
 		if (textInput.length == 0) {
-			startTheGame(LANGUAGETOMESSAGES[language][1]);
+			startTheGame(LANGUAGETOMESSAGES[language].clickbox);
 
 		} else if (textInput.length >7 ) {
-			startTheGame(LANGUAGETOMESSAGES[language][2]);
+			startTheGame(LANGUAGETOMESSAGES[language].toolong);
 
 		} else {
-			buildGame();
-		}
 
-	function buildGame(){
-
-		var language = $('input:radio:checked').val();
-
-		$('#intro h2').text(LANGUAGETOMESSAGES[language][0]);
+			$('#intro h2').text(LANGUAGETOMESSAGES[language].ready);
 
 		var dictsToUse = LANGUAGETODICT[language];
 		var MYPICS = dictsToUse[0];
@@ -457,7 +473,8 @@ $(document).ready(function () {
 
 		function createSounds() {
 			Object.keys(MYSOUNDS).forEach(function (letter) { 
-	    		$('.sounds').append('<audio id="' + letter + '" src="' + MYSOUNDS[letter] + '" preload="auto"></audio>');
+	    		$('.sounds').append('<audio id="' + letter + '" src="' + 
+	    			MYSOUNDS[letter] + '" preload="auto"></audio>');
 			})
 		};
 
@@ -511,10 +528,15 @@ $(document).ready(function () {
 	        
 		    }, 1000);
 		};
-		
-		createSounds();	
-		var name1String = $('input:text:first').val();
 
+			createSounds();	
+			countdown('countdown', 5);
+			buildGame();
+		}
+
+	function buildGame(){
+
+		var name1String = $('input:text:first').val();
 		if (language != 'hebrew') name1String = name1String.toUpperCase();
 
 		var picArray = $.map(MYPICS, function(value, index) {return [value];});
@@ -568,13 +590,11 @@ $(document).ready(function () {
 		
 		$('#inputs, #flags').hide();
 		$('.container').css("display", "inline");
-		
-		countdown('countdown', 5);
 
-		startgame();
+		startgame(name1LettersArray, name1String, availablePics, randomColours, imageSources, imageDivs);
 	};
 
-	function startgame(){
+	function startgame(name1LettersArray, name1String, availablePics, randomColours, imageSources, imageDivs){
 
 		$(document).on("keydown", function (e) {
 
