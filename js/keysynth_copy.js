@@ -3,8 +3,6 @@
 
 $(document).ready(function () {
 
-
-
 	$(document).mousemove(function (e) {
 	
 		var mouseX = e.pageX; // e.pageX - gives you the X position.
