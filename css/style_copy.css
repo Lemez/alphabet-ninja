@@ -21,6 +21,10 @@ html, body {
   border-radius:10px;
 }
 
+ol li {
+	margin-bottom: 10px;
+}
+
 .container {
 	margin-top: 5%;
 	max-height: 90%;

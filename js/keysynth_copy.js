@@ -238,23 +238,48 @@ $(document).ready(function () {
 					toolong : "Shorter words work better :)",
 					howtoplay : "How To Play",
 					placeholder : "Enter A Secret Word",
-					buttontext : "Let's Play" 
+					buttontext : "Let's Play",
+					instructions0 : "Welcome to our game for little ninjas and big ninjas to play together",
+					instructions1 : "Ask your little ninja what word they want to spell -  a name works really well",
+					instructions2 : "Tell us which language you're using",
+					instructions3 : "Get ready to have fun together!" 
 		},
 		'hebrew' : {
 					ready : "Kadima!",
 					clickbox :"Bevakasha tiktav mashehu lmala",
 					toolong :"Pahot mi shmone otiyot yoter tov habibi",
-					howtoplay :"Eich lsahek",
-					placeholder :"Likhtov mila pratit",
-					buttontext :"Yalla nsahek"
+					howtoplay :"איך לשחק",
+					placeholder :"הקלד מילה",
+					buttontext :"יאללה נשחק",
+					instructions0 : "ברוכים הבאים למשחק משותף עבור נינג׳ות קטנים/ות וגדולים/ות",
+					instructions1 : "בקשו מהנינג׳ה הקטן/ה שלכם לבחור מילה לאיות,  שם עובד נפלא",
+					instructions2 : "בחרו את השפה הרצויה",
+					instructions3 : "תהנו"
 		}
 	};
+
+
+// instructions
+// 1. 
+
+// 2. 
+
+// 3. 
+
+// 4. 
 
 	function translateText(language) {
 		var d = LANGUAGETOMESSAGES;
 		$('#textbox').attr('placeholder', d[language].placeholder);
 		$('#letsplay').text(d[language].buttontext);
 		$('#instructions').text(d[language].howtoplay);
+		var joyride = $('#joyRideTipContent li');
+		joyride.eq(0).text(d[language].instructions0);
+		joyride.eq(1).text(d[language].instructions1);
+		joyride.eq(2).text(d[language].instructions2);
+		joyride.eq(3).text(d[language].instructions3);
+		// joyride.css("direction", "rtl");
+
 
 		// change show/hide the text for instructions
 
