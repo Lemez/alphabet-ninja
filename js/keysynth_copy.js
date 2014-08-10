@@ -236,6 +236,7 @@ $(document).ready(function () {
 					ready : "Are You Ready?",
 					clickbox : "Please click the box above and write a secret word",
 					toolong : "Shorter words work better :)",
+					language_error: "Please check the language flag, and what you have written in the box",
 					howtoplay : "How To Play",
 					placeholder : "Enter A Secret Word",
 					buttontext : "Let's Play",
@@ -248,6 +249,7 @@ $(document).ready(function () {
 					ready : "קדימה!",
 					clickbox :"אנא כתוב מילה בתיבה",
 					toolong :"אנא כתוב מילה קצרה יותר",
+					language_error: "Please check the language flag, and what you have written in the box",
 					howtoplay :"איך לשחק",
 					placeholder :"הקלד מילה",
 					buttontext :"יאללה נשחק",
@@ -487,29 +489,32 @@ $(document).ready(function () {
 	};
 
 
-	function languageCheck(inputlang, flaglang) {
-		var flagpics = LANGUAGETODICT[flaglang][0];
-		var inputpics = LANGUAGETODICT[inputlang][0];
+	function languageCheck(language, textInput) {
+	
+		for (var i=0; i < textInput.length; i++) {
 
+			var testText = LANGUAGETODICT[language][0][textInput[i]];
+			// console.log(typeof testText);
+			if (typeof testText === "undefined") return true;
+		}
+		return false;
 	}
 
-	$('#textbox').bind('change', function(){
-    //this.value.toUpperCase();
-    //EDIT: As  Mike Samuel suggested, this will be more appropriate for the job
-    this.value = this.value.toLocaleUpperCase();
-} );
 
 	$('.submit').on("click", function() {
 
 		var language = $('input:radio:checked').val();
 		var textInput = $('input:text:first').val();
-
+		
 
 		if (textInput.length == 0) {
 			startTheGame(LANGUAGETOMESSAGES[language].clickbox);
 
 		} else if (textInput.length >7 ) {
 			startTheGame(LANGUAGETOMESSAGES[language].toolong);
+
+		} else if (languageCheck(language,textInput) == true) {
+			startTheGame(LANGUAGETOMESSAGES[language].language_error);			
 
 		} else {
 
