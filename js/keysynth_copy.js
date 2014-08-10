@@ -245,9 +245,9 @@ $(document).ready(function () {
 					instructions3 : "Get ready to have fun together!" 
 		},
 		'hebrew' : {
-					ready : "Kadima!",
-					clickbox :"Bevakasha tiktav mashehu lmala",
-					toolong :"Pahot mi shmone otiyot yoter tov habibi",
+					ready : "קדימה!",
+					clickbox :"אנא כתוב מילה בתיבה",
+					toolong :"אנא כתוב מילה קצרה יותר",
 					howtoplay :"איך לשחק",
 					placeholder :"הקלד מילה",
 					buttontext :"יאללה נשחק",
@@ -276,7 +276,7 @@ $(document).ready(function () {
 		var d = LANGUAGETOMESSAGES;
 		var language = $(".selected").attr('value');
 
-		clearJoyride();
+		clearJoyride(); // make sure Joyride is cleared before attaching new values
 
 		$('#textbox').attr('placeholder', d[language].placeholder);
 		$('#letsplay').text(d[language].buttontext);
@@ -286,7 +286,7 @@ $(document).ready(function () {
 		joyride.eq(1).text(d[language].instructions1);
 		joyride.eq(2).text(d[language].instructions2);
 		joyride.eq(3).text(d[language].instructions3);
-		console.log(language );
+		$( "#textbox" ).focus();
 		// joyride.css("direction", "rtl");
 
 
@@ -484,10 +484,17 @@ $(document).ready(function () {
 	};
 
 
+	function languageCheck(inputlang, flaglang) {
+		var flagpics = LANGUAGETODICT[flaglang][0];
+		var inputpics = LANGUAGETODICT[inputlang][0];
+
+	}
+
 	$('.submit').on("click", function() {
 
 		var language = $('input:radio:checked').val();
 		var textInput = $('input:text:first').val();
+
 
 		if (textInput.length == 0) {
 			startTheGame(LANGUAGETOMESSAGES[language].clickbox);
@@ -614,6 +621,7 @@ $(document).ready(function () {
 
 		$('.col').eq(j)// .addClass('offset-by-' + divOffsetWords)
 						.find("#pix")
+						.addClass("circle-focus, jig")
 						.css("opacity", "1");
 
 		var imageDivs = $('#pix img');
@@ -640,17 +648,6 @@ $(document).ready(function () {
 		
 			var keycodeForLang = KEYCODES[language];
 
-	// 			var keyStopper=false;
-	// window.onkeydown=function(e){
-	//  if(keyStopper)return e.keyCode;
-	//  keyStopper=true;
-	// console.log(myJSON);
-	// myJSON[parseInt(e.keyCode)].push(1);
-	// }
-	// window.onkeyup = function(e){
-	// keyStopper=false;
-	// }
-
 			if (language == 'hebrew') {var letter = HEBREWLETTERS[keycodeForLang[e.which || e.keyCode]]; }
 			else {var letter = keycodeForLang[e.which || e.keyCode];}
 			
@@ -662,6 +659,17 @@ $(document).ready(function () {
 			else {playSound(letter);} //  play the audio
 
 			letters_function(name1LettersArray); //  play the game
+
+			// 			var keyStopper=false;
+			// window.onkeydown=function(e){
+			//  if(keyStopper)return e.keyCode;
+			//  keyStopper=true;
+			// console.log(myJSON);
+			// myJSON[parseInt(e.keyCode)].push(1);
+			// }
+			// window.onkeyup = function(e){
+			// keyStopper=false;
+			// }
 
 			function letters_function (letters) {  // define the main game function
 
@@ -687,23 +695,15 @@ $(document).ready(function () {
 							 			fontSize: realFontSize
 									 		}, 3000);
 
+					$(".col").eq(counter).find("#pix").addClass("letter-success");
+
 					setTimeout(function() {							
 						var myImage = "images/" + imageSources[0];
 					
-						console.log(counter);
-						console.log(nextCounter);
-						console.log(imageSources);
-						console.log((imageSources[0]));
-						
-
-						$(".col").eq(counter).find(".circle-center").css("background-color", randomColours[counter]);
-						$(".col").eq(counter).find("#pix").css("border-color", "rgba(255,255,255,0.25)")
-						$(".col").eq(nextCounter)
-									.find("#pix")
-									.animate({
-										opacity : 1},
-										2000);
-
+						// console.log(counter);
+						// console.log(nextCounter);
+						// console.log(imageSources);
+						// console.log((imageSources[0]));
 						// imageDivs.eq(counter+1).css("border", "solid white 20px");
 						// flashColours($(".col").eq(counter+1)
 						// 			.find(".circle-center"),200,10);
@@ -713,27 +713,39 @@ $(document).ready(function () {
 									.attr("src", myImage)
 											.animate({
 												opacity : 0},
-														1000)
+														750)
 											.animate({
 												opacity : 1},
-													 	1000)
+													 	750)
 											.animate({
 												opacity : 0},
-														1000)
+														750)
 											.animate({
 												opacity : 1},
-													 	1000);
+													 	750);
+
+						$(".col").eq(counter).find(".circle-center").css("background-color", randomColours[counter]);
+						$(".col").eq(counter).find("#pix").css("border-color", "rgba(255,255,255,0.25)")
+															.removeClass('jig');
+						$(".col").eq(nextCounter)
+									.find("#pix")
+									.addClass('circle-focus')
+									.animate({
+										opacity : 1},
+										2000)
+									.addClass('jig');
+
 
 							setTimeout(function() {
 								playSound("correct");
-										}, (4000));
+										}, (3000));
 						}
 						
 					}, (3000));
 
 					letters.splice(0, 1);
 					imageSources.splice(0, 1);
-					console.log(letters);
+					// console.log(letters);
 
 				} else if (typeof letter === "undefined"
 				 // && language=="hebrew"
@@ -750,14 +762,6 @@ $(document).ready(function () {
 						.html("<span id='letterpix'><img src='images/" + correctImg + 
 											"' /></span> <span id='letterpix'>" + letter  + "</span>")
 							 .css("display", "inline-block")
-							 .css("margin-left", "30%")
-							 .css("text-align", "center")
-							 // .css("height", "70px")
-							 .css("border-radius", "200px")
-							 .css("top", "60%")
-							 .css("opacity", "1")
-							 .css("background-color", "white")
-							 .css("border", "solid white 20px")
 							 // .css("font-size", "40px" )
 							 // .animate(
 							 // { marginLeft: (Math.floor(maths * screen.width)) -200 + 'px' },

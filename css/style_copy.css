@@ -376,27 +376,40 @@ padding: 2% 2% 2% 2%;
 
 opacity: 0.25;
 
-border: solid 14px white;
 }
+
+.circle-focus {
+	/*border: solid 10px white;*/
+}
+
 	
 
 .letters {
 	position: fixed;
-	width: 20%;
-	left: 10%;
+	width: 80%;
+	height: auto;
+	/*height: 100%;*/
+	left: 7.5%;
+	/*top: 60%;*/
 	display: block;
-	text-align: center;
+	/*text-align: center;*/
 	font-size: 120px;
+	/*margin-left: 30%;*/
+	border-radius: 200px;
+	opacity: 1;
+	background-color: white;
+	border: solid white 20px;
+	z-index: 50;
 }
 
 #letterpix {
-	font-size: 120px;
+	font-size: 300px;
 	}	
 
 
 #letterpix img {
-	width: 100px;
- 	height: 100px;
+	width: 300px;
+ 	height: 300px;
 	}	
 
 
@@ -406,6 +419,176 @@ border: solid 14px white;
 	padding: inherit;
 	opacity: 0;
 }
+
+
+.jig {
+	-webkit-animation-name: jig;
+	-webkit-animation-duration: 5s;
+	-webkit-transform-origin:50% 50%;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+	-moz-animation-name: jig;
+	-moz-animation-duration: 5s;
+	-moz-transform-origin:50% 50%;
+	-moz-animation-iteration-count: infinite;
+	-moz-animation-timing-function: linear;
+	animation-name: jig;
+	animation-duration: 5s;
+	transform-origin:50% 50%;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+
+
+@-webkit-keyframes jig {
+
+	25% { 
+
+	-webkit-transform: scale(1.25)rotate(0deg);
+    -moz-transform: scale(1.25)rotate(0deg);
+    -ms-transform: scale(1.25)rotate(0deg);
+    -o-transform: scale(1.25)rotate(0deg);
+    transform: scale(1.25)rotate(0deg); 
+}
+
+
+	50% { 
+	-webkit-transform: scale(1.5) rotate(0deg);
+    -moz-transform: scale(1.5) rotate(0deg);
+    -ms-transform:scale(1.5)  rotate(0deg);
+    -o-transform:scale(1.5) rotate(0deg);
+	transform:scale(1.5)  rotate(0deg); 
+}
+
+
+	75% { 
+
+	-webkit-transform:scale(1.25) rotate(0deg);
+    -moz-transform: scale(1.25)rotate(0deg);
+    -ms-transform:scale(1.25) rotate(0deg);
+    -o-transform: scale(1.25)rotate(0deg);
+    transform:scale(1.25) rotate(0deg); 
+}
+
+
+	100% { 
+	-webkit-transform: scale(1) rotate(0deg);
+    -moz-transform:scale(1)  rotate(0deg);
+    -ms-transform: scale(1) rotate(0deg);
+    -o-transform: scale(1)rotate(0deg);
+	transform:scale(1)  rotate(0deg); 
+}
+
+}
+
+@keyframes jig {
+	25% { 
+
+	-webkit-transform: scale(1.25)rotate(0deg);
+    -moz-transform: scale(1.25)rotate(0deg);
+    -ms-transform: scale(1.25)rotate(0deg);
+    -o-transform: scale(1.25)rotate(0deg);
+    transform: scale(1.25)rotate(0deg); 
+}
+
+
+	50% { 
+	-webkit-transform: scale(1.5) rotate(0deg);
+    -moz-transform: scale(1.5) rotate(0deg);
+    -ms-transform:scale(1.5)  rotate(0deg);
+    -o-transform:scale(1.5) rotate(0deg);
+	transform:scale(1.5)  rotate(0deg); 
+}
+
+
+	75% { 
+
+	-webkit-transform:scale(1.25) rotate(0deg);
+    -moz-transform: scale(1.25)rotate(0deg);
+    -ms-transform:scale(1.25) rotate(0deg);
+    -o-transform: scale(1.25)rotate(0deg);
+    transform:scale(1.25) rotate(0deg); 
+}
+
+
+	100% { 
+	-webkit-transform: scale(1) rotate(360deg);
+    -moz-transform:scale(1)  rotate(360deg);
+    -ms-transform: scale(1) rotate(360deg);
+    -o-transform: scale(1)rotate(360deg);
+	transform:scale(1)  rotate(360deg); 
+}
+
+}
+
+
+
+.letter-success {
+	-webkit-animation-name: letter-success;
+	-webkit-animation-duration: 3s;
+	-webkit-transform-origin:50% 50%;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;
+	-moz-animation-name: letter-success;
+	-moz-animation-duration: 3s;
+	-moz-transform-origin:50% 50%;
+	-moz-animation-iteration-count: 1;
+	-moz-animation-timing-function: linear;
+	animation-name: letter-success;
+	animation-duration: 3s;
+	transform-origin:50% 50%;
+	animation-iteration-count: 1;
+	animation-timing-function: linear;
+}
+
+
+
+@keyframes letter-success {
+	75% { 
+
+	-webkit-transform:rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: )rotate(360deg);
+    transform: rotate(360deg); 
+}
+
+
+	100% { 
+	-webkit-transform: rotate(720deg);
+    -moz-transform:  rotate(720deg);
+    -ms-transform:  rotate(720deg);
+    -o-transform: rotate(720deg);
+	transform: rotate(720deg); 
+}
+
+}
+
+@-webkit-keyframes letter-success {
+
+
+	75% { 
+
+	-webkit-transform:rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: )rotate(360deg);
+    transform: rotate(360deg); 
+}
+
+
+	100% { 
+	-webkit-transform: rotate(720deg);
+    -moz-transform:  rotate(720deg);
+    -ms-transform:  rotate(720deg);
+    -o-transform: rotate(720deg);
+	transform: rotate(720deg); 
+}
+
+}
+
+
+
 
 @-webkit-keyframes shake {
  0% {
@@ -761,6 +944,8 @@ border: solid 14px white;
 	animation-iteration-count: infinite;
 	animation-timing-function: linear;
 }
+
+
 
 
 
