@@ -243,10 +243,11 @@ $(document).ready(function () {
 					instructions0 : "Welcome to our game for little ninjas and big ninjas to play together",
 					instructions1 : "Ask your little ninja what word they want to spell -  a name works really well",
 					instructions2 : "Tell us which language you're using",
-					instructions3 : "Get ready to have fun together!" 
+					instructions3 : "Get ready to have fun together!",
+					text_align : 'left'
 		},
 		'hebrew' : {
-					ready : "קדימה!",
+					ready : "!קדימה",
 					clickbox :"אנא כתוב מילה בתיבה",
 					toolong :"אנא כתוב מילה קצרה יותר",
 					language_error: "Please check the language flag, and what you have written in the box",
@@ -256,7 +257,8 @@ $(document).ready(function () {
 					instructions0 : "ברוכים הבאים למשחק משותף עבור נינג׳ות קטנים/ות וגדולים/ות",
 					instructions1 : "בקשו מהנינג׳ה הקטן/ה שלכם לבחור מילה לאיות,  שם עובד נפלא",
 					instructions2 : "בחרו את השפה הרצויה",
-					instructions3 : "תהנו"
+					instructions3 : "תהנו",
+					text_align : 'right'
 		}
 	};
 
@@ -289,7 +291,7 @@ $(document).ready(function () {
 		joyride.eq(2).text(d[language].instructions2);
 		joyride.eq(3).text(d[language].instructions3);
 		$( "#textbox" ).focus();
-		// joyride.css("direction", "rtl");
+		joyride.css("text-align", d[language].text_align);
 
 
 		// change show/hide the text for instructions
