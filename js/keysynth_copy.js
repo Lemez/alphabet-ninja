@@ -268,22 +268,31 @@ $(document).ready(function () {
 
 // 4. 
 
-	function translateText(language) {
+	function clearJoyride() {
+		jQuery(window).joyride("destroy");
+	}
+
+	function translateText() {
 		var d = LANGUAGETOMESSAGES;
+		var language = $(".selected").attr('value');
+
+		clearJoyride();
+
 		$('#textbox').attr('placeholder', d[language].placeholder);
 		$('#letsplay').text(d[language].buttontext);
 		$('#instructions').text(d[language].howtoplay);
-		var joyride = $('#joyRideTipContent li');
+		var joyride = $('#joyRideTipContent li p');
 		joyride.eq(0).text(d[language].instructions0);
 		joyride.eq(1).text(d[language].instructions1);
 		joyride.eq(2).text(d[language].instructions2);
 		joyride.eq(3).text(d[language].instructions3);
+		console.log(language );
 		// joyride.css("direction", "rtl");
 
 
 		// change show/hide the text for instructions
 
-		startTheGame('');
+		// startTheGame('');
 
 	}
 
@@ -455,17 +464,15 @@ $(document).ready(function () {
 		$('.container').css("display", "none");
 		$('.letters').hide();
 
-		$('#instructions').on('click', function() {
-			 $("#joyRideTipContent").joyride({/* Options will go here */});
-			return false;
-		});
-
 		$('#flags label img').on("click", function() {
 			$(this).addClass('selected');
 			$(this).parent().siblings().find('img').removeClass('selected');
-			var flagLang = $(this).attr('value');
-			translateText(flagLang);
-			
+			translateText();	
+		});
+
+		$('#instructions').on('click', function() {
+			 $("#joyRideTipContent").joyride({/* Options will go here */});
+			// return false;
 		});
 
 		$('#inputs').keypress(function(e) { // MAKE enter work as submit button
