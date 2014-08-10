@@ -471,7 +471,10 @@ $(document).ready(function () {
 		});
 
 		$('#instructions').on('click', function() {
-			 $("#joyRideTipContent").joyride({/* Options will go here */});
+			 $("#joyRideTipContent").joyride({
+			 /* Options will go here */
+			 autoStart : true
+			});
 			// return false;
 		});
 
