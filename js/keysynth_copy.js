@@ -493,6 +493,12 @@ $(document).ready(function () {
 
 	}
 
+	$('#textbox').bind('change', function(){
+    //this.value.toUpperCase();
+    //EDIT: As  Mike Samuel suggested, this will be more appropriate for the job
+    this.value = this.value.toLocaleUpperCase();
+} );
+
 	$('.submit').on("click", function() {
 
 		var language = $('input:radio:checked').val();
@@ -797,6 +803,9 @@ $(document).ready(function () {
 			if (name1LettersArray.length == 0) gameEnd();
 
 			function gameEnd() {
+				if (language == 'hebrew') {var counter = 0;} else {var counter = textInput.length - 1;}
+						
+				$(".col").eq(counter).find(".circle-center").css("background-color", randomColours[counter]);
 
 				$('.letters').animate({   // make the single letter disappear
 									 	paddingTop: '800px'
@@ -808,16 +817,21 @@ $(document).ready(function () {
 				var allLetters = $('.col #lex p');
 				var allNums = $('.col #num'); 
 
+				$('#lex').css("z-index",100);
+
 				for (var i = 0; i < allPics.length; i++) { // make em dance
 				
 					var maths = Math.random();
+					if (maths < 0.5) { maths = maths + 0.5;}
 					// var colorsBackwards = randomColours.reverse();
 					var currentPic = allPics.eq(i);
 					var currentLetter = allLetters.eq(i);
 					var currentNumber = allNums.eq(i);
 					var currentCircle = allCircles.eq(i);
 
-					
+					var circleWidth = Math.floor(maths * 1000);
+
+					currentCircle.animate({width : circleWidth +'px',height : circleWidth +'px', borderRadius : circleWidth/2 +'px' }, (Math.floor(maths * 60000)));
 
 					if ((i+1)%2==0) {
 						
