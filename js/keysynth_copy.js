@@ -866,6 +866,11 @@ $(document).ready(function () {
 					playSound("success");
 													}, (3000));
 
+				$('a#ninjalogo').attr("href", "home.html")
+								.find("img")
+								.css("z-index", 100)
+								.css("position", "fixed");
+
 				// checkPosition();
 
 				// function bounceIt(){
