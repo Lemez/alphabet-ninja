@@ -262,6 +262,12 @@ $(document).ready(function () {
 		}
 	};
 
+	var MX_GAME_MSGS = {
+		'english' : mixpanel.track("Game - english"),
+		'hebrew' : mixpanel.track("Game - hebrew")
+
+	}
+
 
 // instructions
 // 1. 
@@ -599,12 +605,9 @@ $(document).ready(function () {
 
 		var name1String = $('input:text:first').val();
 
-		if (language != 'hebrew') {
-			mixpanel.track("Game - hebrew");
-			name1String = name1String.toUpperCase();
-		} else {
-			mixpanel.track("Game - english");
-		}
+		if (language != 'hebrew') name1String = name1String.toUpperCase();
+		
+		MX_GAME_MSGS[language];
 
 		var picArray = $.map(MYPICS, function(value, index) {return [value];});
 		var availablePics = [];
@@ -882,7 +885,7 @@ $(document).ready(function () {
 								.find("img")
 								.css("z-index", 100)
 								.css("position", "fixed");
-								
+
 				$('a#ninjalogo, #again').on('click', function(){
 					mixpanel.track('Play again');
 				});	
