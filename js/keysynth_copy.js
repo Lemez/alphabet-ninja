@@ -605,9 +605,7 @@ $(document).ready(function () {
 
 		var name1String = $('input:text:first').val();
 
-		if (language != 'hebrew') name1String = name1String.toUpperCase();
-		
-		MX_GAME_MSGS[language];
+		if (language != 'hebrew') {name1String = name1String.toUpperCase();}
 
 		var picArray = $.map(MYPICS, function(value, index) {return [value];});
 		var availablePics = [];
@@ -661,6 +659,8 @@ $(document).ready(function () {
 		
 		$('#inputs, #flags').hide();
 		$('.container').css("display", "inline");
+
+		MX_GAME_MSGS[language];
 
 		startgame(name1LettersArray, name1String, availablePics, randomColours, imageSources, imageDivs);
 	};
