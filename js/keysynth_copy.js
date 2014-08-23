@@ -510,17 +510,23 @@ $(document).ready(function () {
 		
 
 		if (textInput.length == 0) {
+			mixpanel.track("Name - none");
 			startTheGame(LANGUAGETOMESSAGES[language].clickbox);
 
+
 		} else if (textInput.length >7 ) {
+			mixpanel.track("Name - too long");
 			startTheGame(LANGUAGETOMESSAGES[language].toolong);
+			
 
 		} else if (languageCheck(language,textInput) == true) {
+			mixpanel.track("Name - language error");
 			startTheGame(LANGUAGETOMESSAGES[language].language_error);			
 
 		} else {
-
+			mixpanel.track("Name - accepted");
 			$('#intro h2').text(LANGUAGETOMESSAGES[language].ready);
+			
 
 		var dictsToUse = LANGUAGETODICT[language];
 		var MYPICS = dictsToUse[0];
@@ -592,7 +598,13 @@ $(document).ready(function () {
 	function buildGame(){
 
 		var name1String = $('input:text:first').val();
-		if (language != 'hebrew') name1String = name1String.toUpperCase();
+
+		if (language != 'hebrew') {
+			mixpanel.track("Game - hebrew");
+			name1String = name1String.toUpperCase();
+		} else {
+			mixpanel.track("Game - english");
+		}
 
 		var picArray = $.map(MYPICS, function(value, index) {return [value];});
 		var availablePics = [];
@@ -870,6 +882,10 @@ $(document).ready(function () {
 								.find("img")
 								.css("z-index", 100)
 								.css("position", "fixed");
+								
+				$('a#ninjalogo, #again').on('click', function(){
+					mixpanel.track('Play again');
+				});	
 
 				// checkPosition();
 
