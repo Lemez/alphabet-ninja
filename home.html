@@ -85,8 +85,8 @@
     FB.api('/me', function(response) {
       console.log('Successful login for: ' + response.first_name);
       console.log(response);
-      document.getElementById('userName').innerHTML =
-        'Hi ' + response.first_name + '!';
+      // document.getElementById('userName').innerHTML =
+      //   'Hi ' + response.first_name + '!';
 
        document.getElementById('fphoto').src = 'http://graph.facebook.com/' + response.id + '/picture';
     });
