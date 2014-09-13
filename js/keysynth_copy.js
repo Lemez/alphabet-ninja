@@ -111,6 +111,40 @@ $(document).ready(function () {
 		"rocket" : "rocket-ship-shooting-md.png"
 	};
 
+
+	var NASLETTERS = {"A"	: "",
+		"B" :"" ,
+		"C" :"",
+		"Č" :"",
+		"Ć" :"",
+		"D" :"",
+		"Đ" :"",
+		"E" :"",
+		"F" :"",
+		"G" :"",
+		"H" :"",
+		"I" :"",
+		"J" : "A",
+		"K" :"",
+		"L" :"",
+		"M" :"",
+		"N" :"",
+		"O" :"",
+		"P" : "",
+		"Q" :"",
+		"R" :"",
+		"S" :"",
+		"Š" :"",
+		"T" :"",
+		"U" :"",
+		"V" :"",
+		"W" :"",
+		"X" :"",
+		"Y" :"",
+		"Z" :"",
+		"Ž" :""
+	};
+
 	var HEBREWSOUNDS = {
 		"א" : "audio/Male_snoring_with_effects_-sounds_like_a_lion-_Nightingale_Music_Productions.mp3" ,
 		"ב" : "audio/Animals_duck_quack_-nature-_Nightingale_Music_Productions_13810.mp3",
