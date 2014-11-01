@@ -4,6 +4,44 @@
 $(document).ready(function () {
 
 
+	
+	
+	var platform = navigator.platform;
+	var viewport = {
+	    width  : $(window).width(),
+	    height : $(window).height()
+	};
+
+//can access dimensions like this:
+//viewport.height
+
+	console.log(platform);
+	console.log(viewport);
+
+
+	 var isMobile =  function detectmob() { 
+	 if( navigator.userAgent.match(/Android/i)
+	 || navigator.userAgent.match(/webOS/i)
+	 || navigator.userAgent.match(/iPhone/i)
+	 || navigator.userAgent.match(/iPad/i)
+	 || navigator.userAgent.match(/iPod/i)
+	 || navigator.userAgent.match(/BlackBerry/i)
+	 || navigator.userAgent.match(/Windows Phone/i)
+	 ){
+	    return true;
+	  }
+	 else {
+	    return false;
+	  }
+	}
+
+	// if device is mobile, populate virtual keyboard 
+
+
+
+
+
+
 
 	$(document).mousemove(function (e) {
 	
@@ -269,7 +307,7 @@ $(document).ready(function () {
 		'english' : { 
 					ready : "Are You Ready?",
 					clickbox : "Please click the box above and write a secret word",
-					toolong : "Shorter words work better :)",
+					toolong : "Make your browser wider or choose a shorter word",
 					language_error: "Please check the language flag, and what you have written in the box",
 					howtoplay : "How To Play",
 					placeholder : "Enter A Secret Word",
@@ -547,6 +585,16 @@ $(document).ready(function () {
 
 		var language = $('input:radio:checked').val();
 		var textInput = $('input:text:first').val();
+
+
+		// determine maximum length based on browser width
+		var submittedWidth = textInput.length;
+		var maxWidth = viewport.width;
+
+		var columnWidth = 160;
+		var maxLength = ~~(maxWidth / columnWidth );
+
+		console.log(maxLength);
 		
 
 		if (textInput.length == 0) {
@@ -554,7 +602,7 @@ $(document).ready(function () {
 			startTheGame(LANGUAGETOMESSAGES[language].clickbox);
 
 
-		} else if (textInput.length >7 ) {
+		} else if (textInput.length > maxLength ) {
 			mixpanel.track("Name - too long");
 			startTheGame(LANGUAGETOMESSAGES[language].toolong);
 			
@@ -700,6 +748,7 @@ $(document).ready(function () {
 	};
 
 	function startgame(name1LettersArray, name1String, availablePics, randomColours, imageSources, imageDivs){
+
 
 		$(document).on("keydown", function (e) {
 

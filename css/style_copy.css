@@ -277,6 +277,11 @@ div#inputs  {
 
 /*+++ CORE GAME ++++*/
 
+/*keyboard for mobile browsers*/
+#keyboard {
+	display: none;
+}
+
 #content {
 	width: 100%;
 	margin: 0 auto 0 auto;
