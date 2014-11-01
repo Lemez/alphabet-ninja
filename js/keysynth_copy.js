@@ -591,15 +591,17 @@ $(document).ready(function () {
 
 
 		// determine maximum length based on browser width
-		var submittedWidth = textInput.length;
+
 		var maxWidth = viewport.width;
 		var columnMargin = ~~(maxWidth / 100 ); 
 
-		var columnWidth = 150 + columnMargin;
+		var columnWidth = 150 + (2 * columnMargin);
 		var maxLength = ~~(maxWidth / columnWidth );
 
-		console.log(maxLength);
+		console.log(maxWidth);
 		console.log(columnWidth);
+		console.log(maxLength);
+
 		
 
 		if (textInput.length == 0) {
