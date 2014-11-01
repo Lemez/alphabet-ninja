@@ -7,16 +7,11 @@ $(document).ready(function () {
 	
 	
 	var platform = navigator.platform;
-	var viewport = {
-	    width  : $(window).width(),
-	    height : $(window).height()
-	};
 
 //can access dimensions like this:
 //viewport.height
 
 	console.log(platform);
-	console.log(viewport);
 
 
 	 var isMobile =  function detectmob() { 
@@ -543,6 +538,8 @@ $(document).ready(function () {
 		
 		$('#message').text(message);
 
+
+
 		$('.container').css("display", "none");
 		$('.letters').hide();
 
@@ -582,6 +579,12 @@ $(document).ready(function () {
 
 
 	$('.submit').on("click", function() {
+
+		var viewport = {
+		    width  : $(window).width(),
+		    height : $(window).height()
+		};
+
 
 		var language = $('input:radio:checked').val();
 		var textInput = $('input:text:first').val();
