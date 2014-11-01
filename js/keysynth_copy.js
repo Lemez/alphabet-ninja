@@ -13,8 +13,7 @@ $(document).ready(function () {
 
 	console.log(platform);
 
-
-	 var isMobile =  function detectmob() { 
+	function detectmob() { 
 	 if( navigator.userAgent.match(/Android/i)
 	 || navigator.userAgent.match(/webOS/i)
 	 || navigator.userAgent.match(/iPhone/i)
@@ -29,6 +28,8 @@ $(document).ready(function () {
 	    return false;
 	  }
 	}
+
+	 var isMobile =  detectmob();
 
 	// if device is mobile, populate virtual keyboard 
 
@@ -529,6 +530,25 @@ $(document).ready(function () {
 			setTimeout(checkPosition, 1000);
 	};
 
+		function shuffle(array) {
+			  var currentIndex = array.length, temporaryValue, randomIndex ;
+
+			  // While there remain elements to shuffle...
+			  while (0 !== currentIndex) {
+
+			    // Pick a remaining element...
+			    randomIndex = Math.floor(Math.random() * currentIndex);
+			    currentIndex -= 1;
+
+			    // And swap it with the current element.
+			    temporaryValue = array[currentIndex];
+			    array[currentIndex] = array[randomIndex];
+			    array[randomIndex] = temporaryValue;
+			  }
+
+	  return array;
+	}
+
 	// **************************** START CODE ++++++++++++++++++++++++++++
 
 	addFlags();
@@ -537,8 +557,6 @@ $(document).ready(function () {
 	function startTheGame(message) {
 		
 		$('#message').text(message);
-
-
 
 		$('.container').css("display", "none");
 		$('.letters').hide();
@@ -731,8 +749,73 @@ $(document).ready(function () {
 						.append('<div id="lex" class="row"><p></p></div>');
 					
 			cols.eq(j).find("#num").css("color", random_colour);
-			randomColours.push(random_colour);			
+			randomColours.push(random_colour);	
+
+
+			console.log(isMobile);
+
+			// if mobile then populate manual keyboard with letter choices
+
+			if (isMobile == false) {
+
+				// empty array of letters
+				var letterArray = [];
+
+				// note current letter
+				var thisLetter = name1LettersArray[j];
+
+				// get all possible letters from the correct language
+				var availableLetters = Object.keys(MYSOUNDS).filter(checkIsValid);
+
+				// check availableLetters contains only letters and not other elements
+				function checkIsValid(e){if (e.length == 1) return true;else return false;}
+
+				// randomly select one
+				
+				function getRandomLetter(array) {
+					
+					letter = availableLetters[Math.floor(Math.random()*availableLetters.length)];
+
+					return letter;
+				}
+
+				// add current letter to the array
+				letterArray.push(thisLetter);
+
+				// define how many options we want to give
+				var maxLetterOptions = 3;	
+
+				//  add as many random letters to the array as we have defined
+				while (letterArray.length < maxLetterOptions) {
+
+					var distractor = getRandomLetter(availableLetters);
+					
+					// if letter is not in the array already, add it
+					if ($.inArray(distractor, letterArray) != 0) {
+						letterArray.push(distractor);
+					}
+				}
+				
+				// //  randomly sort the array
+				letterArray = shuffle(letterArray);
+
+				console.log(letterArray);
+
+				// add all keyboard options for each letter
+				for (var x = 0; x < maxLetterOptions; x++) {
+
+					$('#keyboard')
+						.append('<div id="kb_letters" class="row circle" title="' + thisLetter + 
+							'" index='+ j + '>' + letterArray[x] + '</div>');
+		
+				}
+			}
+
 		};
+
+		
+
+		var firstLetter = name1LettersArray[0];
 		
 		var i = 0;
 		if (language == 'hebrew') {var j = -1;} else {var j = i;};
@@ -779,6 +862,7 @@ $(document).ready(function () {
 				{ return false;} 
 			else {playSound(letter);} //  play the audio
 
+		
 			letters_function(name1LettersArray); //  play the game
 
 			// 			var keyStopper=false;

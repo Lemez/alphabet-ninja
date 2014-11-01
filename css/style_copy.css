@@ -280,6 +280,14 @@ div#inputs  {
 /*keyboard for mobile browsers*/
 #keyboard {
 	display: none;
+	width: 100%
+}
+
+#kb_letters {
+	width: 20%;
+	margin: 0 1% 0 1%;
+	font-size: 20px;
+	font-weight: 700;
 }
 
 #content {
