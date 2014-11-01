@@ -13,6 +13,8 @@ $(document).ready(function () {
 
 	console.log(platform);
 
+	
+
 	function detectmob() { 
 	 if( navigator.userAgent.match(/Android/i)
 	 || navigator.userAgent.match(/webOS/i)
@@ -754,6 +756,7 @@ $(document).ready(function () {
 
 			console.log(isMobile);
 
+
 			// if mobile then populate manual keyboard with letter choices
 
 			if (isMobile == false) {
@@ -805,7 +808,7 @@ $(document).ready(function () {
 				for (var x = 0; x < maxLetterOptions; x++) {
 
 					$('#keyboard')
-						.append('<div id="kb_letters" class="row circle" title="' + thisLetter + 
+						.append('<div id="kb_letters" class="circle" title="' + thisLetter + 
 							'" index='+ j + '>' + letterArray[x] + '</div>');
 		
 				}
@@ -813,9 +816,8 @@ $(document).ready(function () {
 
 		};
 
-		
 
-		var firstLetter = name1LettersArray[0];
+		
 		
 		var i = 0;
 		if (language == 'hebrew') {var j = -1;} else {var j = i;};
@@ -839,7 +841,6 @@ $(document).ready(function () {
 
 	function startgame(name1LettersArray, name1String, availablePics, randomColours, imageSources, imageDivs){
 
-
 		$(document).on("keydown", function (e) {
 
 			if ($('#intro').css("display") == 'block') return false;
@@ -862,6 +863,14 @@ $(document).ready(function () {
 				{ return false;} 
 			else {playSound(letter);} //  play the audio
 
+			showMobileView(0);
+
+			function showMobileView(index){
+					$('#keyboard').show();
+					$('#kb_letters').hide();
+					$('#kb_letters').attr('index', index.toString()).css('display','inline-block');
+
+			}
 		
 			letters_function(name1LettersArray); //  play the game
 
@@ -878,12 +887,16 @@ $(document).ready(function () {
 
 			function letters_function (letters) {  // define the main game function
 
+					
+
 				if ($.inArray(letter, letters) == 0) {
 
 					var realFontSize = $('#lex p').css("font-size");
 
 					var counter = (name1String.length - letters.length);
 					var nextCounter = counter + 1;
+
+
 
 					if (language == 'hebrew') {
 						counter = (name1LettersArray.length-1);
@@ -939,6 +952,8 @@ $(document).ready(function () {
 										opacity : 1},
 										2000)
 									.addClass('jig');
+
+						showMobileView(nextCounter);
 
 
 							setTimeout(function() {
