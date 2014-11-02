@@ -279,7 +279,6 @@ div#inputs  {
 
 /*keyboard for mobile browsers*/
 #keyboard {
-	display: none;
 	width: 100%;
 }
 
@@ -288,7 +287,11 @@ div#inputs  {
 	margin: 0 1% 0 1%;
 	font-size: 20px;
 	font-weight: 700;
-	display: inline;
+	display: none;
+}
+
+.vis {
+	display: inline-block;
 }
 
 #content {

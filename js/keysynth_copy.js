@@ -585,6 +585,14 @@ $(document).ready(function () {
 	    });
 	};
 
+	function showMobileLetters(i){
+				// $('#keyboard').show();
+				// $('#kb_letters').hide();
+				$('#kb_letters').find('index', i.toString()).addClass('vis');
+				
+				alert("showMobileLetters");
+
+		}
 
 	function languageCheck(language, textInput) {
 	
@@ -692,6 +700,9 @@ $(document).ready(function () {
 				setTimeout(function() {
 					$('#intro').hide();
 					$('.col').css("opacity", 1);
+
+					if (isMobile) showMobileLetters(0);
+
 					return;	
 				},2000);
 	        }
@@ -753,13 +764,15 @@ $(document).ready(function () {
 			cols.eq(j).find("#num").css("color", random_colour);
 			randomColours.push(random_colour);	
 
+			// force true state for development
+			isMobile = true;
 
 			console.log(isMobile);
 
 
 			// if mobile then populate manual keyboard with letter choices
 
-			if (isMobile == false) {
+			if (isMobile) {
 
 				// empty array of letters
 				var letterArray = [];
@@ -782,19 +795,20 @@ $(document).ready(function () {
 					return letter;
 				}
 
-				// add current letter to the array
-				letterArray.push(thisLetter);
-
+				
 				// define how many options we want to give
 				var maxLetterOptions = 3;	
+
+				// add current letter to the array
+				letterArray.push(thisLetter);
 
 				//  add as many random letters to the array as we have defined
 				while (letterArray.length < maxLetterOptions) {
 
 					var distractor = getRandomLetter(availableLetters);
-					
+		
 					// if letter is not in the array already, add it
-					if ($.inArray(distractor, letterArray) != 0) {
+					if ($.inArray(distractor, letterArray) == -1 ) {
 						letterArray.push(distractor);
 					}
 				}
@@ -809,12 +823,13 @@ $(document).ready(function () {
 
 					$('#keyboard')
 						.append('<div id="kb_letters" class="circle" title="' + thisLetter + 
-							'" index='+ j + '>' + letterArray[x] + '</div>');
+							'" index="'+ j + '">' + letterArray[x] + '</div>');
 		
 				}
 			}
 
 		};
+
 
 
 		
@@ -849,6 +864,8 @@ $(document).ready(function () {
 			$('.letters').hide();
 			$('.col').css("opacity", 1);
 
+
+
 			var random_colour = ('#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6));
 		
 			var keycodeForLang = KEYCODES[language];
@@ -863,14 +880,7 @@ $(document).ready(function () {
 				{ return false;} 
 			else {playSound(letter);} //  play the audio
 
-			showMobileView(0);
-
-			function showMobileView(index){
-					$('#keyboard').show();
-					$('#kb_letters').hide();
-					$('#kb_letters').attr('index', index.toString()).css('display','inline-block');
-
-			}
+			
 		
 			letters_function(name1LettersArray); //  play the game
 
@@ -953,7 +963,7 @@ $(document).ready(function () {
 										2000)
 									.addClass('jig');
 
-						showMobileView(nextCounter);
+						showMobileLetters(nextCounter);
 
 
 							setTimeout(function() {
