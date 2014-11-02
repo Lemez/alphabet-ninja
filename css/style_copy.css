@@ -277,18 +277,21 @@ div#inputs  {
 
 /*+++ CORE GAME ++++*/
 /*keyboard for mobile browsers*/
+#keyboard {
+	margin-top: 2.5%;
+}
 
 #kb_letters {
 	text-align: center;
 	width: 100%;
-	height: 200px;
 }
 
 .mob_letter {
 	font-size: 150px;
 	font-weight: 700;
 	text-align: center;
-	margin: -10% 2% 0 2%;
+	margin: 0 2% 0 2%;
+
 }
 
 .vis {
