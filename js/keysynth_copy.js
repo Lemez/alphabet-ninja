@@ -812,8 +812,8 @@ $(document).ready(function () {
 
 	function startgame(name1LettersArray, name1String, availablePics, randomColours, imageSources, imageDivs){
 
+		// change some layout elements if mobile keyboard is involved
 		if (isMobile) {
-		// reduce font size ( mob only ) so that 3 letters are clearer in size
 				$('#lex p').each(function(){
 					$(this).css("font-size", 80);
 				})
