@@ -586,14 +586,14 @@ $(document).ready(function () {
 	};
 
 	function showMobileLetters(i){
-				// $('#keyboard').show();
-				// $('#kb_letters').hide();
+				
 				var letters = $("." + i.toString());
+					letters.siblings().removeClass('vis').addClass('invis').css('display','none');
 
-					letters.siblings().removeClass('vis').addClass('invis');
-					letters.removeClass('invis').addClass('vis');
-					
-					alert("showMobileLetters");
+					letters.removeClass('invis').addClass('vis shake').hide()
+							.css('opacity', 0)
+							.css('display','inline')
+							.animate({opacity : 1},5000);
 
 		}
 
@@ -632,7 +632,6 @@ $(document).ready(function () {
 		console.log(maxWidth);
 		console.log(columnWidth);
 		console.log(maxLength);
-
 		
 
 		if (textInput.length == 0) {
@@ -767,7 +766,7 @@ $(document).ready(function () {
 			cols.eq(j).find("#num").css("color", random_colour);
 			randomColours.push(random_colour);	
 
-			// force true state for development
+// force 'true' state for development
 			isMobile = true;
 
 			console.log(isMobile);
@@ -828,18 +827,12 @@ $(document).ready(function () {
 				for (var x = 0; x < maxLetterOptions; x++) {
 
 					$('#kb_letters').last()
-						.append('<div id="mob_letter" class="circle ' +  j + '" title="' + thisLetter + 
+						.append('<div class="invis mob_letter ' +  j + '" id="' + thisLetter + 
 							'" >' + letterArray[x] + '</div>');
-		
 				}
 			}
-
 		};
 
-
-
-		
-		
 		var i = 0;
 		if (language == 'hebrew') {var j = -1;} else {var j = i;};
 
@@ -864,55 +857,41 @@ $(document).ready(function () {
 
 		$(document).on("keydown", function (e) {
 
+			//  visual setup
 			if ($('#intro').css("display") == 'block') return false;
-			
 			$('#intro').hide();
 			$('.letters').hide();
 			$('.col').css("opacity", 1);
 
-
-
 			var random_colour = ('#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6));
-		
+
+			//  keycodes setup
+			// define set of keycodes
 			var keycodeForLang = KEYCODES[language];
 
-			if (language == 'hebrew') {var letter = HEBREWLETTERS[keycodeForLang[e.which || e.keyCode]]; }
+			// make sure keycode is mapped to correct letter
+			if (language == 'hebrew') {var letter = HEBREWLETTERS[keycodeForLang[e.which || e.keyCode]]}
 			else {var letter = keycodeForLang[e.which || e.keyCode];}
 			
+			//  map sound to letter
 			var letterSound = MYSOUNDS[letter];
 			var letterDivs = $('#lex p');
 
-			if (name1LettersArray.length == 0) 
-				{ return false;} 
+			//  on keydown
+				// play sound unless game over
+			if (name1LettersArray.length == 0) { return false;} 
 			else {playSound(letter);} //  play the audio
 
-			
-		
-			letters_function(name1LettersArray); //  play the game
-
-			// 			var keyStopper=false;
-			// window.onkeydown=function(e){
-			//  if(keyStopper)return e.keyCode;
-			//  keyStopper=true;
-			// console.log(myJSON);
-			// myJSON[parseInt(e.keyCode)].push(1);
-			// }
-			// window.onkeyup = function(e){
-			// keyStopper=false;
-			// }
+			//  game logic
+			letters_function(name1LettersArray); 
 
 			function letters_function (letters) {  // define the main game function
-
-					
 
 				if ($.inArray(letter, letters) == 0) {
 
 					var realFontSize = $('#lex p').css("font-size");
-
 					var counter = (name1String.length - letters.length);
 					var nextCounter = counter + 1;
-
-
 
 					if (language == 'hebrew') {
 						counter = (name1LettersArray.length-1);
@@ -924,23 +903,19 @@ $(document).ready(function () {
 									.css("font-size", (Math.floor(Math.random() * 800))) // create random font-size to animate from
 									.css("display", "inline-block")
 							 		.css("color", randomColours[counter])
-							 		// .css("text-shadow", (5 + (Math.floor(maths * 10))) + "px " + (5 + (Math.floor(maths * 10))) + "px " + "darkgray")
 							 		.animate({
 							 			fontSize: realFontSize
 									 		}, 3000);
 
 					$(".col").eq(counter).find("#pix").addClass("letter-success");
 
+					// fade out mobile choices if correct letter chosen
+					if (isMobile == true) {
+						$('.' + counter).animate({opacity : 0},750)
+					}
+
 					setTimeout(function() {							
 						var myImage = "images/" + imageSources[0];
-					
-						// console.log(counter);
-						// console.log(nextCounter);
-						// console.log(imageSources);
-						// console.log((imageSources[0]));
-						// imageDivs.eq(counter+1).css("border", "solid white 20px");
-						// flashColours($(".col").eq(counter+1)
-						// 			.find(".circle-center"),200,10);
 
 						if (name1LettersArray.length != 0) { 
 							imageDivs.eq(nextCounter)
@@ -971,7 +946,6 @@ $(document).ready(function () {
 
 						showMobileLetters(nextCounter);
 
-
 							setTimeout(function() {
 								playSound("correct");
 										}, (3000));
@@ -997,15 +971,7 @@ $(document).ready(function () {
 					$('.letters')
 						.html("<span id='letterpix'><img src='images/" + correctImg + 
 											"' /></span> <span id='letterpix'>" + letter  + "</span>")
-							 .css("display", "inline-block")
-							 // .css("font-size", "40px" )
-							 // .animate(
-							 // { marginLeft: (Math.floor(maths * screen.width)) -200 + 'px' },
-							 // { duration: 500
-							 // 	// , easing: 'easeOutBounce'
-							 // }
-							 	// )
-								;
+							 .css("display", "inline-block");
 
 					flashColours('.letters',200,10);
 
@@ -1015,20 +981,7 @@ $(document).ready(function () {
 				};
 			};
 
-
-			// if (name1LettersArray.length == 0 && name2LettersArray.length != 0) {  // call the function for name2
-
-			// 	$('#and p').animate({ opacity: 1}, 3000 );
-			// 	$('#name2').slideDown(2000);
-			// 	$('#congrats').css("display", "block")
-			// 					.animate({ top: 0}, 1000 );
-
-			// 	var myDiv = '#name2';
-			// 	letters_function(name2LettersArray);
-			// };
-
-			if (name1LettersArray.length == 0) gameEnd();
-
+			if (name1LettersArray.length == 0) 
 			function gameEnd() {
 				if (language == 'hebrew') {var counter = 0;} else {var counter = textInput.length - 1;}
 						
