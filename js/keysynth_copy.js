@@ -588,9 +588,12 @@ $(document).ready(function () {
 	function showMobileLetters(i){
 				// $('#keyboard').show();
 				// $('#kb_letters').hide();
-				$('#kb_letters').find('index', i.toString()).addClass('vis');
-				
-				alert("showMobileLetters");
+				var letters = $("." + i.toString());
+
+					letters.siblings().removeClass('vis');
+					letters.addClass('vis');
+					
+					alert("showMobileLetters");
 
 		}
 
@@ -822,8 +825,8 @@ $(document).ready(function () {
 				for (var x = 0; x < maxLetterOptions; x++) {
 
 					$('#keyboard')
-						.append('<div id="kb_letters" class="circle" title="' + thisLetter + 
-							'" index="'+ j + '">' + letterArray[x] + '</div>');
+						.append('<div id="kb_letters" class="circle ' +  j + '" title="' + thisLetter + 
+							'" >' + letterArray[x] + '</div>');
 		
 				}
 			}
