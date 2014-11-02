@@ -283,15 +283,21 @@ div#inputs  {
 }
 
 #kb_letters {
-	width: 20%;
-	margin: 0 1% 0 1%;
-	font-size: 20px;
-	font-weight: 700;
+	/*visibility: hidden;*/
 	display: none;
+	width: 100%;
+	text-align: center;
+
 }
 
 .vis {
+/*	visibility: visible;*/
 	display: inline-block;
+}
+
+.invis {
+/*	visibility: visible;*/
+	display: none;
 }
 
 #content {
@@ -321,7 +327,8 @@ h2, #num {
 
 
 #pix,
-#lex {
+#lex,
+#kb_letters  {
 	width: 100px;
  	height: 100px;
 	display: inline-block;
