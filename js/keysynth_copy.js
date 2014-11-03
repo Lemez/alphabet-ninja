@@ -911,10 +911,9 @@ $(document).ready(function () {
 									 		}, 3000);
 
 					//  make the image rotate
-					$(".col").eq(counter).find("#pix").addClass("letter-success");
+					// $(".col").eq(counter).find("#pix").addClass("letter-success");
 
 					//  make the image animate in a more mobile friendly way
-					// $(".col").eq(counter).find("#pix").addClass("letter-success");
 					$(".col").eq(counter).find("#pix").addClass("letter-success-mob");
 
 

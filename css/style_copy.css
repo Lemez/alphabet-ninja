@@ -644,20 +644,20 @@ opacity: 0.25;
 
 
 	75% { 
-	-webkit-transform: scale(1) rotate(720deg);
-    -moz-transform:scale(1)  rotate(720deg);
-    -ms-transform: scale(1) rotate(720deg);
-    -o-transform: scale(1)rotate(720deg);
-	transform:scale(1)  rotate(720deg); 
+	-webkit-transform: scale(2) rotate(720deg);
+    -moz-transform:scale(2)  rotate(720deg);
+    -ms-transform: scale(2) rotate(720deg);
+    -o-transform: scale(2)rotate(720deg);
+	transform:scale(2)  rotate(720deg); 
 }
 
 	95% { 
 
-	-webkit-transform:scale(2) rotate(1080deg);
-    -moz-transform: scale(2)rotate(1080deg);
-    -ms-transform:scale(2) rotate(1080deg);
-    -o-transform: scale(2)rotate(1080deg);
-    transform:scale(2) rotate(1080deg); 
+	-webkit-transform:scale(1) rotate(180deg);
+    -moz-transform: scale(1)rotate(180deg);
+    -ms-transform:scale(1) rotate(180deg);
+    -o-transform: scale(1)rotate(180deg);
+    transform:scale(1) rotate(180deg); 
 }
 
 
@@ -687,20 +687,20 @@ opacity: 0.25;
 
 
 	75% { 
-	-webkit-transform: scale(1) rotate(720deg);
-    -moz-transform:scale(1)  rotate(720deg);
-    -ms-transform: scale(1) rotate(720deg);
-    -o-transform: scale(1)rotate(720deg);
-	transform:scale(1)  rotate(720deg); 
+	-webkit-transform: scale(2) rotate(720deg);
+    -moz-transform:scale(2)  rotate(720deg);
+    -ms-transform: scale(2) rotate(720deg);
+    -o-transform: scale(2)rotate(720deg);
+	transform:scale(2)  rotate(720deg); 
 }
 
 	95% { 
 
-	-webkit-transform:scale(2) rotate(1080deg);
-    -moz-transform: scale(2)rotate(1080deg);
-    -ms-transform:scale(2) rotate(1080deg);
-    -o-transform: scale(2)rotate(1080deg);
-    transform:scale(2) rotate(1080deg); 
+	-webkit-transform:scale(1) rotate(180deg);
+    -moz-transform: scale(1)rotate(180deg);
+    -ms-transform:scale(1) rotate(180deg);
+    -o-transform: scale(1)rotate(180deg);
+    transform:scale(1) rotate(180deg); 
 }
 
 
@@ -1127,5 +1127,33 @@ opacity: 0.25;
 	z-index: 5;
 	position: absolute;
 }
+
+
+
+.animate {
+     background: red;  
+     -webkit-animation: super-rainbow 15s infinite alternate linear; 
+     -moz-animation: super-rainbow 15s infinite alternate linear; 
+}
+
+@-webkit-keyframes super-rainbow {
+    0%   { background: red; } 
+    20%  { background: orange; }
+    40%  { background: yellow; }
+    60%  { background: green; }
+    80%  { background: blue; }
+    100% { background: violet; }
+}
+
+@-moz-keyframes super-rainbow {
+    0%   { background: red; } 
+    20%  { background: orange; }
+    40%  { background: yellow; }
+    60%  { background: green; }
+    80%  { background: blue; }
+    100% { background: violet; }
+}
+
+#animate img:nth-of-type(2) { -webkit-animation-delay: 1s; -moz-animation-delay: 1s; }
 
 
