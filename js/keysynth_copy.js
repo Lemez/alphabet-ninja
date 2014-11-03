@@ -825,6 +825,8 @@ $(document).ready(function () {
 					  $( "div.mob_letter" ).bind( "tap", tapHandler );
 					 
 					  function tapHandler( event ){
+					  	console.log("tapped!");
+
 					  	var letterTapped = $( event.target ).innerHTML;
 
 					    //  trigger the keydown function using the keycode
