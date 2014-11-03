@@ -813,12 +813,35 @@ $(document).ready(function () {
 	function startgame(name1LettersArray, name1String, availablePics, randomColours, imageSources, imageDivs){
 
 		// change some layout elements if mobile keyboard is involved
-		if (isMobile) {
+		if (isMobile) {													// start of isMobile
 				$('#lex p').each(function(){
 					$(this).css("font-size", 80);
 				})
 				$('#lex').css("height", "auto");
-			}
+
+				//  check to see if letter is pressed and if so, mimic the behaviour of keydown
+
+				$(function(){
+					  $( "div.mob_letter" ).bind( "tap", tapHandler );
+					 
+					  function tapHandler( event ){
+					  	var letterTapped = $( event.target ).innerHTML;
+
+					    //  trigger the keydown function using the keycode
+					    var keycode = KEYCHARTOCODE[letterTapped];
+
+					    console.log(letterTapped);
+					    console.log(keycode);
+					    
+					    $(function (){
+					    	var e = $.Event('keydown');
+						    e.which = keycode;
+						    $(document).trigger(e);
+					    } 
+					  }
+				});
+
+			}															// end of isMobile
 
 		$(document).on("keydown", function (e) {
 
