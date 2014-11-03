@@ -818,30 +818,31 @@ $(document).ready(function () {
 					$(this).css("font-size", 80);
 				})
 				$('#lex').css("height", "auto");
+				console.log("mob is on!");
 
 				//  check to see if letter is pressed and if so, mimic the behaviour of keydown
 
-				$(function(){
-					  $( "div.mob_letter" ).bind( "tap", tapHandler );
+				// $(function(){
+				// 	  $( "div.mob_letter" ).bind( "tap", tapHandler );
 					 
-					  function tapHandler( event ){
-					  	console.log("tapped!");
+				// 	  function tapHandler( event ){
+				// 	  	console.log("tapped!");
 
-					  	// var letterTapped = $( event.target ).innerHTML;
+				// 	  	// var letterTapped = $( event.target ).innerHTML;
 
-					   //  //  trigger the keydown function using the keycode
-					   //  var keycode = KEYCHARTOCODE[letterTapped];
+				// 	   //  //  trigger the keydown function using the keycode
+				// 	   //  var keycode = KEYCHARTOCODE[letterTapped];
 
-					   //  console.log(letterTapped);
-					   //  console.log(keycode);
+				// 	   //  console.log(letterTapped);
+				// 	   //  console.log(keycode);
 					    
-					   //  $(function (){
-					   //  	var e = $.Event('keydown');
-						  //   e.which = keycode;
-						  //   $(document).trigger(e);
-					   //  }); 
-					  }
-				});
+				// 	   //  $(function (){
+				// 	   //  	var e = $.Event('keydown');
+				// 		  //   e.which = keycode;
+				// 		  //   $(document).trigger(e);
+				// 	   //  }); 
+				// 	  }
+				// });
 
 			}															// end of isMobile
 
