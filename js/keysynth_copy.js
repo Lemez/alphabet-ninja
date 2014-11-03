@@ -837,7 +837,7 @@ $(document).ready(function () {
 					    	var e = $.Event('keydown');
 						    e.which = keycode;
 						    $(document).trigger(e);
-					    } 
+					    }); 
 					  }
 				});
 
