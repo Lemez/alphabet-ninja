@@ -6,6 +6,7 @@ mixpanel.init("000de46f82a71fdfbec5f8a41d56035f");</script><!-- end Mixpanel -->
 	<head>
 
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
 
 		<link rel="stylesheet" href="css/reset.css" />
 		<link rel="stylesheet" href="css/skeleton.css" />
@@ -25,7 +26,7 @@ mixpanel.init("000de46f82a71fdfbec5f8a41d56035f");</script><!-- end Mixpanel -->
 		</header>
 			 		
 		
-		<div id = 'background'>
+		<div data-role="page" id = 'background'>
 
 			 	<div id="flags">
 			 		<label>
@@ -86,7 +87,7 @@ mixpanel.init("000de46f82a71fdfbec5f8a41d56035f");</script><!-- end Mixpanel -->
 			</div>
 		</section>
 
-		<div id='prepare'>
+		<div data-role="page" id='prepare'>
 
 			<div class="row" id="intro">
 				<h2>Are You Ready?</h2>	
@@ -98,7 +99,8 @@ mixpanel.init("000de46f82a71fdfbec5f8a41d56035f");</script><!-- end Mixpanel -->
 
 		<section class="container">
 			<div id='timer'></div>
-			<div class="row">
+
+			<div data-role="page" class="row">
 				<div class="row letters circle-center"></div><!-- <div id="top"></div> -->
 
 				<div id="content">
@@ -114,13 +116,15 @@ mixpanel.init("000de46f82a71fdfbec5f8a41d56035f");</script><!-- end Mixpanel -->
 
 
 		<!-- <script src="js/jquery.typer.js" ></script> -->
-		<script src="js/jquery.js" ></script>
-		<script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
+	
 		<!-- <script src="js/touchpunch.js"></script> -->
+
 		
 		<script src="js/keysynth_copy.js" ></script>
 		<script src="js/jquery.color.min.js" ></script>
-		<!-- <script src="js/jquery.mobile-1.4.3.min.js" ></script> -->
+		
+		<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
 
 		<!-- /* Then attach the Joyride plugin */ -->
 		<script src="js/jquery.joyride-2.1.js"></script>
