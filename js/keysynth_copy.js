@@ -916,6 +916,9 @@ $(document).ready(function () {
 					//  make the image animate in a more mobile friendly way
 					$(".col").eq(counter).find("#pix").addClass("letter-success-mob");
 
+					// from http://css-tricks.com/examples/ColorAnimateAnyShape/ not working
+					// $(".col").eq(counter).find("#pix").addClass("animate");
+
 
 					// fade out mobile choices if correct letter chosen
 					if (isMobile == true) {
