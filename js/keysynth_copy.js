@@ -812,6 +812,12 @@ $(document).ready(function () {
 
 	function startgame(name1LettersArray, name1String, availablePics, randomColours, imageSources, imageDivs){
 
+		// Mobile to-do
+		//  Joyride not working
+		//  Joyride NEXT button too small
+		//  
+
+
 		// change some layout elements if mobile keyboard is involved
 		if (isMobile) {													// start of isMobile
 				$('#lex p').each(function(){
