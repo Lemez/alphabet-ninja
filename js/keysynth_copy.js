@@ -827,20 +827,15 @@ $(document).ready(function () {
 					 
 					  function eventHandler(event){
 					  	
-					  	var letterTapped = $( event.target ).innerHTML;
-					  	alert(letterTapped);
+					  var letterTapped = event.target.innerHTML;
 
-					   //  //  trigger the keydown function using the keycode
-					   //  var keycode = KEYCHARTOCODE[letterTapped];
-
-					   //  console.log(letterTapped);
-					   //  console.log(keycode);
+					    //  trigger the keydown function using the keycode
+					  var keycodeTapped = KEYCHARTOCODE[letterTapped];
 					    
-					   //  $(function (){
-					   //  	var e = $.Event('keydown');
-						  //   e.which = keycode;
-						  //   $(document).trigger(e);
-					   //  }); 
+					  var e = jQuery.Event("keydown", { keyCode: keycodeTapped });
+
+					  // trigger an artificial keydown event
+					  jQuery("body").trigger( e );
 					  }
 				});
 
