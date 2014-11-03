@@ -528,7 +528,7 @@ opacity: 0.25;
 	-webkit-transform: scale(1) rotate(360deg);
     -moz-transform:scale(1)  rotate(360deg);
     -ms-transform: scale(1) rotate(360deg);
-    -o-transform: scale(1)rotate(360deg);
+    -o-transform: scale(1) rotate(360deg);
 	transform:scale(1)  rotate(360deg); 
 }
 
@@ -536,7 +536,8 @@ opacity: 0.25;
 
 
 
-.letter-success {
+.letter-success
+ {
 	-webkit-animation-name: letter-success;
 	-webkit-animation-duration: 3s;
 	-webkit-transform-origin:50% 50%;
@@ -562,7 +563,7 @@ opacity: 0.25;
 	-webkit-transform:rotate(360deg);
     -moz-transform: rotate(360deg);
     -ms-transform: rotate(360deg);
-    -o-transform: )rotate(360deg);
+    -o-transform: rotate(360deg);
     transform: rotate(360deg); 
 }
 
@@ -600,6 +601,110 @@ opacity: 0.25;
 
 }
 
+
+.letter-success-mob
+ {
+	-webkit-animation-name: letter-success-mob;
+	-webkit-animation-duration: 3s;
+	-webkit-transform-origin:50% 50%;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;
+	-moz-animation-name: letter-success-mob;
+	-moz-animation-duration: 3s;
+	-moz-transform-origin:50% 50%;
+	-moz-animation-iteration-count: 1;
+	-moz-animation-timing-function: linear;
+	animation-name: letter-success-mob;
+	animation-duration: 3s;
+	transform-origin:50% 50%;
+	animation-iteration-count: 1;
+	animation-timing-function: linear;
+}
+
+@keyframes letter-success-mob {
+25% { 
+
+	-webkit-transform: scale(1.5)rotate(180deg);
+    -moz-transform: scale(1.5)rotate(180deg);
+    -ms-transform: scale(1.5)rotate(180deg);
+    -o-transform: scale(1.5)rotate(180deg);
+    transform: scale(1.5)rotate(180deg); 
+}
+
+
+	50% { 
+	-webkit-transform: scale(3) rotate(360deg);
+    -moz-transform: scale(3) rotate(360deg);
+    -ms-transform:scale(3)  rotate(360deg);
+    -o-transform:scale(3) rotate(360deg);
+	transform:scale(3)  rotate(360deg); 
+}
+
+
+
+
+	75% { 
+	-webkit-transform: scale(1) rotate(720deg);
+    -moz-transform:scale(1)  rotate(720deg);
+    -ms-transform: scale(1) rotate(720deg);
+    -o-transform: scale(1)rotate(720deg);
+	transform:scale(1)  rotate(720deg); 
+}
+
+	95% { 
+
+	-webkit-transform:scale(2) rotate(1080deg);
+    -moz-transform: scale(2)rotate(1080deg);
+    -ms-transform:scale(2) rotate(1080deg);
+    -o-transform: scale(2)rotate(1080deg);
+    transform:scale(2) rotate(1080deg); 
+}
+
+
+}
+
+@-webkit-keyframes letter-success-mob {
+
+25% { 
+
+	-webkit-transform: scale(1.5)rotate(180deg);
+    -moz-transform: scale(1.5)rotate(180deg);
+    -ms-transform: scale(1.5)rotate(180deg);
+    -o-transform: scale(1.5)rotate(180deg);
+    transform: scale(1.5)rotate(180deg); 
+}
+
+
+	50% { 
+	-webkit-transform: scale(3) rotate(360deg);
+    -moz-transform: scale(3) rotate(360deg);
+    -ms-transform:scale(3)  rotate(360deg);
+    -o-transform:scale(3) rotate(360deg);
+	transform:scale(3)  rotate(360deg); 
+}
+
+
+
+
+	75% { 
+	-webkit-transform: scale(1) rotate(720deg);
+    -moz-transform:scale(1)  rotate(720deg);
+    -ms-transform: scale(1) rotate(720deg);
+    -o-transform: scale(1)rotate(720deg);
+	transform:scale(1)  rotate(720deg); 
+}
+
+	95% { 
+
+	-webkit-transform:scale(2) rotate(1080deg);
+    -moz-transform: scale(2)rotate(1080deg);
+    -ms-transform:scale(2) rotate(1080deg);
+    -o-transform: scale(2)rotate(1080deg);
+    transform:scale(2) rotate(1080deg); 
+}
+
+
+}
 
 
 

@@ -913,6 +913,11 @@ $(document).ready(function () {
 					//  make the image rotate
 					$(".col").eq(counter).find("#pix").addClass("letter-success");
 
+					//  make the image animate in a more mobile friendly way
+					// $(".col").eq(counter).find("#pix").addClass("letter-success");
+					$(".col").eq(counter).find("#pix").addClass("letter-success-mob");
+
+
 					// fade out mobile choices if correct letter chosen
 					if (isMobile == true) {
 						$('.' + counter).animate({opacity : 0},750)
