@@ -822,10 +822,11 @@ $(document).ready(function () {
 				//  check to see if letter is pressed and if so, mimic the behaviour of keydown
 
 				$(function(){
-					  $( "div.mob_letter" ).bind( "tap", tapHandler );
+					  $( "div.mob_letter" ).bind('tapone',eventHandler);
+					
 					 
-					  function tapHandler( event ){
-					  	console.log("tapped!");
+					  function eventHandler(){
+					  	alert("tapped!");
 
 					  	// var letterTapped = $( event.target ).innerHTML;
 
