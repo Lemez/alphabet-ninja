@@ -393,7 +393,7 @@ $(document).ready(function () {
 	spectrum();
 	function spectrum(){
 	    var hue = 'rgba(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.random() + 0.3) + ')';
-	    $('body, #inputs input').animate( { backgroundColor: hue }, 5000);
+	    $('body, #inputs input, html').animate( { backgroundColor: hue }, 5000);
 	    setTimeout(spectrum,1); // stop it from overloading max cache
 	    // console.log(hue);
 	};
@@ -815,7 +815,7 @@ $(document).ready(function () {
 		// Mobile to-do
 		//  Joyride not working
 		//  Joyride NEXT button too small
-		//  
+		//  get background to work all the way down beyond initial screen
 
 
 		// change some layout elements if mobile keyboard is involved
@@ -832,6 +832,12 @@ $(document).ready(function () {
 					
 					 
 					  function eventHandler(event){
+
+					  	console.log('top = ' + event.target.offsetTop +
+      								'\nleft = ' + event.target.offsetLeft +
+      								'\nheight = ' + event.target.offsetHeight +
+      								'\nwidth = ' + event.target.offsetWidth);
+					  	console.log(event);
 					  	
 					  var letterTapped = event.target.innerHTML;
 
