@@ -727,7 +727,7 @@ $(document).ready(function () {
 			randomColours.push(random_colour);	
 
 			// force 'true' state for development
-			isMobile = true;
+			// isMobile = true;
 			console.log(isMobile);
 
 			// if mobile then populate manual keyboard with letter choices
