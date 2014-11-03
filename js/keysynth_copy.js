@@ -988,83 +988,82 @@ $(document).ready(function () {
 				};
 			};
 
-			if (name1LettersArray.length == 0) {
+			if (name1LettersArray.length == 0) { gameEnd()};
 
-				function gameEnd() {
-					// make the letters nice and big to start with, back to normal size
-					if (isMobile == true) {$('#lex').animate({fontSize:150}, 2000);}
+			function gameEnd() {
+				// make the letters nice and big to start with, back to normal size
+				if (isMobile == true) {$('#lex').animate({fontSize:150}, 2000);}
 
-					if (language == 'hebrew') {var counter = 0;} else {var counter = textInput.length - 1;}
-							
-					$(".col").eq(counter).find(".circle-center").css("background-color", randomColours[counter]);
+				if (language == 'hebrew') {var counter = 0;} else {var counter = textInput.length - 1;}
+						
+				$(".col").eq(counter).find(".circle-center").css("background-color", randomColours[counter]);
 
-					$('.letters').animate({   // make the single letter disappear
-										 	paddingTop: '800px'
-										 }, 1000)
-								.hide(1000);
+				$('.letters').animate({   // make the single letter disappear
+									 	paddingTop: '800px'
+									 }, 1000)
+							.hide(1000);
 
-					var allPics = $('.col').find("img");
-					var allCircles = $('.col #pix');
-					var allLetters = $('.col #lex p');
-					var allNums = $('.col #num'); 
+				var allPics = $('.col').find("img");
+				var allCircles = $('.col #pix');
+				var allLetters = $('.col #lex p');
+				var allNums = $('.col #num'); 
 
-					$('#lex').css("z-index",100);
+				$('#lex').css("z-index",100);
 
-					for (var i = 0; i < allPics.length; i++) { // make em dance
-					
-						var maths = Math.random();
-						if (maths < 0.5) { maths = maths + 0.5;}
-						// var colorsBackwards = randomColours.reverse();
-						var currentPic = allPics.eq(i);
-						var currentLetter = allLetters.eq(i);
-						var currentNumber = allNums.eq(i);
-						var currentCircle = allCircles.eq(i);
+				for (var i = 0; i < allPics.length; i++) { // make em dance
+				
+					var maths = Math.random();
+					if (maths < 0.5) { maths = maths + 0.5;}
+					// var colorsBackwards = randomColours.reverse();
+					var currentPic = allPics.eq(i);
+					var currentLetter = allLetters.eq(i);
+					var currentNumber = allNums.eq(i);
+					var currentCircle = allCircles.eq(i);
 
-						var circleWidth = Math.floor(maths * 1000);
+					var circleWidth = Math.floor(maths * 1000);
 
-						currentCircle.animate({width : circleWidth +'px',height : circleWidth +'px', borderRadius : circleWidth/2 +'px' }, (Math.floor(maths * 60000)));
+					currentCircle.animate({width : circleWidth +'px',height : circleWidth +'px', borderRadius : circleWidth/2 +'px' }, (Math.floor(maths * 60000)));
 
-						if ((i+1)%2==0) {
-							
-							currentPic.animate({   width: (Math.floor(maths * 1000)) + 'px'}, (Math.floor(maths * 60000)));
-							currentLetter.animate({  fontSize : "500px", top: (Math.floor(maths * 800)) + 'px'}, (Math.floor(maths * 60000)));	
-							currentNumber.animate({  fontSize : "300px", bottom: (Math.floor(maths * 800)) + 'px'}, (Math.floor(maths * 60000)));		
+					if ((i+1)%2==0) {
+						
+						currentPic.animate({   width: (Math.floor(maths * 1000)) + 'px'}, (Math.floor(maths * 60000)));
+						currentLetter.animate({  fontSize : "500px", top: (Math.floor(maths * 800)) + 'px'}, (Math.floor(maths * 60000)));	
+						currentNumber.animate({  fontSize : "300px", bottom: (Math.floor(maths * 800)) + 'px'}, (Math.floor(maths * 60000)));		
 
-						} else {
-							currentPic.animate({  width: (Math.floor(maths * 1000)) + 'px'}, (Math.floor(maths * 60000)));
-							currentLetter.animate({  fontSize : "500px", top: (Math.floor(maths * 800)) + 'px'}, (Math.floor(maths * 60000)));
-							currentNumber.animate({  fontSize : "700px", top: (Math.floor(maths * 200)) + 'px'}, (Math.floor(maths * 60000)));	
-						};
+					} else {
+						currentPic.animate({  width: (Math.floor(maths * 1000)) + 'px'}, (Math.floor(maths * 60000)));
+						currentLetter.animate({  fontSize : "500px", top: (Math.floor(maths * 800)) + 'px'}, (Math.floor(maths * 60000)));
+						currentNumber.animate({  fontSize : "700px", top: (Math.floor(maths * 200)) + 'px'}, (Math.floor(maths * 60000)));	
 					};
+				};
 
 
-					$("#again p").animate({ fontSize: '100px', top: (Math.floor(Math.random() * 800)) + 'px', opacity: 1}, (Math.floor(Math.random() * 100000)));
+				$("#again p").animate({ fontSize: '100px', top: (Math.floor(Math.random() * 800)) + 'px', opacity: 1}, (Math.floor(Math.random() * 100000)));
 
-					setTimeout(function() {
-						playSound("success");
-														}, (3000));
+				setTimeout(function() {
+					playSound("success");
+													}, (3000));
 
-					$('a#ninjalogo').attr("href", "home.html")
-									.find("img")
-									.css("z-index", 100)
-									.css("position", "fixed");
+				$('a#ninjalogo').attr("href", "home.html")
+								.find("img")
+								.css("z-index", 100)
+								.css("position", "fixed");
 
-					$('a#ninjalogo, #again').on('click', function(){
-						mixpanel.track('Play again');
-					});	
+				$('a#ninjalogo, #again').on('click', function(){
+					mixpanel.track('Play again');
+				});	
 
-					// checkPosition();
+				// checkPosition();
 
-					// function bounceIt(){
+				// function bounceIt(){
 
-					// 	$(this).animate({
-					// 		paddingTop: "-20px"},
-					// 		{ duration: 1000, easing: 'easeOutBounce'
-					// 	});
+				// 	$(this).animate({
+				// 		paddingTop: "-20px"},
+				// 		{ duration: 1000, easing: 'easeOutBounce'
+				// 	});
 
-					// 	setTimeout(bounce, 1);
-					// };
-				}
+				// 	setTimeout(bounce, 1);
+				// };
 			}
 
 		});
