@@ -827,19 +827,19 @@ $(document).ready(function () {
 					  function tapHandler( event ){
 					  	console.log("tapped!");
 
-					  	var letterTapped = $( event.target ).innerHTML;
+					  	// var letterTapped = $( event.target ).innerHTML;
 
-					    //  trigger the keydown function using the keycode
-					    var keycode = KEYCHARTOCODE[letterTapped];
+					   //  //  trigger the keydown function using the keycode
+					   //  var keycode = KEYCHARTOCODE[letterTapped];
 
-					    console.log(letterTapped);
-					    console.log(keycode);
+					   //  console.log(letterTapped);
+					   //  console.log(keycode);
 					    
-					    $(function (){
-					    	var e = $.Event('keydown');
-						    e.which = keycode;
-						    $(document).trigger(e);
-					    }); 
+					   //  $(function (){
+					   //  	var e = $.Event('keydown');
+						  //   e.which = keycode;
+						  //   $(document).trigger(e);
+					   //  }); 
 					  }
 				});
 
