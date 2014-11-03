@@ -825,10 +825,10 @@ $(document).ready(function () {
 					  $( "div.mob_letter" ).bind('tapone',eventHandler);
 					
 					 
-					  function eventHandler(){
-					  	alert("tapped!");
-
-					  	// var letterTapped = $( event.target ).innerHTML;
+					  function eventHandler(event){
+					  	
+					  	var letterTapped = $( event.target ).innerHTML;
+					  	alert(letterTapped);
 
 					   //  //  trigger the keydown function using the keycode
 					   //  var keycode = KEYCHARTOCODE[letterTapped];
