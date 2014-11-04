@@ -1131,29 +1131,29 @@ opacity: 0.25;
 
 
 .animate {
-     background: red;  
-     -webkit-animation: super-rainbow 15s infinite alternate linear; 
-     -moz-animation: super-rainbow 15s infinite alternate linear; 
+     color: red;  
+     -webkit-animation: super-rainbow 1s infinite alternate linear; 
+     -moz-animation: super-rainbow 1s infinite alternate linear; 
 }
 
 @-webkit-keyframes super-rainbow {
-    0%   { background: red; } 
-    20%  { background: orange; }
-    40%  { background: yellow; }
-    60%  { background: green; }
-    80%  { background: blue; }
-    100% { background: violet; }
+    0%   { color: red; } 
+    20%  { color: orange; }
+    40%  { color: yellow; }
+    60%  { color: green; }
+    80%  { color: blue; }
+    100% { color: violet; }
 }
 
 @-moz-keyframes super-rainbow {
-    0%   { background: red; } 
-    20%  { background: orange; }
-    40%  { background: yellow; }
-    60%  { background: green; }
-    80%  { background: blue; }
-    100% { background: violet; }
+    0%   { color: red; } 
+    20%  { color: orange; }
+    40%  { color: yellow; }
+    60%  { color: green; }
+    80%  { color: blue; }
+    100% { color: violet; }
 }
 
-#animate img:nth-of-type(2) { -webkit-animation-delay: 1s; -moz-animation-delay: 1s; }
+#animate img { -webkit-animation-delay: 1s; -moz-animation-delay: 1s; }
 
 

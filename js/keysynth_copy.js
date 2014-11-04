@@ -787,9 +787,10 @@ $(document).ready(function () {
 		var i = 0;
 		if (language == 'hebrew') {var j = -1;} else {var j = i;};
 
+		var currentCol = $('.col').eq(j);
+
 		// bring the first image into focus
-		$('.col').eq(j)
-						.find("#pix")
+		currentCol.find("#pix")
 						.addClass("circle-focus, jig")
 						.css("opacity", "1");
 
@@ -797,6 +798,22 @@ $(document).ready(function () {
 		var imageDivs = $('#pix img');
 		$(imageDivs.get(j)).attr("src", "images/" + imageSources[i]);
 		
+		// rainbow animate the first number
+		currentCol.find("#num")
+						.addClass("animate");
+
+		// store current font size 
+		var origNumberFontSize = parseInt(currentCol.find("#num")
+								.css("font-size")
+								.slice(0,2)
+								);
+		// gives "40px" so need to slice into it and change to ParseInt
+
+		// then change it
+		currentCol.find("#num").css("font-size",origNumberFontSize*1.5 );
+
+		// alert(origNumberFontSize);
+
 		// hide opening page elements
 		$('#inputs, #flags').hide();
 
@@ -821,7 +838,7 @@ $(document).ready(function () {
 		// change some layout elements if mobile keyboard is involved
 		if (isMobile) {													// start of isMobile
 				$('#lex p').each(function(){
-					$(this).css("font-size", 80);
+					$(this).css("font-size", 120);
 				})
 				$('#lex').css("height", "auto");
 
@@ -900,6 +917,8 @@ $(document).ready(function () {
 						nextCounter = (counter-1);
 					}
 
+					
+
 					// animate the correct letter in a cool way
 					letterDivs.eq(counter)
 									.text(letter) // problem here - get() does not work like eq()
@@ -914,17 +933,17 @@ $(document).ready(function () {
 					// $(".col").eq(counter).find("#pix").addClass("letter-success");
 
 					//  make the image animate in a more mobile friendly way
-					$(".col").eq(counter).find("#pix").addClass("letter-success-mob");
+					var thisCol = $(".col").eq(counter);
+					var nextCol = $(".col").eq(nextCounter);
 
-					// from http://css-tricks.com/examples/ColorAnimateAnyShape/ not working
-					// $(".col").eq(counter).find("#pix").addClass("animate");
-
+					thisCol.find("#pix").addClass("letter-success-mob");
 
 					// fade out mobile choices if correct letter chosen
 					if (isMobile == true) {
-						$('.' + counter).animate({opacity : 0},750)
+						$('.' + counter).animate({opacity : 0},3000)
 					}
 
+					
 					// Set up a delay to animate flashing image as it appears in focus
 					setTimeout(function() {							
 						var myImage = "images/" + imageSources[0];
@@ -956,7 +975,22 @@ $(document).ready(function () {
 										2000)
 									.addClass('jig');
 
-						showMobileLetters(nextCounter);
+					// from http://css-tricks.com/examples/ColorAnimateAnyShape
+					thisCol.find("#num").removeClass("animate");
+					nextCol.find("#num").addClass("animate");
+
+					// restore current font size to normal
+					var newNumberFontSize = parseInt(
+											thisCol.find("#num")
+													.css("font-size")
+													.slice(0,2)
+													);
+					thisCol.find("#num").css("font-size",newNumberFontSize/1.5 );
+
+					// then increase next one
+					nextCol.find("#num").css("font-size",newNumberFontSize );
+
+					showMobileLetters(nextCounter);
 
 							setTimeout(function() {
 								playSound("correct");
@@ -1014,6 +1048,10 @@ $(document).ready(function () {
 				var allCircles = $('.col #pix');
 				var allLetters = $('.col #lex p');
 				var allNums = $('.col #num'); 
+
+				allNums.removeClass('animate');
+				// allLetters.addClass('animate');
+				// $('body').addClass('animate');
 
 				$('#lex').css("z-index",100);
 
