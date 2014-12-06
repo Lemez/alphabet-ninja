@@ -975,26 +975,26 @@ $(document).ready(function () {
 										2000)
 									.addClass('jig');
 
-					// from http://css-tricks.com/examples/ColorAnimateAnyShape
-					thisCol.find("#num").removeClass("animate");
-					nextCol.find("#num").addClass("animate");
+						// from http://css-tricks.com/examples/ColorAnimateAnyShape
+						thisCol.find("#num").removeClass("animate");
+						nextCol.find("#num").addClass("animate");
 
-					// restore current font size to normal
-					var newNumberFontSize = parseInt(
-											thisCol.find("#num")
-													.css("font-size")
-													.slice(0,2)
-													);
-					thisCol.find("#num").css("font-size",newNumberFontSize/1.5 );
+						// restore current font size to normal
+						var newNumberFontSize = parseInt(
+												thisCol.find("#num")
+														.css("font-size")
+														.slice(0,2)
+														);
+						thisCol.find("#num").css("font-size",newNumberFontSize/1.5 );
 
-					// then increase next one
-					nextCol.find("#num").css("font-size",newNumberFontSize );
+						// then increase next one
+						nextCol.find("#num").css("font-size",newNumberFontSize );
 
-					showMobileLetters(nextCounter);
+						showMobileLetters(nextCounter);
 
-							setTimeout(function() {
-								playSound("correct");
-										}, (3000));
+						setTimeout(function() {
+							playSound("correct");
+									}, (3000));
 						}
 						
 					}, (3000));
