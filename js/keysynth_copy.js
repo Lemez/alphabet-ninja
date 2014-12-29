@@ -3,6 +3,7 @@
 
 $(document).ready(function () {
 
+
 	var platform = navigator.platform;
 	
 	//  make height and width dynamic and always updated on resize
@@ -291,7 +292,223 @@ $(document).ready(function () {
 		"." : "ץ",
 		";" : "ף"
 	};
+
+
+
+	var TAMIL_LETTERS = {
+		"A" : "அ", // A // Mother, Amma
+		"Q" : "ஆ", // AA // Goat, Aadu, Amai Tortoise
+		"S" : "இ", // i Ilai / leaf
+		"W" : "ஈ", // ii I - fly
+		"D" : "உ", // u ural, grinder
+		"E" : "ஊ", // uu unjal swing
+		"G" : "எ", // e erumbu, ant
+		"T" : "ஏ", // e- eni, ladder
+		"R" : "ஐ", // ai aindhu, five
+		"C" : "ஒ", // o ondru, one
+		"X" : "ஓ", // o: onAn, chameleon
+		"Z" : "ஔ", // au 
+		"H" : "க்", // k Chakkaram, wheel
+		"B" : "ங்", // n: Sangu, Shell
+		"[" : "ச்", // c 
+		"]" : "ஞ்", // nj
+		"O" : "ட்", // t. Ottagam, camel
+		"P" : "ண்", // n. kan, eye
+		"L" : "த்", // t Thathai, parrot
+		";" : "ந்", // nn pandhu, ball
+		"J" : "ப்", // p kappal, ship
+		"K" : "ம்", // m ambu, arrow
+		"'" : "ய்", // y naai, dog
+		"M" : "ர்", // r malar, flower
+		"N" : "ல்", // l kal, leg
+		"V" : "வ்", // v 
+		"/" : "ழ்", // l- itazh, lips
+		"Y" : "ள்", // l--
+		"U" : "ற்", // r
+		"I" : "ன்", // nn-
+		"" : "ஶ்", // s
+		"" : "ஜ்", //  j
+		"" : "ஷ்", // sh
+		"" : "ஸ்", // ss
+		"" : "ஹ்", // h
+		"" : "க்ஷ்" // ks
+	};
+
+var TAMIL_PICS = [
+		// "A" : 
+		"அ", // A Mother, Amma
+		// "Q" : 
+		"ஆ", // AA Goat, Aadu
+		// "S" : 
+		"இ", // i
+		// "W" : 
+		"ஈ", // ii
+		// "D" : 
+		"உ", // u
+		// "E" : 
+		"ஊ", // uu
+		// "G" : 
+		"எ", // e
+		// "T" : 
+		"ஏ", // e-
+		// "R" : 
+		"ஐ", // ai
+		// "C" : 
+		"ஒ", // o
+		// "X" : 
+		"ஓ", // o:
+		// "Z" : 
+		"ஔ", // au
+		// "H" : 
+		"க்", // k
+		// "B" : 
+		"ங்", // n:
+		// "[" : 
+		"ச்", // c
+		// "]" : 
+		"ஞ்", // nj
+		// "O" : 
+		"ட்", // t.
+		// "P" : 
+		"ண்", // n.
+		// "L" : 
+		"த்", // t
+		// ";" : 
+		"ந்", // nn
+		// "J" : 
+		"ப்", // p
+		// "K" : 
+		"ம்", // m
+		// "'" : 
+		"ய்", // y
+		// "M" : 
+		"ர்", // r
+		// "N" : 
+		"ல்", // l
+		// "V" : 
+		"வ்", // v
+		// "/" : 
+		"ழ்", // l-
+		// "Y" : 
+		"ள்", // l--
+		// "U" : 
+		"ற்", // r
+		// "I" : 
+		"ன்", // nn-
+		// "" : 
+		"ஶ்", // s
+		// "" : 
+		"ஜ்", //  j
+		// "" : 
+		"ஷ்", // sh
+		// "" : 
+		"ஸ்", // ss
+		// "" : 
+		"ஹ்", // h
+		// "" : 
+		"க்ஷ்" // ks
+	];
 	
+
+var TAMIL_SOUNDS = [
+		// "A" : 
+		"அ", // A Mother, Amma
+		// "Q" : 
+		"ஆ", // AA Goat, Aadu
+		// "S" : 
+		"இ", // i
+		// "W" : 
+		"ஈ", // ii
+		// "D" : 
+		"உ", // u
+		// "E" : 
+		"ஊ", // uu
+		// "G" : 
+		"எ", // e
+		// "T" : 
+		"ஏ", // e-
+		// "R" : 
+		"ஐ", // ai
+		// "C" : 
+		"ஒ", // o
+		// "X" : 
+		"ஓ", // o:
+		// "Z" : 
+		"ஔ", // au
+		// "H" : 
+		"க்", // k
+		// "B" : 
+		"ங்", // n:
+		// "[" : 
+		"ச்", // c
+		// "]" : 
+		"ஞ்", // nj
+		// "O" : 
+		"ட்", // t.
+		// "P" : 
+		"ண்", // n.
+		// "L" : 
+		"த்", // t
+		// ";" : 
+		"ந்", // nn
+		// "J" : 
+		"ப்", // p
+		// "K" : 
+		"ம்", // m
+		// "'" : 
+		"ய்", // y
+		// "M" : 
+		"ர்", // r
+		// "N" : 
+		"ல்", // l
+		// "V" : 
+		"வ்", // v
+		// "/" : 
+		"ழ்", // l-
+		// "Y" : 
+		"ள்", // l--
+		// "U" : 
+		"ற்", // r
+		// "I" : 
+		"ன்", // nn-
+		// "" : 
+		"ஶ்", // s
+		// "" : 
+		"ஜ்", //  j
+		// "" : 
+		"ஷ்", // sh
+		// "" : 
+		"ஸ்", // ss
+		// "" : 
+		"ஹ்", // h
+		// "" : 
+		"க்ஷ்" // ks
+	];
+
+var	tamil_vowel_sounds = ["","a","ā","i","ī","u","ū","e","ē","ai","o","ō","au"];
+var tamil_vowels = ["ஃ","அ","ஆ","இ","ஈ","உ","ஊ","எ","ஏ","ஐ","ஒ","ஓ","ஔ"];
+		
+var tamil_syllables = [
+{"k" : ["க்",,"க","கா","கி","கீ","கு","கூ","கெ","கே","கை","கொ","கோ","கௌ"]},
+{"ṅ" : ["ங்","ங","ஙா","ஙி","ஙீ","ஙு","ஙூ","ஙெ","ஙே","ஙை","ஙொ","ஙோ","ஙௌ"]},
+{"c" : ["ச்","ச","சா","சி","சீ","சு","சூ","செ","சே","சை","சொ","சோ","சௌ"]},
+{"ñ" : ["ஞ்","ஞ","ஞா","ஞி","ஞீ","ஞு","ஞூ","ஞெ","ஞே","ஞை","ஞொ","ஞோ","ஞௌ"]},
+{"ṭ" : ["ட்","ட","டா","டி","டீ","டு","டூ","டெ","டே","டை","டொ","டோ","டௌ"]},
+{"ṇ" : ["ண்","ண","ணா","ணி","ணீ","ணு","ணூ","ணெ,,ணே","ணை","ணொ","ணோ","ணௌ"]},
+{"t" : ["த்","த","தா","தி","தீ","து","தூ","தெ","தே","தை","தொ","தோ","தௌ"]},
+{"n" : ["ந்","ந","நா","நி","நீ","நு","நூ","நெ","நே","நை","நொ","நோ","நௌ"]},
+{"p" : ["ப்","ப","பா","பி","பீ","பு","பூ","பெ","பே","பை","பொ","போ","பௌ"]},
+{"m" : ["ம்","ம","மா","மி","மீ","மு","மூ","மெ","மே","மை","மொ","மோ","மௌ"]},
+{"y" : ["ய்","ய","யா","யி","யீ","யு","யூ","யெ","யே","யை","யொ","யோ","யௌ"]},
+{"r" : ["ர்","ர","ரா","ரி","ரீ","ரு","ரூ","ரெ","ரே","ரை","ரொ","ரோ","ரௌ"]},
+{"l" : ["ல்","ல","லா","லி","லீ","லு","லூ","லெ","லே","லை","லொ","லோ","லௌ"]},
+{"v" : ["வ்","வ","வா","வி","வீ","வு","வூ","வெ","வே","வை","வொ","வோ","வௌ"]},
+{"ḻ" : ["ழ்","ழ","ழா","ழி","ழீ","ழு","ழூ","ழெ","ழே","ழை","ழொ","ழோ","ழௌ"]},
+{"ḷ" : ["ள்","ள","ளா","ளி","ளீ","ளு","ளூ","ளெ","ளே","ளை","ளொ","ளோ","ளௌ"]},
+{"ṟ" : ["ற்","ற","றா","றி","றீ","று","றூ","றெ","றே","றை","றொ","றோ","றௌ"]},
+{"ṉ" : ["ன்","ன","னா","னி","னீ","னு","னூ","னெ","னே","னை","னொ","னோ","னௌ"]}
+];
+
 	var LANGUAGETODICT = {
 		'english' : [PICS, SOUNDS],
 		'hebrew' : [HEBREWPICS, HEBREWSOUNDS]
@@ -333,8 +550,50 @@ $(document).ready(function () {
 		'hebrew' : mixpanel.track("Game - hebrew")
 	}
 
+	var TamilDict = makeTamilDict();
+	console.log(TamilDict);
+
+	var ppp = 0;
+	for (key in TamilDict){ppp++;}
+	console.log(ppp);
+
 	function clearJoyride() {
 		jQuery(window).joyride("destroy");
+	}
+
+	Array.prototype.subarray=function(start,end){
+     	if(!end){ end=-1;} 
+    	return this.slice(start, this.length+1-(end*-1));
+	}
+
+	function makeTamilDict() {
+
+		tamil_dict = {};
+		var len = tamil_syllables.length;
+
+		for (var i=0;i<len;i++){
+			s = tamil_syllables[i];
+			for (key in s){
+						var t = s[key].slice(2,s.length);
+						var sound = key;
+			}
+
+			// console.log(sound);
+			// console.log(t);
+			
+			for (var j=0;j<t.length;j++){
+				english_syllable = sound+tamil_vowel_sounds[j];
+      			tamil_syllable = t[j];
+      			tamil_dict[english_syllable] = tamil_syllable;
+      			// console.log(tamil_syllable);
+      			// console.log(english_syllable);
+      				
+			}
+		}
+
+		for (i=0;i<tamil_vowels.length;i++){tamil_dict[tamil_vowel_sounds[i]] = tamil_vowels[i];}
+		
+		return tamil_dict;
 	}
 
 	function translateText() {
@@ -941,6 +1200,14 @@ $(document).ready(function () {
 					// fade out mobile choices if correct letter chosen
 					if (isMobile == true) {
 						$('.' + counter).animate({opacity : 0},3000)
+
+					// trying to isolate the single mobile letter and animate that instead but taint workin
+
+						// myDiv = 'div.' + counter;
+						// var mobile_letter = $('myDiv:contains(letter)');
+						// console.log(mobile_letter.text;
+						// mobile_letter.css("color", "white");
+						// mobile_letter.siblings().animate({opacity : 0},3000)
 					}
 
 					
