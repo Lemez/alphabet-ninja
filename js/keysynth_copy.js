@@ -293,7 +293,8 @@ $(document).ready(function () {
 	var KEYCHARTOCODE = {
 		// "Backspace":8,"Tab":9,"Enter":13,"Shift":16,"Ctrl":17,"Alt":18,"Pause/Break":19,"Caps Lock":20,"Esc":27,"Space":32,"Page Up":33,"Page Down":34,"End":35,"Home":36,"Left":37,"Up":38,"Right":39,"Down":40,"Insert":45,"Delete":46,
 		// "0":48,"1":49,"2":50,"3":51,"4":52,"5":53,"6":54,"7":55,"8":56,"9":57,
-		"A":65,"B":66,"C":67,"D":68,"E":69,"F":70,"G":71,"H":72,"I":73,"J":74,"K":75,"L":76,"M":77,"N":78,"O":79,"P":80,"Q":81,"R":82,"S":83,"T":84,"U":85,"V":86,"W":87,"X":88,"Y":89,"Z":90
+		"A":65,"B":66,"C":67,"D":68,"E":69,"F":70,"G":71,"H":72,"I":73,"J":74,"K":75,"L":76,"M":77,"N":78,"O":79,"P":80,"Q":81,"R":82,"S":83,"T":84,"U":85,"V":86,"W":87,"X":88,"Y":89,"Z":90,
+		"'":39,",":44,"-":45,".":46,"/":47,":":58,"=":61,"[":91,"\\":92,"]":93,"`":96
 	};
 
 	var SOUNDS = {
@@ -510,6 +511,11 @@ $(document).ready(function () {
 	};
 	var NASLETTERS = {"A" : "A","B" : "B","C" : "C","D" : "D","E" : "E","F" : "F","G" : "G","H" : "H","I" : "I","J" : "J","K" : "K","L" : "L","M" : "M","N" : "N","O" : "O","P" : "P","Q" : "Q","R" : "R","S" : "S","T" : "T","U" : "U","V" : "V","W" : "W","X" : "X","Y" : "Y","Z" : "Z","[" : "Š","]" : "Đ",";" : "Č","'" : "Ć","\\": "Ž"
 	};
+
+	var LETTERMAP = {
+		'hebrew' : HEBREWLETTERS,
+		'croatian' : NASLETTERS
+	}
 
 
 	var LANGUAGETODICT = {
@@ -1172,8 +1178,11 @@ $(document).ready(function () {
 			var keycodeForLang = KEYCODES[language];
 
 			// make sure keycode is mapped to correct letter
-			if (language == 'hebrew') {var letter = HEBREWLETTERS[keycodeForLang[e.which || e.keyCode]]}
-			else {var letter = keycodeForLang[e.which || e.keyCode];}
+			if (language != "english") {
+				var letter = LETTERMAP[language][keycodeForLang[e.which || e.keyCode]];
+			} else {
+				var letter = keycodeForLang[e.which || e.keyCode];
+			}
 			
 			//  map sound to letter
 			var letterSound = MYSOUNDS[letter];
