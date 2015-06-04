@@ -3,6 +3,8 @@
 
 $(document).ready(function () {
 
+	var LOG = false;
+
 
 	var platform = navigator.platform;
 	
@@ -13,13 +15,13 @@ $(document).ready(function () {
 		    height : $(window).height()
 		};
 
-		console.log("height: " + viewport.height);
-		console.log("width: " + viewport.width);
+		if (LOG) console.log("height: " + viewport.height);
+		if (LOG) console.log("width: " + viewport.width);
 	});
 			
 
 
-	console.log(platform);
+	if (LOG) console.log(platform);
 
 	function detectmob() { 
 	 if( navigator.userAgent.match(/Android/i)
@@ -44,7 +46,226 @@ $(document).ready(function () {
 		var mouseX = e.pageX; // e.pageX - gives you the X position.
 		var mouseY = e.pageY; // e.pageY - gives you the Y position.
 	});
-	
+
+
+
+
+
+	var TAMIL_LETTERS = {
+		"A" : "அ", // A // Mother, Amma
+		"Q" : "ஆ", // AA // Goat, Aadu, Amai Tortoise
+		"S" : "இ", // i Ilai / leaf
+		"W" : "ஈ", // ii I - fly
+		"D" : "உ", // u ural, grinder
+		"E" : "ஊ", // uu unjal swing
+		"G" : "எ", // e erumbu, ant
+		"T" : "ஏ", // e- eni, ladder
+		"R" : "ஐ", // ai aindhu, five
+		"C" : "ஒ", // o ondru, one
+		"X" : "ஓ", // o: onAn, chameleon
+		"Z" : "ஔ", // au 
+		"H" : "க்", // k Chakkaram, wheel
+		"B" : "ங்", // n: Sangu, Shell
+		"[" : "ச்", // c 
+		"]" : "ஞ்", // nj
+		"O" : "ட்", // t. Ottagam, camel
+		"P" : "ண்", // n. kan, eye
+		"L" : "த்", // t Thathai, parrot
+		";" : "ந்", // nn pandhu, ball
+		"J" : "ப்", // p kappal, ship
+		"K" : "ம்", // m ambu, arrow
+		"'" : "ய்", // y naai, dog
+		"M" : "ர்", // r malar, flower
+		"N" : "ல்", // l kal, leg
+		"V" : "வ்", // v 
+		"/" : "ழ்", // l- itazh, lips
+		"Y" : "ள்", // l--
+		"U" : "ற்", // r
+		"I" : "ன்", // nn-
+		"" : "ஶ்", // s
+		"" : "ஜ்", //  j
+		"" : "ஷ்", // sh
+		"" : "ஸ்", // ss
+		"" : "ஹ்", // h
+		"" : "க்ஷ்" // ks
+	};
+
+	var TAMIL_PICS = [
+			// "A" : 
+			"அ", // A Mother, Amma
+			// "Q" : 
+			"ஆ", // AA Goat, Aadu
+			// "S" : 
+			"இ", // i
+			// "W" : 
+			"ஈ", // ii FLY
+			// "D" : 
+			"உ", // u
+			// "E" : 
+			"ஊ", // uu
+			// "G" : 
+			"எ", // e MOUSE
+			// "T" : 
+			"ஏ", // e-
+			// "R" : 
+			"ஐ", // ai
+			// "C" : 
+			"ஒ", // o CAMEL
+			// "X" : 
+			"ஓ", // o:
+			// "Z" : 
+			"ஔ", // au
+			// "H" : 
+			"க்", // k
+			// "B" : 
+			"ங்", // n:
+			// "[" : 
+			"ச்", // c
+			// "]" : 
+			"ஞ்", // nj
+			// "O" : 
+			"ட்", // t.
+			// "P" : 
+			"ண்", // n.
+			// "L" : 
+			"த்", // t
+			// ";" : 
+			"ந்", // nn
+			// "J" : 
+			"ப்", // p
+			// "K" : 
+			"ம்", // m
+			// "'" : 
+			"ய்", // y RABBIT
+			// "M" : 
+			"ர்", // r - SAW
+			// "N" : 
+			"ல்", // l
+			// "V" : 
+			"வ்", // v
+			// "/" : 
+			"ழ்", // l-
+			// "Y" : 
+			"ள்", // l--
+			// "U" : 
+			"ற்", // r SOME KIND OF BIRD :)
+			// "I" : 
+			"ன்", // nn-
+			// "" : 
+			"ஶ்", // s
+			// "" : 
+			"ஜ்", //  j
+			// "" : 
+			"ஷ்", // sh
+			// "" : 
+			"ஸ்", // ss
+			// "" : 
+			"ஹ்", // h
+			// "" : 
+			"க்ஷ்" // ks
+		];
+		
+
+	var TAMIL_SOUNDS = [
+			// "A" : 
+			"அ", // A Mother, Amma
+			// "Q" : 
+			"ஆ", // AA Goat, Aadu
+			// "S" : 
+			"இ", // i
+			// "W" : 
+			"ஈ", // ii
+			// "D" : 
+			"உ", // u
+			// "E" : 
+			"ஊ", // uu
+			// "G" : 
+			"எ", // e
+			// "T" : 
+			"ஏ", // e-
+			// "R" : 
+			"ஐ", // ai
+			// "C" : 
+			"ஒ", // o
+			// "X" : 
+			"ஓ", // o:
+			// "Z" : 
+			"ஔ", // au
+			// "H" : 
+			"க்", // k
+			// "B" : 
+			"ங்", // n:
+			// "[" : 
+			"ச்", // c
+			// "]" : 
+			"ஞ்", // nj
+			// "O" : 
+			"ட்", // t.
+			// "P" : 
+			"ண்", // n.
+			// "L" : 
+			"த்", // t
+			// ";" : 
+			"ந்", // nn
+			// "J" : 
+			"ப்", // p
+			// "K" : 
+			"ம்", // m
+			// "'" : 
+			"ய்", // y
+			// "M" : 
+			"ர்", // r
+			// "N" : 
+			"ல்", // l
+			// "V" : 
+			"வ்", // v
+			// "/" : 
+			"ழ்", // l-
+			// "Y" : 
+			"ள்", // l--
+			// "U" : 
+			"ற்", // r
+			// "I" : 
+			"ன்", // nn-
+			// "" : 
+			"ஶ்", // s
+			// "" : 
+			"ஜ்", //  j
+			// "" : 
+			"ஷ்", // sh
+			// "" : 
+			"ஸ்", // ss
+			// "" : 
+			"ஹ்", // h
+			// "" : 
+			"க்ஷ்" // ks
+		];
+
+	var	tamil_vowel_sounds = ["","a","ā","i","ī","u","ū","e","ē","ai","o","ō","au"];
+	var tamil_vowels = ["ஃ","அ","ஆ","இ","ஈ","உ","ஊ","எ","ஏ","ஐ","ஒ","ஓ","ஔ"];
+			
+	var tamil_syllables = [
+		{"k" : ["க்",,"க","கா","கி","கீ","கு","கூ","கெ","கே","கை","கொ","கோ","கௌ"]},
+		{"ṅ" : ["ங்","ங","ஙா","ஙி","ஙீ","ஙு","ஙூ","ஙெ","ஙே","ஙை","ஙொ","ஙோ","ஙௌ"]},
+		{"c" : ["ச்","ச","சா","சி","சீ","சு","சூ","செ","சே","சை","சொ","சோ","சௌ"]},
+		{"ñ" : ["ஞ்","ஞ","ஞா","ஞி","ஞீ","ஞு","ஞூ","ஞெ","ஞே","ஞை","ஞொ","ஞோ","ஞௌ"]},
+		{"ṭ" : ["ட்","ட","டா","டி","டீ","டு","டூ","டெ","டே","டை","டொ","டோ","டௌ"]},
+		{"ṇ" : ["ண்","ண","ணா","ணி","ணீ","ணு","ணூ","ணெ,,ணே","ணை","ணொ","ணோ","ணௌ"]},
+		{"t" : ["த்","த","தா","தி","தீ","து","தூ","தெ","தே","தை","தொ","தோ","தௌ"]},
+		{"n" : ["ந்","ந","நா","நி","நீ","நு","நூ","நெ","நே","நை","நொ","நோ","நௌ"]},
+		{"p" : ["ப்","ப","பா","பி","பீ","பு","பூ","பெ","பே","பை","பொ","போ","பௌ"]},
+		{"m" : ["ம்","ம","மா","மி","மீ","மு","மூ","மெ","மே","மை","மொ","மோ","மௌ"]},
+		{"y" : ["ய்","ய","யா","யி","யீ","யு","யூ","யெ","யே","யை","யொ","யோ","யௌ"]},
+		{"r" : ["ர்","ர","ரா","ரி","ரீ","ரு","ரூ","ரெ","ரே","ரை","ரொ","ரோ","ரௌ"]},
+		{"l" : ["ல்","ல","லா","லி","லீ","லு","லூ","லெ","லே","லை","லொ","லோ","லௌ"]},
+		{"v" : ["வ்","வ","வா","வி","வீ","வு","வூ","வெ","வே","வை","வொ","வோ","வௌ"]},
+		{"ḻ" : ["ழ்","ழ","ழா","ழி","ழீ","ழு","ழூ","ழெ","ழே","ழை","ழொ","ழோ","ழௌ"]},
+		{"ḷ" : ["ள்","ள","ளா","ளி","ளீ","ளு","ளூ","ளெ","ளே","ளை","ளொ","ளோ","ளௌ"]},
+		{"ṟ" : ["ற்","ற","றா","றி","றீ","று","றூ","றெ","றே","றை","றொ","றோ","றௌ"]},
+		{"ṉ" : ["ன்","ன","னா","னி","னீ","னு","னூ","னெ","னே","னை","னொ","னோ","னௌ"]}
+	];
+
+
 
 	var KEYCODETOCHAR_UK = {
 		// 8:"Backspace",9:"Tab",13:"Enter",16:"Shift",17:"Ctrl",18:"Alt",19:"Pause/Break",20:"Caps Lock",27:"Esc",32:"Space",33:"Page Up",34:"Page Down",35:"End",36:"Home",37:"Left",38:"Up",39:"Right",40:"Down",45:"Insert",46:"Delete",
@@ -58,9 +279,15 @@ $(document).ready(function () {
 		188: ",", 190: ".", 186: ";" 
 	};
 
+	var KEYCODETOCHAR_CRO = {
+		65:"A",66:"B",67:"C",68:"D",69:"E",70:"F",71:"G",72:"H",73:"I",74:"J",75:"K",76:"L",77:"M",78:"N",79:"O",80:"P",81:"Q",82:"R",83:"S",84:"T",85:"U",86:"V",87:"W",88:"X",89:"Y",90:"Z",
+		219: "[", 221: "]", 186: ";", 222: "'", 220: "\\" 
+	};
+
 	var KEYCODES = {
 		'english' : KEYCODETOCHAR_UK,
-		'hebrew': KEYCODETOCHAR_ISR
+		'hebrew': KEYCODETOCHAR_ISR,
+		'croatian' : KEYCODETOCHAR_CRO
 	}
 
 	var KEYCHARTOCODE = {
@@ -113,6 +340,77 @@ $(document).ready(function () {
 			"rocket"  : "audio/Rocket_launch_05_SFXBible_ss06674.mp3",
 			"tick"	: "audio/Data_beep_counter_tick_1.mp3"
 	};
+	var HEBREWSOUNDS = {
+		"א" : "audio/Male_snoring_with_effects_-sounds_like_a_lion-_Nightingale_Music_Productions.mp3" ,
+		"ב" : "audio/Animals_duck_quack_-nature-_Nightingale_Music_Productions_13810.mp3",
+		"ג" : "audio/Acoustic_BPM_110_32_Shriek_2011.mp3" ,
+		"ד" : "audio/human_bee.mp3" ,
+		"ה" : "audio/hippo.mp3",
+		"ו" : "audio/HOSPITAL_BED_CURTAIN_OP.mp3",
+		"ז" : "audio/Horse_two_horses_neigh_step_in_dirt_BLASTmp3EFX_00173.mp3" ,
+		"ח" : "audio/13_year_old_Tabby_Cat_-_Meows-Irritated.mp3" ,
+		"ט" : "audio/parrot_12007201.mp3" ,
+		"י" : "audio/owl.mp3" ,
+		"כ" : "audio/EFX_INT_Dog_Panting_05_AAA.mp3" ,
+		"ל" : "audio/Submarine_sonar_ping_multiple_BLASTWAVEFX_18257.mp3" ,
+		"מ" : "audio/rain_car_interior_wind_shield_wipers_on.mp3" ,
+		"ם" : "audio/Scissor_cuts_thick_paper_AOS02714.mp3" ,
+		"נ" : "audio/river_churnet_water_1998.mp3",
+		"ּּן" : "audio/many balloons fly by releasing air.mp3",
+		"ס" : "audio/horse.mp3" ,
+		"ע" : "audio/HUMAN_VOICE_YAWN_01.mp3" ,
+		"פ" : "audio/CARTOON_TROMBONE_DEEP_SLIDE_01.mp3" ,
+		"ף" : "audio/Drum_snare_fanfare_BLASTmp3EFX_14764.mp3" ,
+		"צ" : "audio/Frogs_croaking_close_in_a_loop.mp3" ,
+		"ץ" : "audio/Bomb_explosion_medium_distance_muffled_warped_01_SFXBible_ss06658.mp3" , 
+		"ק" : "audio/LTMacaque.mp3" ,
+		"ך" : "audio/trumpets_fanfar.mp3" ,
+		"ר" : "audio/Bartender_shakes_ice_and_drink_in_metal_ice_shaker_AOS01016.mp3",
+		"ש" : "audio/Late_20s_Woman_Says_Shhh-Shush-Soft-Choppy.mp3" ,
+		"ת" : "audio/Eating_apple_soundsnap.mp3" ,	
+		"success" : "audio/Peppa.mp3",
+		"other" : "audio/3.mp3",
+		"correct" : "audio/p.mp3",
+		"rocket"  : "audio/Rocket_launch_05_SFXBible_ss06674.mp3",
+		"tick"	: "audio/Data_beep_counter_tick_1.mp3"
+	};	
+	var NASSOUNDS = {
+		"A"	:"audio/Toyota-Matrix-2007-Start-Rev-Small.mp3", // auto  - revving engine
+		"B" :"audio/many balloons fly by releasing air.mp3" , //balloon
+		"C" :"audio/steps.mp3", // shoes - walking sound cipela
+		"Č" :"audio/hitting strongly with hammer.mp3", // hammer - nails hammering sound cekic
+		"Ć" :"audio/owl.mp3", //owl (ćuk)
+		"D" :"audio/Male_snoring_with_effects_-sounds_like_a_lion-_Nightingale_Music_Productions.mp3", // dinosaur / roaring lion sound 
+		"Dž" :"audio/mosque.mp3", //pocket (zip sound) - džamija
+		"Đ" :"audio/School bell ring_BLASTWAVEFX_23042.mp3", //pupil, student - sound of school bell? sound of  
+		"E" :"audio/Male shivers with cold- long_Nightingale Music Productions_12506.mp3", //  Shivering sound? eskim
+		"F" :"audio/Suling.mp3",  // camera clicking sound, frula,flauta (flute)
+		"G" :"audio/Acoustic_BPM_110_32_Shriek_2011.mp3", //guitar
+		"H" :"audio/Water_fish_swimming.mp3", // Jellyfish sound hobotnica
+		"I" :"audio/ouch.mp3", //"OWWWW!" sound igla
+		"J" : "audio/Eating_apple_soundsnap.mp3" , //apple
+		"K" :"audio/Pretty_xylophone_melody_AOS00288.mp3", //horse, kangaroo(klokan), umbrella,whale, xylo, king
+		"L" :"audio/Male_snoring_with_effects_-sounds_like_a_lion-_Nightingale_Music_Productions.mp3", // lion
+		"Lj" :"audio/swings.mp3",  //swing ljuljačka, "WHEEEE" sound
+		"M" :"audio/LTMacaque.mp3", //monkey, cat, 
+		"N" :"audio/Male_blow_nose_BLASTWAVEFX_19918.mp3", //nose
+		"Nj" :"audio/Late 20s Woman Sniffs-Random.mp3", // njuška dog's nose, dog sniffing fast
+		"O" :"audio/sheep.mp3", //sheep
+		"P" : "audio/Animals_duck_quack_-nature-_Nightingale_Music_Productions_13810.mp3", //duck
+		"R" :"audio/HUMAN CROWD CLAP PATTERN IN UNISON 01.mp3", // hands clapping
+		"S" :"audio/CARTOON_TROMBONE_DEEP_SLIDE_01.mp3", //elephant     ,icecream, 
+		"Š" :"audio/Scissor_cuts_thick_paper_AOS02714.mp3", //scissors
+		"T" :"audio/Trumpet-37_D_BPM_77.mp3", //trumpet, quiet, 
+		"U" :"audio/cuckooclock.mp3", // ura - clock ticking, cuckoo //race -> cheering at end
+		"V" :"audio/Violin_G_major_scale_up_down_BLASTWAVEFX_27410.mp3",//violin
+		"Z" :"audio/HUMAN_VOICE_YAWN_01.mp3", //rabbit, yawn, zebra, curtain (zavjesa)
+		"Ž" :"audio/Frogs_croaking_close_in_a_loop.mp3", //frog,
+		"success" : "audio/Peppa.mp3",
+		"other" : "audio/3.mp3",
+		"correct" : "audio/p.mp3",
+		"rocket"  : "audio/Rocket_launch_05_SFXBible_ss06674.mp3",
+		"tick"	: "audio/Data_beep_counter_tick_1.mp3"
+	};
 
 	var PICS = {
 		"A" : "apple2.svg",
@@ -143,85 +441,6 @@ $(document).ready(function () {
 		"Z" : "zebra.svg",
 		"rocket" : "rocket-ship-shooting-md.png"
 	};
-
-
-	var NASLETTERS = {"A"	: "",
-		"B" :"" ,
-		"C" :"",
-		"Č" :"",
-		"Ć" :"",
-		"D" :"",
-		"Đ" :"",
-		"E" :"",
-		"F" :"",
-		"G" :"",
-		"H" :"",
-		"I" :"",
-		"J" : "A",
-		"K" :"",
-		"L" :"",
-		"M" :"",
-		"N" :"",
-		"O" :"",
-		"P" : "",
-		"Q" :"",
-		"R" :"",
-		"S" :"",
-		"Š" :"",
-		"T" :"",
-		"U" :"",
-		"V" :"",
-		"W" :"",
-		"X" :"",
-		"Y" :"",
-		"Z" :"",
-		"Ž" :""
-	};
-
-	var HEBREWSOUNDS = {
-		"א" : "audio/Male_snoring_with_effects_-sounds_like_a_lion-_Nightingale_Music_Productions.mp3" ,
-		"ב" : "audio/Animals_duck_quack_-nature-_Nightingale_Music_Productions_13810.mp3",
-		"ג" : "audio/Acoustic_BPM_110_32_Shriek_2011.mp3" ,
-		"ד" : "audio/human_bee.mp3" ,
-		"ה" : "audio/hippo.mp3",
-		"ו" : "audio/HOSPITAL_BED_CURTAIN_OP.mp3",
-		"ז" : "audio/Horse_two_horses_neigh_step_in_dirt_BLASTmp3EFX_00173.mp3" ,
-		"ח" : "audio/13_year_old_Tabby_Cat_-_Meows-Irritated.mp3" ,
-		"ט" : "audio/parrot_12007201.mp3" ,
-		"י" : "audio/owl.mp3" ,
-		"כ" : "audio/EFX_INT_Dog_Panting_05_AAA.mp3" ,
-		"ל" : "audio/Submarine_sonar_ping_multiple_BLASTWAVEFX_18257.mp3" ,
-		"מ" : "audio/rain_car_interior_wind_shield_wipers_on.mp3" ,
-		"ם" : "audio/Scissor_cuts_thick_paper_AOS02714.mp3" ,
-		"נ" : "audio/river_churnet_water_1998.mp3",
-		"ּּן" : "audio/balloon.wav",
-		"ס" : "audio/horse.mp3" ,
-		"ע" : "audio/HUMAN_VOICE_YAWN_01.mp3" ,
-		"פ" : "audio/CARTOON_TROMBONE_DEEP_SLIDE_01.mp3" ,
-		"ף" : "audio/Drum_snare_fanfare_BLASTmp3EFX_14764.mp3" ,
-		"צ" : "audio/Frogs_croaking_close_in_a_loop.mp3" ,
-		"ץ" : "audio/Bomb_explosion_medium_distance_muffled_warped_01_SFXBible_ss06658.mp3" , 
-		"ק" : "audio/LTMacaque.mp3" ,
-		"ך" : "audio/trumpets_fanfar.mp3" ,
-		"ר" : "audio/Bartender_shakes_ice_and_drink_in_metal_ice_shaker_AOS01016.mp3",
-		"ש" : "audio/Late_20s_Woman_Says_Shhh-Shush-Soft-Choppy.mp3" ,
-		"ת" : "audio/Eating_apple_soundsnap.mp3" ,
-		// "I" : "audio/Slurp_BLASTWAVEFX_13030.mp3" ,
-		// "J" : "audio/Water  fish swimming.mp3" ,
-		// "K" : "audio/doing - mouth harp 8 clean two kinds.mp3" ,
-		// "N" : "audio/Male blow nose_BLASTmp3EFX_19918.mp3" ,
-		// "R" : "audio/chewing carrot.mp3" ,
-		// "S" : "audio/sheep.mp3" ,
-		// "T" : "audio/Trumpet-37 D BPM 77.mp3" ,
-		// "V" : "audio/Violin G major scale up down_BLASTWAVEFX_27410.mp3" ,
-		// "X" : "audio/Pretty xylophone melody_AOS00288.mp3" ,
-		"success" : "audio/Peppa.mp3",
-		"other" : "audio/3.mp3",
-		"correct" : "audio/p.mp3",
-		"rocket"  : "audio/Rocket_launch_05_SFXBible_ss06674.mp3",
-		"tick"	: "audio/Data_beep_counter_tick_1.mp3"
-	};	
-
 	var HEBREWPICS = {
 		"א" : "lion 2.svg",
 		"ב" : "duck2.svg",
@@ -250,268 +469,53 @@ $(document).ready(function () {
 		"ץ" : "explosion.svg",
 		"ף" : "drum.svg",
 		"ם" : "scissors.svg",
-	
 		"rocket" : "rocket-ship-shooting-md.png"
 	};
-
-	var HEBREWLETTERS = {
-		"A" : "ש",
-		"B" : "נ",
-		"C" : "ב",
-		"D" : "ג",
-		"E" : "ק",
-		"F" : "כ",
-		"G" : "ע",
-		"H" : "י",
-		"I" : "ן",
-		"J" : "ח",
-		"K" : "ל",
-		"L" : "ך",
-		"M" : "צ",
-		"N" : "מ",
-		"O" : "ם",
-		"P" : "פ",
-		"Q" : "",
-		"R" : "ר",
-		"S" : "ד",
-		"T" : "א",
-		"U" : "ו",
-		"V" : "ה",
-		"W" : "",
-		"X" : "ס",
-		"Y" : "ט",
-		"Z" : "ז",
-		"," : "ת",
-		"." : "ץ",
-		";" : "ף"
+	var NASPICS = {
+		"A"	:"car_pd_192.png", // auto  - revving engine
+		"B" :"balloon_new.png" , //balloon
+		"C" :"shoe_pd_878.png", // shoes - walking sound cipela
+		"Č" :"hammer.png", // hammer - nails hammering sound cekic
+		"Ć" :PICS["O"], //owl (ćuk)
+		"D" :"dinosaur.png", // dinosaur / roaring lion sound 
+		"Dž" :"mosque.png", //pocket (zip sound) - džamija
+		"Đ" : "student.png", //pupil, student - sound of school bell? sound of  
+		"E" :"esquimal.png", //  Shivering sound? eskim
+		"F" :"flute.png",  // camera clicking sound, frula,flauta (flute)
+		"G" :PICS["G"], //guitar
+		"H" :"octopus.png", // Jellyfish sound hobotnica
+		"I" :"needle.png", //"OWWWW!" sound igla
+		"J" : PICS["A"] , //apple
+		"K" : PICS["X"], //horse, kangaroo(klokan), umbrella,whale, xylo, king
+		"L" :PICS["L"], // lion
+		"Lj" :"swing_pd_noun_206.png",  //swing ljuljačka, "WHEEEE" sound
+		"M" :PICS["M"], //monkey, cat, 
+		"N" :PICS["N"], //nose
+		"Nj" :"njuska.png", // njuška dog's nose, dog sniffing fast
+		"O" : PICS["S"], //sheep
+		"P" : HEBREWPICS["ב"], //duck
+		"R" : "hand.png", // hands clapping
+		"S" : PICS["E"], //elephant     ,icecream, 
+		"Š" :HEBREWPICS["ם"], //scissors
+		"T" :PICS["T"], //trumpet, quiet, 
+		"U" :"clock.png", // ura - clock ticking, cuckoo //race -> cheering at end
+		"V" : PICS["V"],//violin
+		"Z" : PICS["Y"], //rabbit, yawn, zebra, curtain (zavjesa)
+		"Ž" : PICS["צ"] //frog,
 	};
 
-	var HEBREWSOFIT = {
-		"I" : "ן",
-		"L" : "ך",
-		"." : "ץ",
-		";" : "ף"
+	var HEBREWLETTERS = {"A" : "ש","B" : "נ","C" : "ב","D" : "ג","E" : "ק","F" : "כ","G" : "ע","H" : "י","I" : "ן","J" : "ח","K" : "ל","L" : "ך","M" : "צ","N" : "מ","O" : "ם","P" : "פ","Q" : "","R" : "ר","S" : "ד","T" : "א","U" : "ו","V" : "ה","W" : "","X" : "ס","Y" : "ט","Z" : "ז","," : "ת","." : "ץ",";" : "ף"
+	};
+	var HEBREWSOFIT = {"I" : "ן","L" : "ך","." : "ץ",";" : "ף"
+	};
+	var NASLETTERS = {"A" : "A","B" : "B","C" : "C","D" : "D","E" : "E","F" : "F","G" : "G","H" : "H","I" : "I","J" : "J","K" : "K","L" : "L","M" : "M","N" : "N","O" : "O","P" : "P","Q" : "Q","R" : "R","S" : "S","T" : "T","U" : "U","V" : "V","W" : "W","X" : "X","Y" : "Y","Z" : "Z","[" : "Š","]" : "Đ",";" : "Č","'" : "Ć","\\": "Ž"
 	};
 
-
-
-	var TAMIL_LETTERS = {
-		"A" : "அ", // A // Mother, Amma
-		"Q" : "ஆ", // AA // Goat, Aadu, Amai Tortoise
-		"S" : "இ", // i Ilai / leaf
-		"W" : "ஈ", // ii I - fly
-		"D" : "உ", // u ural, grinder
-		"E" : "ஊ", // uu unjal swing
-		"G" : "எ", // e erumbu, ant
-		"T" : "ஏ", // e- eni, ladder
-		"R" : "ஐ", // ai aindhu, five
-		"C" : "ஒ", // o ondru, one
-		"X" : "ஓ", // o: onAn, chameleon
-		"Z" : "ஔ", // au 
-		"H" : "க்", // k Chakkaram, wheel
-		"B" : "ங்", // n: Sangu, Shell
-		"[" : "ச்", // c 
-		"]" : "ஞ்", // nj
-		"O" : "ட்", // t. Ottagam, camel
-		"P" : "ண்", // n. kan, eye
-		"L" : "த்", // t Thathai, parrot
-		";" : "ந்", // nn pandhu, ball
-		"J" : "ப்", // p kappal, ship
-		"K" : "ம்", // m ambu, arrow
-		"'" : "ய்", // y naai, dog
-		"M" : "ர்", // r malar, flower
-		"N" : "ல்", // l kal, leg
-		"V" : "வ்", // v 
-		"/" : "ழ்", // l- itazh, lips
-		"Y" : "ள்", // l--
-		"U" : "ற்", // r
-		"I" : "ன்", // nn-
-		"" : "ஶ்", // s
-		"" : "ஜ்", //  j
-		"" : "ஷ்", // sh
-		"" : "ஸ்", // ss
-		"" : "ஹ்", // h
-		"" : "க்ஷ்" // ks
-	};
-
-var TAMIL_PICS = [
-		// "A" : 
-		"அ", // A Mother, Amma
-		// "Q" : 
-		"ஆ", // AA Goat, Aadu
-		// "S" : 
-		"இ", // i
-		// "W" : 
-		"ஈ", // ii
-		// "D" : 
-		"உ", // u
-		// "E" : 
-		"ஊ", // uu
-		// "G" : 
-		"எ", // e
-		// "T" : 
-		"ஏ", // e-
-		// "R" : 
-		"ஐ", // ai
-		// "C" : 
-		"ஒ", // o
-		// "X" : 
-		"ஓ", // o:
-		// "Z" : 
-		"ஔ", // au
-		// "H" : 
-		"க்", // k
-		// "B" : 
-		"ங்", // n:
-		// "[" : 
-		"ச்", // c
-		// "]" : 
-		"ஞ்", // nj
-		// "O" : 
-		"ட்", // t.
-		// "P" : 
-		"ண்", // n.
-		// "L" : 
-		"த்", // t
-		// ";" : 
-		"ந்", // nn
-		// "J" : 
-		"ப்", // p
-		// "K" : 
-		"ம்", // m
-		// "'" : 
-		"ய்", // y
-		// "M" : 
-		"ர்", // r
-		// "N" : 
-		"ல்", // l
-		// "V" : 
-		"வ்", // v
-		// "/" : 
-		"ழ்", // l-
-		// "Y" : 
-		"ள்", // l--
-		// "U" : 
-		"ற்", // r
-		// "I" : 
-		"ன்", // nn-
-		// "" : 
-		"ஶ்", // s
-		// "" : 
-		"ஜ்", //  j
-		// "" : 
-		"ஷ்", // sh
-		// "" : 
-		"ஸ்", // ss
-		// "" : 
-		"ஹ்", // h
-		// "" : 
-		"க்ஷ்" // ks
-	];
-	
-
-var TAMIL_SOUNDS = [
-		// "A" : 
-		"அ", // A Mother, Amma
-		// "Q" : 
-		"ஆ", // AA Goat, Aadu
-		// "S" : 
-		"இ", // i
-		// "W" : 
-		"ஈ", // ii
-		// "D" : 
-		"உ", // u
-		// "E" : 
-		"ஊ", // uu
-		// "G" : 
-		"எ", // e
-		// "T" : 
-		"ஏ", // e-
-		// "R" : 
-		"ஐ", // ai
-		// "C" : 
-		"ஒ", // o
-		// "X" : 
-		"ஓ", // o:
-		// "Z" : 
-		"ஔ", // au
-		// "H" : 
-		"க்", // k
-		// "B" : 
-		"ங்", // n:
-		// "[" : 
-		"ச்", // c
-		// "]" : 
-		"ஞ்", // nj
-		// "O" : 
-		"ட்", // t.
-		// "P" : 
-		"ண்", // n.
-		// "L" : 
-		"த்", // t
-		// ";" : 
-		"ந்", // nn
-		// "J" : 
-		"ப்", // p
-		// "K" : 
-		"ம்", // m
-		// "'" : 
-		"ய்", // y
-		// "M" : 
-		"ர்", // r
-		// "N" : 
-		"ல்", // l
-		// "V" : 
-		"வ்", // v
-		// "/" : 
-		"ழ்", // l-
-		// "Y" : 
-		"ள்", // l--
-		// "U" : 
-		"ற்", // r
-		// "I" : 
-		"ன்", // nn-
-		// "" : 
-		"ஶ்", // s
-		// "" : 
-		"ஜ்", //  j
-		// "" : 
-		"ஷ்", // sh
-		// "" : 
-		"ஸ்", // ss
-		// "" : 
-		"ஹ்", // h
-		// "" : 
-		"க்ஷ்" // ks
-	];
-
-var	tamil_vowel_sounds = ["","a","ā","i","ī","u","ū","e","ē","ai","o","ō","au"];
-var tamil_vowels = ["ஃ","அ","ஆ","இ","ஈ","உ","ஊ","எ","ஏ","ஐ","ஒ","ஓ","ஔ"];
-		
-var tamil_syllables = [
-{"k" : ["க்",,"க","கா","கி","கீ","கு","கூ","கெ","கே","கை","கொ","கோ","கௌ"]},
-{"ṅ" : ["ங்","ங","ஙா","ஙி","ஙீ","ஙு","ஙூ","ஙெ","ஙே","ஙை","ஙொ","ஙோ","ஙௌ"]},
-{"c" : ["ச்","ச","சா","சி","சீ","சு","சூ","செ","சே","சை","சொ","சோ","சௌ"]},
-{"ñ" : ["ஞ்","ஞ","ஞா","ஞி","ஞீ","ஞு","ஞூ","ஞெ","ஞே","ஞை","ஞொ","ஞோ","ஞௌ"]},
-{"ṭ" : ["ட்","ட","டா","டி","டீ","டு","டூ","டெ","டே","டை","டொ","டோ","டௌ"]},
-{"ṇ" : ["ண்","ண","ணா","ணி","ணீ","ணு","ணூ","ணெ,,ணே","ணை","ணொ","ணோ","ணௌ"]},
-{"t" : ["த்","த","தா","தி","தீ","து","தூ","தெ","தே","தை","தொ","தோ","தௌ"]},
-{"n" : ["ந்","ந","நா","நி","நீ","நு","நூ","நெ","நே","நை","நொ","நோ","நௌ"]},
-{"p" : ["ப்","ப","பா","பி","பீ","பு","பூ","பெ","பே","பை","பொ","போ","பௌ"]},
-{"m" : ["ம்","ம","மா","மி","மீ","மு","மூ","மெ","மே","மை","மொ","மோ","மௌ"]},
-{"y" : ["ய்","ய","யா","யி","யீ","யு","யூ","யெ","யே","யை","யொ","யோ","யௌ"]},
-{"r" : ["ர்","ர","ரா","ரி","ரீ","ரு","ரூ","ரெ","ரே","ரை","ரொ","ரோ","ரௌ"]},
-{"l" : ["ல்","ல","லா","லி","லீ","லு","லூ","லெ","லே","லை","லொ","லோ","லௌ"]},
-{"v" : ["வ்","வ","வா","வி","வீ","வு","வூ","வெ","வே","வை","வொ","வோ","வௌ"]},
-{"ḻ" : ["ழ்","ழ","ழா","ழி","ழீ","ழு","ழூ","ழெ","ழே","ழை","ழொ","ழோ","ழௌ"]},
-{"ḷ" : ["ள்","ள","ளா","ளி","ளீ","ளு","ளூ","ளெ","ளே","ளை","ளொ","ளோ","ளௌ"]},
-{"ṟ" : ["ற்","ற","றா","றி","றீ","று","றூ","றெ","றே","றை","றொ","றோ","றௌ"]},
-{"ṉ" : ["ன்","ன","னா","னி","னீ","னு","னூ","னெ","னே","னை","னொ","னோ","னௌ"]}
-];
 
 	var LANGUAGETODICT = {
 		'english' : [PICS, SOUNDS],
-		'hebrew' : [HEBREWPICS, HEBREWSOUNDS]
+		'hebrew' : [HEBREWPICS, HEBREWSOUNDS],
+		'croatian' : [NASPICS,NASSOUNDS]
 	};
 
 	var LANGUAGETOMESSAGES = {
@@ -542,20 +546,42 @@ var tamil_syllables = [
 					instructions2 : "בחרו את השפה הרצויה",
 					instructions3 : "תהנו",
 					text_align : 'right'
+		},	
+		'croatian' : {
+					ready : "Spremni ste?",
+					clickbox :"Kliknuti ovdje!",
+					toolong :"Vaš rijeć je predugačak",
+					language_error: "Molim provjeriti napisani rijeć za griješke",
+					howtoplay :"Kako igrati",
+					placeholder :"Napisati sekretni rijeć",
+					buttontext :"Hajmo igrati",
+					instructions0 : "Dobro došli našoj igre za malih i velikih nindže",
+					instructions1 : "Pitajte malu nindžu koji rijeć želi - ime radi vrlo dobro",
+					instructions2 : "Koji jezik koristite?",
+					instructions3 : "Pripremite se!",
+					text_align : 'left'
 		}
 	};
 
 	var MX_GAME_MSGS = {
 		'english' : mixpanel.track("Game - english"),
-		'hebrew' : mixpanel.track("Game - hebrew")
+		'hebrew' : mixpanel.track("Game - hebrew"),
+		'croatian' : mixpanel.track("Game - croatian")
 	}
 
+	var ADDITIONALFLAGS = {
+		 "hebrew" : "israel.svg",
+		 "croatian" : "yugoslavia-bw.png"
+		 // "russia" : "russia.svg"
+		 // "tamil" : "tamil.png"
+	};
+
 	var TamilDict = makeTamilDict();
-	console.log(TamilDict);
+	if (LOG) console.log(TamilDict);
 
 	var ppp = 0;
 	for (key in TamilDict){ppp++;}
-	console.log(ppp);
+	if (LOG) console.log(ppp);
 
 	function clearJoyride() {
 		jQuery(window).joyride("destroy");
@@ -620,10 +646,7 @@ var tamil_syllables = [
 
 	}
 
-	var ADDITIONALFLAGS = {
-		 "hebrew" : "israel.svg"
-		 // "russia" : "russia.svg"
-	};
+	
 
 	// image condition
 	// Get the size of an object by using  defined function
@@ -858,6 +881,8 @@ var tamil_syllables = [
 		var language = $('input:radio:checked').val();
 		var textInput = $('input:text:first').val();
 
+		console.log(language);
+
 		var maxWidth = $(window).width();
 		var columnMargin = ~~(maxWidth / 100 ); 
 
@@ -939,7 +964,11 @@ var tamil_syllables = [
 		};
 
 			createSounds();	
+
+			// $('.sounds').each(function(i,obj){console.log(obj)});
+
 			countdown('countdown', 5);
+			
 			buildGame();
 		}
 
@@ -963,7 +992,6 @@ var tamil_syllables = [
 		var imageSources = [];
 		var randomColours = [];
 
-		
 		for (var i = 0; i < name1LettersArray.length; i++) { 				// start for loop over letters
 
 			// define direction of counting, L to R or R to L depending on language
@@ -987,7 +1015,7 @@ var tamil_syllables = [
 
 			// force 'true' state for development
 			isMobile = true;
-			console.log(isMobile);
+			if (LOG) console.log(isMobile);
 
 			// if mobile then populate manual keyboard with letter choices
 			if (isMobile) {											// start of mobile Building
