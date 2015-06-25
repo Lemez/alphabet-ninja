@@ -33,33 +33,58 @@ mixpanel.init("000de46f82a71fdfbec5f8a41d56035f");</script><!-- end Mixpanel -->
 		<header>
 			<nav>
 				<a id='ninjalogo'><img id='ninja' src='images/Alphabet Ninja logo clear.png' width='200' height='60' /></a>
+			</br>
+
 			 </nav>
 		</header>
 			 		
 		
 		<div id = 'background'>
+				<span id="flash"></span>
 
 			 	<div id="flags">
-			 		<label>
+			 		<label for='flags'>
 					  <input type="radio" name="flag" value="english" checked  />
 					  <img src="images/uk_usa.svg" class="selected" value="english" id='firstflag'>
 					 </label>
+				</div>
 					
+				<div id="othernav">
+					
+					<a class="triangle-isosceles" id="instructions" href="#"></a>
+	
+					<label for="autoplay_check" id='autoplaylabel'>
 
-					<a class="triangle-isosceles" id="instructions" href="#">How To Play</a>
+			 			<input id="autoplay_check" type="checkbox" name="autoplay" value="autoplay" /> 
+			 			<img src="images/repeat_29210_no_credit.png" id='autoplay_img'>
+			 			
+			 		</label>
+
+
+
 		
 			 	</div>
+
+
+
+
 
 			 	<div id="inputs">
 
 					<input id='textbox' type="text" placeholder="Enter a secret word!" id="nameone" contenteditable="true" autofocus style="text-transform:capitalize;" onkeyup="javascript:this.value=this.value.toUpperCase()"/>
 
+			 			
+
+
 					<!-- <p>&</p><input type="text" placeholder='And then yours here' id="nametwo" contenteditable="true"/>-->
 					<div id='message'></div>
 					 <button id="letsplay" class="submit">Let's Play!</button>
 
+					 
+
 			</div>
 
+			
 			
 			
 				<!-- 	<button id='#intro-eng'>English</button>

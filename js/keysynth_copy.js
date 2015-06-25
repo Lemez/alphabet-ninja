@@ -4,7 +4,7 @@
 $(document).ready(function () {
 
 	var LOG = false;
-
+	var autoplay;
 
 	var platform = navigator.platform;
 	
@@ -46,9 +46,6 @@ $(document).ready(function () {
 		var mouseX = e.pageX; // e.pageX - gives you the X position.
 		var mouseY = e.pageY; // e.pageY - gives you the Y position.
 	});
-
-
-
 
 
 	var TAMIL_LETTERS = {
@@ -501,8 +498,8 @@ $(document).ready(function () {
 		"T" :PICS["T"], //trumpet, quiet, 
 		"U" :"clock.png", // ura - clock ticking, cuckoo //race -> cheering at end
 		"V" : PICS["V"],//violin
-		"Z" : PICS["Y"], //rabbit, yawn, zebra, curtain (zavjesa)
-		"Ž" : PICS["צ"] //frog,
+		"Z" : HEBREWPICS["Y"], //rabbit, yawn, zebra, curtain (zavjesa)
+		"Ž" : HEBREWPICS["צ"] //frog,
 	};
 
 	var HEBREWLETTERS = {"A" : "ש","B" : "נ","C" : "ב","D" : "ג","E" : "ק","F" : "כ","G" : "ע","H" : "י","I" : "ן","J" : "ח","K" : "ל","L" : "ך","M" : "צ","N" : "מ","O" : "ם","P" : "פ","Q" : "","R" : "ר","S" : "ד","T" : "א","U" : "ו","V" : "ה","W" : "","X" : "ס","Y" : "ט","Z" : "ז","," : "ת","." : "ץ",";" : "ף"
@@ -530,7 +527,7 @@ $(document).ready(function () {
 					clickbox : "Please click the box above and write a secret word",
 					toolong : "Make your browser wider or choose a shorter word",
 					language_error: "Please check the language flag, and what you have written in the box",
-					howtoplay : "How To Play",
+					// howtoplay : "How To Play",
 					placeholder : "Enter A Secret Word",
 					buttontext : "Let's Play",
 					instructions0 : "Welcome to our game for little ninjas and big ninjas to play together",
@@ -544,7 +541,7 @@ $(document).ready(function () {
 					clickbox :"אנא כתוב מילה בתיבה",
 					toolong :"אנא כתוב מילה קצרה יותר",
 					language_error: "Please check the language flag, and what you have written in the box",
-					howtoplay :"איך לשחק",
+					// howtoplay :"איך לשחק",
 					placeholder :"הקלד מילה",
 					buttontext :"יאללה נשחק",
 					instructions0 : "ברוכים הבאים למשחק משותף עבור נינג׳ות קטנים/ות וגדולים/ות",
@@ -558,7 +555,7 @@ $(document).ready(function () {
 					clickbox :"Kliknuti ovdje!",
 					toolong :"Vaš rijeć je predugačak",
 					language_error: "Molim provjeriti napisani rijeć za griješke",
-					howtoplay :"Kako igrati",
+					// howtoplay :"Kako igrati",
 					placeholder :"Napisati sekretni rijeć",
 					buttontext :"Hajmo igrati",
 					instructions0 : "Dobro došli našoj igre za malih i velikih nindže",
@@ -824,6 +821,29 @@ $(document).ready(function () {
 	  return array;
 	}
 
+	var flashDict = {
+		'true' : 'ON',
+		'false' : 'OFF'
+	};
+
+	function flashmessage(state) {
+		var autoplayT1 = "Autoplay ";
+		var autoplayT2 = flashDict[state];
+		var autoplayMessage = autoplayT1.concat(autoplayT2);
+
+		item = $('#flash');
+
+		item.text(autoplayMessage)
+				.animate({
+				opacity: 1
+	},500)
+				.animate({
+				opacity: 0
+	},1000);
+				console.log(state);
+	}
+
+	
 	// **************************** START CODE ++++++++++++++++++++++++++++
 
 	addFlags();
@@ -840,6 +860,21 @@ $(document).ready(function () {
 			$(this).addClass('selected');
 			$(this).parent().siblings().find('img').removeClass('selected');
 			translateText();	
+		});
+
+		$('#flags label img').on('mouseover', function() {
+			var flagName = $(this).attr('value');
+			$(this).attr('title', flagName);	
+		});
+
+		$('#othernav label img').on('mouseover', function() {
+			$(this).attr('title', 'Autoplay');	
+		});
+
+		$('#othernav label img').on("click", function() {
+			$(this).toggleClass('selected');
+			autoplay = !document.getElementById("autoplay_check").checked;
+			flashmessage(autoplay);	
 		});
 
 		$('#instructions').on('click', function() {
@@ -887,13 +922,13 @@ $(document).ready(function () {
 		var language = $('input:radio:checked').val();
 		var textInput = $('input:text:first').val();
 
-		console.log(language);
-
 		var maxWidth = $(window).width();
 		var columnMargin = ~~(maxWidth / 100 ); 
 
 		var columnWidth = 150 + (2 * columnMargin);
 		var maxLength = ~~(maxWidth / columnWidth );
+		console.log(maxLength);
+		// var maxLength = 100;
 		
 		//  check for acceptable input
 		// no input
@@ -932,12 +967,29 @@ $(document).ready(function () {
 			document.getElementById(s).play();
 		};
 
-		function countdown(element, seconds) {
+		function countdown(element, seconds, repeatcase) {
 
-	 	   var interval = setInterval(function() {	
+		if (repeatcase == true) {
+			$('div.shake').removeClass("liftoff");
+			$('#intro').removeClass("shake");
+			$('#countdown, #prepare h2').animate({
+							fontSize : '60px',
+			            	width : '100%',
+			            	height: '100%',
+			            	opacity : 1
+			            },1000);
+			$('#countdown').animate({
+				width : '45%',
+				fontSize : '120px'
+				},1);
+		} 
+
+	 	 	var interval = setInterval(function() {	
 
 		    	$('#intro').show();
 		    	$('#instructions').hide();
+		    	$('#othernav').hide();
+
 		    	var msTime = seconds*1000;
 		    	startRocket(msTime - 1000);
 		    	if (seconds < 10) seconds = "0" + seconds; 
@@ -969,19 +1021,55 @@ $(document).ready(function () {
 			    }, 1000);
 		};
 
+		function triggernewgame(){
+			$("#success").animate({volume: 0}, 1000);
+			$(".container").hide();
+			countdown('countdown', 5, true);
+			buildGame(true);
+		};
+
+
 			createSounds();	
 
 			// $('.sounds').each(function(i,obj){console.log(obj)});
 
-			countdown('countdown', 5);
+			countdown('countdown', 5, false);
 			
-			buildGame();
+			buildGame(false);
 		}
 
-	function buildGame(){
+	var ENG_PLAYLIST = ['DOG', 'MONKEY', 'PARROT', 'CAT', 'WHALE', 'HORSE', 'ZEBRA' ];
 
-		var name1String = $('input:text:first').val();
-		if (language != 'hebrew') {name1String = name1String.toUpperCase();}
+
+	function cleanGame(){
+		$('.col').remove();
+		$('#kb_letters').remove();
+	}
+
+	function removeFromArray(item,array) {
+
+		while (array.indexOf(item) !== -1) {
+			  array.splice(array.indexOf(item), 1);
+			}
+
+	}
+
+	function buildGame(repeatcase){
+
+		if (repeatcase==true) {
+			cleanGame();
+			var name1String = ENG_PLAYLIST[Math.floor(Math.random()*ENG_PLAYLIST.length)];
+			removeFromArray(name1String,ENG_PLAYLIST);
+			console.log(name1String);
+			console.log(ENG_PLAYLIST);
+			
+
+		} else {
+			var name1String = $('input:text:first').val();
+			if (language != 'hebrew') {name1String = name1String.toUpperCase();}
+		}
+
+		
 		var picArray = $.map(MYPICS, function(value, index) {return [value];});
 		var availablePics = [];
 		var size = Object.size(MYPICS);
@@ -1387,13 +1475,25 @@ $(document).ready(function () {
 				};
 
 
-				$("#again p").animate({ fontSize: '100px', top: (Math.floor(Math.random() * 800)) + 'px', opacity: 1}, (Math.floor(Math.random() * 100000)));
-
+				
 				setTimeout(function() {
+					$("#success").animate({volume: 1}, 1);
 					playSound("success");
-													}, (3000));
+													}, 3000);
 
-				$('a#ninjalogo').attr("href", "home.html")
+			
+				autoplay = document.getElementById("autoplay_check").checked;
+				console.log(autoplay);
+
+				if (autoplay==true) {
+					setTimeout(function() {
+							triggernewgame();
+													}, 5000);
+					
+				} else {
+					$("#again p").animate({ fontSize: '100px', top: (Math.floor(Math.random() * 800)) + 'px', opacity: 1}, (Math.floor(Math.random() * 100000)));
+
+					$('a#ninjalogo').attr("href", "home.html")
 								.find("img")
 								.css("z-index", 100)
 								.css("position", "fixed");
@@ -1401,6 +1501,10 @@ $(document).ready(function () {
 				$('a#ninjalogo, #again').on('click', function(){
 					mixpanel.track('Play again');
 				});	
+
+				}
+
+
 
 				// checkPosition();
 
