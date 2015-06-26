@@ -981,8 +981,13 @@ $(document).ready(function () {
 		function countdown(element, seconds, repeatcase) {
 
 		if (repeatcase == true) {
-			$('div.shake').removeClass("liftoff");
-			$('#intro').removeClass("shake");
+			$('#new_word img').remove();
+			$('#prepare h1').text("");
+
+			$('#rocket div').css("background", "url(" + sessionStorage.getItem("image") + ") no-repeat");
+
+			$('#rocket div').removeClass("liftoff");
+			$('#rocket div').css("width", "300px");
 			$('#countdown, #prepare h2').animate({
 							fontSize : '60px',
 			            	width : '100%',
@@ -994,6 +999,8 @@ $(document).ready(function () {
 				fontSize : '120px'
 				},1);
 		} 
+			var msTime = seconds*1000;
+		    // startRocket(msTime);
 
 	 	 	var interval = setInterval(function() {	
 
@@ -1001,8 +1008,6 @@ $(document).ready(function () {
 		    	$('#instructions').hide();
 		    	$('#othernav').hide();
 
-		    	var msTime = seconds*1000;
-		    	startRocket(msTime - 1000);
 		    	if (seconds < 10) seconds = "0" + seconds; 
 		    	playSound('tick');
 
@@ -1011,11 +1016,11 @@ $(document).ready(function () {
 	        	if(seconds == 0) {  // zero seconds function   
 			        	clearInterval(interval);
 			            playSound("rocket");
-			            $("div.shake").addClass("liftoff");
+			            $("#rocket div").addClass("liftoff");
 			            $('#countdown, #prepare h2').animate({
 			            	fontSize : '600px',
 			            	width : '500%',
-			            	height: '150%',
+			            	height: '500%',
 			            	opacity : 0
 			            },3000);
 
@@ -1035,8 +1040,13 @@ $(document).ready(function () {
 		function displayNewWord(letter) {
 			pics = JSON.parse(sessionStorage.getItem("pics"));
 			t = pics[letter];
-			$('#new_word').html('<img src=images/' + t + ' />');
-			
+			$('#new_word').html('<img src="images/' + t + '" />');
+			$('#prepare h1').text("Next word...")	
+							.css('display', 'inline');
+
+			$('#new_word img').addClass('jig');
+
+			sessionStorage.setItem("image",$('#new_word img').attr("src"));
 		}
 
 		function triggernewgame(){
@@ -1055,10 +1065,12 @@ $(document).ready(function () {
 
 			indexLetter = word[0].toUpperCase();
 
+			displayNewWord(indexLetter);
+
 			setTimeout(function() {
-							displayNewWord(indexLetter);
-									}, (3000));
-			countdown('countdown', 5, true);
+							countdown('countdown', 5, true);
+									}, (5000));
+			
 			buildGame(true);
 		};
 

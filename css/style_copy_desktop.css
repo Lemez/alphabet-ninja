@@ -259,7 +259,8 @@ div#inputs  {
 										/* INTRODUCTION */
 
 #prepare {
-	width: 100%;
+	width: 100%;	
+	text-align: center;
 }
 
 #new_word {
@@ -270,9 +271,17 @@ div#inputs  {
 #new_word img {
 	width: 250px;
 	height: 100%;
-	margin-left: 1%;
 	z-index: 500;
 	position: absolute;
+	text-align: center;
+	margin-left: -25%;
+}
+
+#prepare h1 {
+	display: none;
+	text-align: center;
+	font-size: 120px;
+	margin-top: 20%;
 }
 
 #intro {
@@ -288,10 +297,31 @@ div#inputs  {
 	text-align: center;
 }
 
+.full {
+	width: 100%;
+}
 
 #rocket {
-	width: 45%;
+	width: 50%;
+	display:inline-block;
+	float: left;
+	z-index: 50;
+	margin-left:  -25%;
 	/*float: right;*/
+}
+
+#rocket div {
+	width: 100%;
+	float: left;
+}
+
+#countdown {
+	width: 50%;
+	font-size: 120px;
+	display:inline-block;
+/*	text-align: center;*/
+	float: right;
+	line-height: 2;
 }
 
 /*#rocket img {
@@ -314,14 +344,7 @@ div#inputs  {
   { -webkit-transform: translate(1200px,-200px); -moz-transform: translate(1200px,-200px); -o-transform: translate(1200px,-200px); -ms-transform: translate(1200px,-200px); transform: translate(1200px,-200px); }
 
 */
-#countdown {
-	width: 45%;
-	font-size: 120px;
-	text-align: left;
-	float: right;
-	padding-left: 5%;
-	line-height: 2;
-}
+
 
 #top
  {
@@ -1124,7 +1147,8 @@ opacity: 0.25;
 
 
 .shake {
-	display:inline-block
+	/*display:inline-block;*/
+	/*z-index: auto;*/
 }
 
 
