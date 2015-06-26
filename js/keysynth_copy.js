@@ -579,6 +579,13 @@ $(document).ready(function () {
 		 // "tamil" : "tamil.png"
 	};
 
+	var ENG_PLAYLIST = ['DOG', 'MONKEY', 'PARROT', 'CAT', 'WHALE', 'HORSE', 'ZEBRA' ];
+
+	var PLAYLISTS = {
+		'english' : ENG_PLAYLIST
+	}
+
+	
 	var TamilDict = makeTamilDict();
 	if (LOG) console.log(TamilDict);
 
@@ -955,6 +962,10 @@ $(document).ready(function () {
 		var MYPICS = dictsToUse[0];
 		var MYSOUNDS = dictsToUse[1];
 
+		sessionStorage.setItem("language", language);
+		sessionStorage.setItem("sounds", JSON.stringify(MYSOUNDS));
+		sessionStorage.setItem("pics", JSON.stringify(MYPICS));
+
 		function createSounds() {
 			Object.keys(MYSOUNDS).forEach(function (letter) { 
 	    		$('.sounds').append('<audio id="' + letter + '" src="' + 
@@ -1021,9 +1032,32 @@ $(document).ready(function () {
 			    }, 1000);
 		};
 
+		function displayNewWord(letter) {
+			pics = JSON.parse(sessionStorage.getItem("pics"));
+			t = pics[letter];
+			$('#new_word').html('<img src=images/' + t + ' />');
+			
+		}
+
 		function triggernewgame(){
 			$("#success").animate({volume: 0}, 1000);
 			$(".container").hide();
+
+			lang = sessionStorage.getItem("language");
+
+			var pList = PLAYLISTS[lang];
+
+			var word = pList[Math.floor(Math.random()*pList.length)];
+
+			sessionStorage.setItem("word", word);
+
+			removeFromArray(word,pList);
+
+			indexLetter = word[0].toUpperCase();
+
+			setTimeout(function() {
+							displayNewWord(indexLetter);
+									}, (3000));
 			countdown('countdown', 5, true);
 			buildGame(true);
 		};
@@ -1034,12 +1068,11 @@ $(document).ready(function () {
 			// $('.sounds').each(function(i,obj){console.log(obj)});
 
 			countdown('countdown', 5, false);
-			
+		
 			buildGame(false);
 		}
 
-	var ENG_PLAYLIST = ['DOG', 'MONKEY', 'PARROT', 'CAT', 'WHALE', 'HORSE', 'ZEBRA' ];
-
+	
 
 	function cleanGame(){
 		$('.col').remove();
@@ -1058,17 +1091,13 @@ $(document).ready(function () {
 
 		if (repeatcase==true) {
 			cleanGame();
-			var name1String = ENG_PLAYLIST[Math.floor(Math.random()*ENG_PLAYLIST.length)];
-			removeFromArray(name1String,ENG_PLAYLIST);
-			console.log(name1String);
-			console.log(ENG_PLAYLIST);
-			
-
+			var name1String = sessionStorage.getItem("word");
 		} else {
 			var name1String = $('input:text:first').val();
 			if (language != 'hebrew') {name1String = name1String.toUpperCase();}
 		}
 
+		console.log(name1String);
 		
 		var picArray = $.map(MYPICS, function(value, index) {return [value];});
 		var availablePics = [];

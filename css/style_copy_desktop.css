@@ -262,6 +262,19 @@ div#inputs  {
 	width: 100%;
 }
 
+#new_word {
+	width: 100%;
+	height: 100%;
+}
+
+#new_word img {
+	width: 250px;
+	height: 100%;
+	margin-left: 1%;
+	z-index: 500;
+	position: absolute;
+}
+
 #intro {
 	text-transform: capitalize;
 	font-family: "DINPro", "Museo Sans", Helvetica Neue;

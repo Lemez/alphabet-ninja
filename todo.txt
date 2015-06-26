@@ -1,11 +1,22 @@
-AUTOPLAY option for home screen
-Playlist of animals?
+AUTOPLAY option for home screen // DONE
 
+Playlist of animals? //  DONE as ENG_PLAYLIST
 
+Flickr pics as reference?
+Flickr key
+04358afdb0cfe39e6b3b41153718147b
+Secret:
+a5ff8747def41c5a
 
-touch the pic to get audio of what it is (forvo)
+touch the pic to get audio of what it is (forvo / shtooka.net is better)
+
 Session - dsiplay of words 'got' so far
+
+
+
 Difficulty option - same pic/sound for each or different
 
 Print poster with word :)
-send a message to a friend, a whole sentence! (you see the whole sentence w gaps across the top of the screen (small), with magnified each one as a focus  )
+
+send a message to a friend , a whole sentence! (you see the whole sentence w gaps across the top of the screen (small), with magnified each one as a focus  )
+>> ( Twilio or similar?)
