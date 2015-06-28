@@ -47,6 +47,14 @@ $(document).ready(function () {
 		var mouseY = e.pageY; // e.pageY - gives you the Y position.
 	});
 
+	 // function ajaxFlickr() {
+	 // 	$.ajax({
+		//   type: 'GET',
+		//   url: '/my/url',
+		//   data: data
+		// });
+	 // }
+
 
 	var TAMIL_LETTERS = {
 		"A" : "அ", // A // Mother, Amma
@@ -554,12 +562,12 @@ $(document).ready(function () {
 					ready : "Spremni ste?",
 					clickbox :"Kliknuti ovdje!",
 					toolong :"Vaš rijeć je predugačak",
-					language_error: "Molim provjeriti napisani rijeć za griješke",
+					language_error: "Molim provjeriti napisani rijeć za pogriješke",
 					// howtoplay :"Kako igrati",
-					placeholder :"Napisati sekretni rijeć",
+					placeholder :"Napisati tajni rijeć",
 					buttontext :"Hajmo igrati",
-					instructions0 : "Dobro došli našoj igre za malih i velikih nindže",
-					instructions1 : "Pitajte malu nindžu koji rijeć želi - ime radi vrlo dobro",
+					instructions0 : "Dobro došli do našoj igre za malih i velikih nindže",
+					instructions1 : "Pitajte malu nindžu koji rijeć želi - ime radi jako dobro",
 					instructions2 : "Koji jezik koristite?",
 					instructions3 : "Pripremite se!",
 					text_align : 'left'
@@ -579,10 +587,23 @@ $(document).ready(function () {
 		 // "tamil" : "tamil.png"
 	};
 
-	var ENG_PLAYLIST = ['DOG', 'MONKEY', 'PARROT', 'CAT', 'WHALE', 'HORSE', 'ZEBRA' ];
+	var ENG_PLAYLIST_ANIMALS = ['DOG', 'MONKEY', 'PARROT', 'CAT', 'WHALE', 'HORSE', 'ZEBRA' ];
+	var ENG_PLAYLIST_ANIMALS_SOUNDS = {
+		'DOG' : "audio/matan_dog.mp3",
+		'MONKEY' : "audio/matan_monkey.mp3",
+		'PARROT' : "audio/matan_parrot.mp3" , 
+		'CAT' : "audio/matan_cat.mp3",
+		'WHALE' : "audio/matan_whale.mp3",
+		'HORSE' : "audio/matan_horse.mp3",
+		'ZEBRA' : "audio/matan_zebra.mp3" 
+	}
+
+	var ENG_PLAYLIST_MUSIC = ['VIOLIN', 'GUITAR', 'TRUMPET'];
+	
+
 
 	var PLAYLISTS = {
-		'english' : ENG_PLAYLIST
+		'english' : ENG_PLAYLIST_ANIMALS
 	}
 
 	
@@ -882,7 +903,29 @@ $(document).ready(function () {
 			$(this).toggleClass('selected');
 			autoplay = !document.getElementById("autoplay_check").checked;
 			flashmessage(autoplay);	
+
+			 if ( $('#primary_nav_wrap').css('visibility') == 'hidden' ) {
+			 	$('#primary_nav_wrap').css('visibility','visible');
+			 } else {
+			 	$('#primary_nav_wrap').css('visibility','hidden');
+			 }
+
 		});
+
+		$('#primary_nav_wrap ul li ul li a').on("click", function() {
+			$(".current-menu-item a")
+				.eq(0)
+				.text(this.text)
+				.animate({
+					color: 'white'
+				},250)
+				.animate({
+					color: 'black'
+				},250);
+			$(".no_display").removeClass("no_display");
+			$(this).parent("li").addClass("no_display");
+		});
+		
 
 		$('#instructions').on('click', function() {
 			 $("#joyRideTipContent").joyride({
@@ -1037,7 +1080,9 @@ $(document).ready(function () {
 			    }, 1000);
 		};
 
-		function displayNewWord(letter) {
+		function displayNewWord(word) {
+
+			letter = word[0].toUpperCase();
 			pics = JSON.parse(sessionStorage.getItem("pics"));
 			t = pics[letter];
 			$('#new_word').html('<img src="images/' + t + '" />');
@@ -1047,6 +1092,14 @@ $(document).ready(function () {
 			$('#new_word img').addClass('jig');
 
 			sessionStorage.setItem("image",$('#new_word img').attr("src"));
+
+			$('.sounds').append('<audio id="' + word + '" src="' + 
+	    			ENG_PLAYLIST_ANIMALS_SOUNDS[word] + '" preload="auto"></audio>');
+
+			setTimeout(function() {
+							playSound(word);
+									}, (2000));
+			
 		}
 
 		function triggernewgame(){
@@ -1063,9 +1116,7 @@ $(document).ready(function () {
 
 			removeFromArray(word,pList);
 
-			indexLetter = word[0].toUpperCase();
-
-			displayNewWord(indexLetter);
+			displayNewWord(word);
 
 			setTimeout(function() {
 							countdown('countdown', 5, true);
@@ -1099,18 +1150,54 @@ $(document).ready(function () {
 
 	}
 
+	function addWordToSession(str){
+
+		var sessionWords = JSON.parse(sessionStorage.getItem("session_words"));
+		sessionWords.push(str);
+		sessionStorage.setItem("session_words", JSON.stringify(sessionWords));
+
+	}
+
+	function addWordsandScoretoScreen(str){
+		$('#vocab').css("visibility", "visible")
+		.append('<li><img src="images/star 2.svg" /><div>' + str + '</div></li>'); // add word to vocab list
+					
+	}
+
+				
+
+	// function displayPreviousWords(){
+	// 	var sessionWords = JSON.parse(sessionStorage.getItem("session_words"));
+
+	// 	for (var i = 0; i<sessionWords.length; i++) {
+	// 		$('#vocab-score').append('<div></div>'); // add star to vocab list
+			
+			
+	// 	}
+		
+	// }
+
 	function buildGame(repeatcase){
 
 		if (repeatcase==true) {
 			cleanGame();
 			var name1String = sessionStorage.getItem("word");
+			// displayPreviousWords();
+			addWordToSession(name1String);
+
 		} else {
 			var name1String = $('input:text:first').val();
+			
 			if (language != 'hebrew') {name1String = name1String.toUpperCase();}
+
+			var tempVar = [name1String];
+			sessionStorage.setItem("session_words", JSON.stringify(tempVar));
+
+		
 		}
 
-		console.log(name1String);
-		
+		console.log(JSON.parse(sessionStorage.getItem("session_words")));
+
 		var picArray = $.map(MYPICS, function(value, index) {return [value];});
 		var availablePics = [];
 		var size = Object.size(MYPICS);
@@ -1149,7 +1236,7 @@ $(document).ready(function () {
 			randomColours.push(random_colour);	
 
 			// force 'true' state for development
-			isMobile = true;
+			// isMobile = true;
 			if (LOG) console.log(isMobile);
 
 			// if mobile then populate manual keyboard with letter choices
@@ -1191,7 +1278,7 @@ $(document).ready(function () {
 				// //  randomly sort the array
 				letterArray = shuffle(letterArray);
 
-				console.log(letterArray);
+				// console.log(letterArray);
 
 				// add a containing div for each array
 				$('#keyboard').append('<div id="kb_letters"></div>');
@@ -1465,6 +1552,9 @@ $(document).ready(function () {
 			if (name1LettersArray.length == 0) { gameEnd()};
 
 			function gameEnd() {
+
+				addWordsandScoretoScreen(name1String);
+
 				// make the letters nice and big to start with, back to normal size
 				if (isMobile == true) {$('#lex').animate({fontSize:150}, 2000);}
 
