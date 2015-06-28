@@ -912,6 +912,14 @@ $(document).ready(function () {
 
 		});
 
+		$('#primary_nav_wrap').on("mouseenter", function() {	
+			$("#primary_nav_wrap ul li:hover > ul").css("display", "block");
+		});	
+
+		$('#primary_nav_wrap').on("mouseleave", function() {	
+			$("#primary_nav_wrap ul li:hover > ul").css("display", "none");
+		});	
+
 		$('#primary_nav_wrap ul li ul li a').on("click", function() {
 			$(".current-menu-item a")
 				.eq(0)
@@ -924,6 +932,7 @@ $(document).ready(function () {
 				},250);
 			$(".no_display").removeClass("no_display");
 			$(this).parent("li").addClass("no_display");
+			$('#primary_nav_wrap').trigger('mouseleave');
 		});
 		
 

@@ -90,8 +90,8 @@ font-size:24px;line-height:32px;padding:0 15px;
 #primary_nav_wrap ul ul li:hover {opacity:1;}
 #primary_nav_wrap ul ul{display:none;position:absolute;top:100%;left:0;padding:0;}
 #primary_nav_wrap ul ul li{float:none;width:10%;}
-#primary_nav_wrap ul ul a{line-height:120%;padding:10px 15px}
-#primary_nav_wrap ul li:hover > ul{display:block}
+#primary_nav_wrap ul ul a{line-height:120%;padding:10px 15px; font-size:20px}
+/*#primary_nav_wrap ul li:hover > ul{display:block}*/
 
 
 .clicked {color: black;}
