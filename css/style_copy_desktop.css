@@ -205,15 +205,22 @@ div#inputs  {
 	line-height: 120px;
 }
 
+#inputs input {
+	margin: 1% 2% 1% 10%;
+}
+
 #inputs button.random {
 
-	margin: 0 0 0 47%;
-	text-align: center;
+	display: inline;
 	font-size: 20px;
-	background-color: rgba(0,0,0,0);
-
+/*	background-color: rgba(0,0,0,0);*/
+	background: url("../images/noun_50682_random.png") 0 0 no-repeat;
+	background-size: 50px 50px;
 	box-shadow: none;
 	border-style: none;
+	width: 50px;
+	height: 50px;
+	opacity: 0.5;
 
 }
 
@@ -236,9 +243,6 @@ div#inputs  {
 	background: yellow;
 }
 
-#inputs button:hover {
-	background: cyan;
-}
 
 #inputs input:active {
 	cursor: text;

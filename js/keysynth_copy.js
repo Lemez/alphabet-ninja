@@ -935,6 +935,13 @@ $(document).ready(function () {
 			$('#primary_nav_wrap').trigger('mouseleave');
 		});
 
+		$('button.random').on("mouseenter", function() {
+			$(this).addClass("shake");
+		});
+		$('button.random').on("mouseleave", function() {
+			$(this).removeClass("shake");
+		});
+
 		$('button.random').on("click", function() {
 			var randomWord = ENG_PLAYLIST_MUSIC[Math.floor(Math.random()*ENG_PLAYLIST_MUSIC.length)];
 			$('#textbox').val(randomWord);
