@@ -98,7 +98,7 @@ font-size:24px;line-height:32px;padding:0 15px;
 .no_display {display: none;}
 
 #flash {
-	float: right;position: relative;top: 20%; left: 185px; width: 100px;
+	float: right;position: relative;top: 20%; left: 100px; width: 100px;
 	margin: 0 0 0 0;
 	font-size: 14px;
 	visibility: visible;
@@ -145,11 +145,12 @@ label > input[type="checkbox"] {
 input[type="checkbox"], 
 input[type="checkbox"] + img {
  	float: right;
- 	margin: 40px 10px 0 10px;
- 	width: 50px;
+ 	margin: 25px 10px 0 10px;
+ 	width: 80px;
  	height: 80px;
+ 	cursor:pointer;
 
- 	height: 3em;
+/* 	height: 3em;*/
 }
 
 

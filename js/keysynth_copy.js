@@ -906,18 +906,20 @@ $(document).ready(function () {
 
 			 if ( $('#primary_nav_wrap').css('visibility') == 'hidden' ) {
 			 	$('#primary_nav_wrap').css('visibility','visible');
+			 	$('#primary_nav_wrap').trigger('mouseleave');
 			 } else {
 			 	$('#primary_nav_wrap').css('visibility','hidden');
 			 }
 
+
 		});
 
 		$('#primary_nav_wrap').on("mouseenter", function() {	
-			$("#primary_nav_wrap ul li:hover > ul").css("display", "block");
+			$("#primary_nav_wrap ul ul").css("display", "block");
 		});	
 
 		$('#primary_nav_wrap').on("mouseleave", function() {	
-			$("#primary_nav_wrap ul li:hover > ul").css("display", "none");
+			$("#primary_nav_wrap ul  ul").css("display", "none");
 		});	
 
 		$('#primary_nav_wrap ul li ul li a').on("click", function() {
