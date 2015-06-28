@@ -190,7 +190,7 @@ div#inputs  {
 }
 
 #inputs input,
-#inputs button,
+#inputs button.submit,
 #inputs p {
 	text-transform: capitalize;
 	font-family: Helvetica Neue;
@@ -204,13 +204,26 @@ div#inputs  {
 	border-bottom: 2px solid black;
 	line-height: 120px;
 }
+
+#inputs button.random {
+
+	margin: 0 0 0 47%;
+	text-align: center;
+	font-size: 20px;
+	background-color: rgba(0,0,0,0);
+
+	box-shadow: none;
+	border-style: none;
+
+}
+
 #inputs p {
 	font-size: 120px;
 	color: white;
 	border-bottom: none;
 }
 
-#inputs button {
+#inputs button.submit {
 	border: solid 5px black;
 	width: 40%;
 	margin: 1% 30% 1% 30%;
@@ -219,8 +232,12 @@ div#inputs  {
           border-radius: 4px;
 }
 
-#inputs button:hover {
+#inputs button.submit:hover {
 	background: yellow;
+}
+
+#inputs button:hover {
+	background: cyan;
 }
 
 #inputs input:active {

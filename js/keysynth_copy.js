@@ -934,6 +934,11 @@ $(document).ready(function () {
 			$(this).parent("li").addClass("no_display");
 			$('#primary_nav_wrap').trigger('mouseleave');
 		});
+
+		$('button.random').on("click", function() {
+			var randomWord = ENG_PLAYLIST_MUSIC[Math.floor(Math.random()*ENG_PLAYLIST_MUSIC.length)];
+			$('#textbox').val(randomWord);
+		});
 		
 
 		$('#instructions').on('click', function() {
