@@ -4,15 +4,15 @@
 $(document).ready(function () {
 
 
-	  $.ajaxSetup({ cache: true });
-	  $.getScript('http://connect.facebook.net/en_US/sdk.js', function(){
-	    FB.init({
-	      appId: '1484948608415623',
-	      version: 'v2.0' // or v2.0, v2.1, v2.0
-	    });     
-	    $('#loginbutton,#feedbutton').removeAttr('disabled');
-	    FB.getLoginStatus(updateStatusCallback);
-	  });
+	  // $.ajaxSetup({ cache: true });
+	  // $.getScript('http://connect.facebook.net/en_US/sdk.js', function(){
+	  //   FB.init({
+	  //     appId: '1484948608415623',
+	  //     version: 'v2.0' // or v2.0, v2.1, v2.0
+	  //   });     
+	  //   $('#loginbutton,#feedbutton').removeAttr('disabled');
+	  //   FB.getLoginStatus(updateStatusCallback);
+	  // });
 
 	var LOG = false, saving=false;
 	var autoplay;
@@ -85,6 +85,68 @@ $(document).ready(function () {
 		document.getElementById('savingstate').innerHTML=flashDict[saving];
 	}
 
+	  function saveToFile(blob){
+	  	var dateTimeInMs = new Date();
+	  	var imageName = 'alphabet_ninja_';
+	  	var extension = '.png"';
+	  	var imageFileName = imageName.concat(dateTimeInMs).concat(extension);
+	  	var pathName = '"../blobs/';
+	  	var fullPathName = pathName.concat(imageFileName);
+	  	console.log(fullPathName);
+
+    	var data = new FormData();
+		data.append("data" , blob);
+		var xhr = new XMLHttpRequest();
+		xhr.open( 'post', imageFileName, true );
+		xhr.send(data);
+    }
+
+    function PostImageToFacebook( authToken, filename, mimeType, imageData, message )
+{
+    // this is the multipart/form-data boundary we'll use
+    var boundary = '----ThisIsTheBoundary1234567890';
+    
+    // let's encode our image file, which is contained in the var
+    var formData = '--' + boundary + '\r\n'
+    formData += 'Content-Disposition: form-data; name="source"; filename="' + filename + '"\r\n';
+    formData += 'Content-Type: ' + mimeType + '\r\n\r\n';
+    for ( var i = 0; i < imageData.length; ++i )
+    {
+        formData += String.fromCharCode( imageData[ i ] & 0xff );
+    }
+    formData += '\r\n';
+    formData += '--' + boundary + '\r\n';
+    formData += 'Content-Disposition: form-data; name="message"\r\n\r\n';
+    formData += message + '\r\n'
+    formData += '--' + boundary + '--\r\n';
+    
+    var xhr = new XMLHttpRequest();
+    xhr.open( 'POST', 'https://graph.facebook.com/me/photos?access_token=' + authToken, true );
+    xhr.onload = xhr.onerror = function() {
+        console.log( xhr.responseText );
+    };
+    xhr.setRequestHeader( "Content-Type", "multipart/form-data; boundary=" + boundary );
+    xhr.sendAsBinary( formData );
+}
+
+    function postToFb(canvas){
+
+    	if ( XMLHttpRequest.prototype.sendAsBinary === undefined ) {
+    XMLHttpRequest.prototype.sendAsBinary = function(string) {
+        var bytes = Array.prototype.map.call(string, function(c) {
+            return c.charCodeAt(0) & 0xff;
+        });
+        this.send(new Uint8Array(bytes).buffer);
+    };
+}
+
+    	var c = canvas.toDataURL('image/png');
+        var encodedPng = c.substring(c.indexOf(',')+1,c.length);
+        var decodedPng = atob(encodedPng);
+
+        PostImageToFacebook(response.authResponse.accessToken, 'AlphabetNinja.png', 'image/png', decodedPng, '');
+    }
+
 
 	 function download() {
 
@@ -96,14 +158,19 @@ $(document).ready(function () {
 				// add element to on-screen invisible canvas
 				imgData = getBase64Image(c);
 				var canvas = document.getElementById("my-canvas"), ctx = canvas.getContext("2d");
-				
+				postToFb(canvas);
 				// save hidden element to file
-				canvas.toBlob(function(blob) {
-				    saveAs(blob, "alphabet-ninja.png");
-				});
+				// canvas.toBlob(function(blob) {
+
+				//     // saveAs(blob, "alphabet-ninja.png");
+				//     saveToFile(blob);
+
+				// });
 			});
 	          		
     }
+
+  
 
 		document.getElementById('download').addEventListener('click', prepareForDownload, false);
 
@@ -1090,7 +1157,7 @@ $(document).ready(function () {
 
 		var columnWidth = 150 + (2 * columnMargin);
 		var maxLength = ~~(maxWidth / columnWidth );
-		console.log(maxLength);
+		if (LOG) {console.log(maxLength)};
 		// var maxLength = 100;
 		
 		//  check for acceptable input
@@ -1317,7 +1384,7 @@ $(document).ready(function () {
 		
 		}
 
-		console.log(JSON.parse(sessionStorage.getItem("session_words")));
+		if(LOG) {console.log(JSON.parse(sessionStorage.getItem("session_words")));}
 
 		var picArray = $.map(MYPICS, function(value, index) {return [value];});
 		var availablePics = [];
