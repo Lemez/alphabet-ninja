@@ -57,6 +57,8 @@
 		</header>
 		<div id = 'background'> 		
 			<div id='left'>
+				<a id="download"><p>Saving is <span id='savingstate'>OFF</span></p></a>
+				<br>
 				<ul id='vocab' class='shake'></ul>
 			</div>
 
@@ -150,7 +152,9 @@
 
 		<section>
 			<div id="again">
+
 				<a href="home.html"><p>Play Again!</p></a>
+				
 			</div>
 		</section>
 
@@ -170,13 +174,15 @@
 			<div id='timer'></div>
 			<div class="row">
 				<div class="row letters circle-center"></div><!-- <div id="top"></div> -->
-				<div id="content">
+
+					<div id="content">
 
 				</div><!-- <div id="numbers"></div><div id="name1"></div><div id="name2"></div> -->
 				<div id="keyboard" class="row"></div>
 			</div>
 
 		</section>
+		<canvas id='my-canvas'></canvas>
 
 
 	</body>
@@ -190,6 +196,9 @@
 		
 		<script src="js/keysynth_copy.js" ></script>
 		<script src="js/jquery.color.min.js" ></script>
+		<script src="js/html2canvas.js" ></script>
+		<script src="js/filesaver.min.js" ></script>
+		<script src="js/canvas-toBlob.js" ></script>
 		<!-- <script src="js/jquery.mobile-1.4.3.min.js" ></script> -->
 
 		<!-- /* Then attach the Joyride plugin */ -->

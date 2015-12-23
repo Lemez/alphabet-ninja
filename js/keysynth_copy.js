@@ -14,7 +14,7 @@ $(document).ready(function () {
 	    FB.getLoginStatus(updateStatusCallback);
 	  });
 
-	var LOG = false;
+	var LOG = false, saving=false;
 	var autoplay;
 	document.getElementById("autoplay_check").checked = false;
 	document.getElementById("englishflag").checked = true;
@@ -61,6 +61,51 @@ $(document).ready(function () {
 		var mouseX = e.pageX; // e.pageX - gives you the X position.
 		var mouseY = e.pageY; // e.pageY - gives you the Y position.
 	});
+
+	 // add element to on-screen canvas (hidden)
+	 function getBase64Image(img) {
+	    canvas = document.getElementById("my-canvas");
+	    canvas.width = img.width;
+	    canvas.height = img.height;
+	    ctx = canvas.getContext("2d");
+	    ctx.drawImage(img, 0, 0);
+	    dataURL = canvas.toDataURL("image/png");
+	    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+	}
+
+	function hideForSaving(){
+ 		$('#download').css('visibility','hidden');
+ 		$('#again').css('visibility','hidden');
+ 		$('#vocab').css('visibility','hidden');
+ 		$('#content').css('margin-top', '10%');
+	}
+
+	function prepareForDownload(){
+		saving = !saving;
+		document.getElementById('savingstate').innerHTML=flashDict[saving];
+	}
+
+
+	 function download() {
+
+	 		hideForSaving();
+	 		myElement = document.body;
+    	    html2canvas(myElement).then(function(c) {
+				// document.body.appendChild(canvas);
+
+				// add element to on-screen invisible canvas
+				imgData = getBase64Image(c);
+				var canvas = document.getElementById("my-canvas"), ctx = canvas.getContext("2d");
+				
+				// save hidden element to file
+				canvas.toBlob(function(blob) {
+				    saveAs(blob, "alphabet-ninja.png");
+				});
+			});
+	          		
+    }
+
+		document.getElementById('download').addEventListener('click', prepareForDownload, false);
 
 	 // function ajaxFlickr() {
 	 // 	$.ajax({
@@ -1254,6 +1299,7 @@ $(document).ready(function () {
 
 	function buildGame(repeatcase){
 
+
 		if (repeatcase==true) {
 			cleanGame();
 			var name1String = sessionStorage.getItem("word");
@@ -1418,7 +1464,7 @@ $(document).ready(function () {
 		//  Joyride NEXT button too small
 		//  get background to work all the way down beyond initial screen
 
-
+		$('#left').css("visibility", "visible");
 		// change some layout elements if mobile keyboard is involved
 		if (isMobile) {													// start of isMobile
 				$('#lex p').each(function(){
@@ -1639,7 +1685,10 @@ $(document).ready(function () {
 
 			function gameEnd() {
 
+				
+
 				addWordsandScoretoScreen(name1String);
+				$('#download').css('visibility','visible');
 
 				// make the letters nice and big to start with, back to normal size
 				if (isMobile == true) {$('#lex').animate({fontSize:150}, 2000);}
@@ -1671,6 +1720,8 @@ $(document).ready(function () {
 
 				$('#lex').css("z-index",100);
 
+
+
 				for (var i = 0; i < allPics.length; i++) { // make em dance
 				
 					var maths = Math.random();
@@ -1700,15 +1751,17 @@ $(document).ready(function () {
 				};
 
 
+
 				
 				setTimeout(function() {
 					$("#success").animate({volume: 1}, 1);
 					playSound("success");
+					// save the image if saving turned on
+					if (saving) {download()};
 													}, 3000);
 
 			
 				autoplay = document.getElementById("autoplay_check").checked;
-				console.log(autoplay);
 
 				if (autoplay==true) {
 					setTimeout(function() {

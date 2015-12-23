@@ -72,6 +72,10 @@ nav, #top {
 	display: inline;	
 }
 
+#saving {
+	height: 2em;
+}
+
 #othernav {
 	width: 20%;
 	height: 3em;
@@ -1239,4 +1243,13 @@ opacity: 0.25;
 
 #animate img { -webkit-animation-delay: 1s; -moz-animation-delay: 1s; }
 
+#download {
+	text-align: center;
+	position: fixed;
+	z-index: 100;
+	font-size: 24px;
+}
 
+canvas {
+	display: none;
+}
