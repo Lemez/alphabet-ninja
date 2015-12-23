@@ -5,6 +5,7 @@ html, body {
 }
 
 
+
 a.triangle-isosceles {
   position:relative;
   background-image: url('../images/noun_20518_cc_no_credit.png');
@@ -419,6 +420,7 @@ h2, #num {
 	font-size: 100px;
 }
 
+
 #lex {
 	font-weight: 700;
 /*	width: 150px;
@@ -430,7 +432,6 @@ h2, #num {
 #pix img {
 	width: 100px;
 	height: auto;
-
 	min-height: 100px;
 	min-width: 100px;
 	opacity: 1;

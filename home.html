@@ -21,7 +21,7 @@
 
 		<!-- start Mixpanel -->
 		<script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
-			for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+			for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="http://cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
 			mixpanel.init("000de46f82a71fdfbec5f8a41d56035f");</script>
 			<!-- end Mixpanel -->
 
@@ -29,11 +29,19 @@
 	
 	<body ontouchmove="BlockMove(event);">
 
-		 <script>
-		 function BlockMove(event) {
-		  // Tell Safari not to move the window.
-		  event.preventDefault() ;
-		 }
+		<div id="fb-root"></div>
+			<script>(function(d, s, id) {
+			  var js, fjs = d.getElementsByTagName(s)[0];
+			  if (d.getElementById(id)) return;
+			  js = d.createElement(s); js.id = id;
+			  js.src = "http://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.3&appId=1484948608415623";
+			  fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));</script>
+		<script>
+					 function BlockMove(event) {
+					  // Tell Safari not to move the window.
+					  event.preventDefault() ;
+					 }
 		 </script>
 
 
@@ -54,7 +62,7 @@
 
 			 	<div id="flags">
 			 		<label for='flags'>
-					  <input type="radio" name="flag" value="english" checked  />
+					  <input id ='englishflag' type="radio" name="flag" value="english" checked  />
 					  <img src="images/uk_usa.svg" class="selected" value="english" id='firstflag'>
 					 </label>
 				</div>
@@ -62,22 +70,22 @@
 				<div id="othernav">
 					
 
-					<a class="triangle-isosceles" id="instructions" href="#"></a>
+					<a class="triangle-isosceles" id="instructions" title="Instructions" href="#"></a>
 			 		
 			 		<div id="primary_nav_wrap">
 						<ul>
-						  <li class="current-menu-item"><a href="#">Animals</a>
+						  <li class="current-menu-item"><a id='playlist_displayed' href="#">Animals</a>
 						  		<ul>
-							      <li class="no_display"><a href="#">Animals</a></li>
-							      <li><a href="#">Music</a></li>
-							      <li><a href="#">Random</a></li>
+							      <li class="no_display"><a id="playlist_animals" href="#">Animals</a></li>
+							      <li><a id="playlist_music" href="#">Music</a></li>
+							      <li><a id="playlist_random" href="#">Random</a></li>
 							     </ul>
 						  </li>
 						</ul>
 					</div>
 					<label for="autoplay_check" id='autoplaylabel'>
 			 			<input id="autoplay_check" type="checkbox" name="autoplay" value="autoplay" /> 
-			 			<img src="images/noun_88058_cc_repeat.png" id='autoplay_img'>
+			 			<img id='autoplay_img' src="images/noun_88058_cc_repeat.png" title="Autoplay">
 			 		</label>
 			 		<span id="flash"></span>
 			 	</div>
@@ -90,7 +98,7 @@
 
 
 					<input id='textbox' type="text" placeholder="Enter a secret word!" id="nameone" contenteditable="true" autofocus style="text-transform:capitalize;" onkeyup="javascript:this.value=this.value.toUpperCase()"/>
-					<button id="randomword" class="random" value="Random"></button>
+					<button id="randomword" class="random" title="Random word" value="Random"></button>
 
 			 			
 
@@ -98,6 +106,8 @@
 					<!-- <p>&</p><input type="text" placeholder='And then yours here' id="nametwo" contenteditable="true"/>-->
 					<div id='message'></div>
 					 <button id="letsplay" class="submit">Let's Play!</button>
+
+					   <div class="fb-share-button" data-href="http://alphabet.ninja" data-layout="box_count"></div>
 
 					 
 
@@ -128,6 +138,8 @@
 		        <p>Get ready to have fun together! </p>
 		      </li>
 		    </ol>
+
+		  
 				
 		</div>
 
@@ -165,6 +177,8 @@
 			</div>
 
 		</section>
+
+
 	</body>
 
 

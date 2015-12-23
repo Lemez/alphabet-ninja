@@ -3,8 +3,23 @@
 
 $(document).ready(function () {
 
+
+	  $.ajaxSetup({ cache: true });
+	  $.getScript('http://connect.facebook.net/en_US/sdk.js', function(){
+	    FB.init({
+	      appId: '1484948608415623',
+	      version: 'v2.0' // or v2.0, v2.1, v2.0
+	    });     
+	    $('#loginbutton,#feedbutton').removeAttr('disabled');
+	    FB.getLoginStatus(updateStatusCallback);
+	  });
+
 	var LOG = false;
 	var autoplay;
+	document.getElementById("autoplay_check").checked = false;
+	document.getElementById("englishflag").checked = true;
+
+	$('#textbox').val('');
 
 	var platform = navigator.platform;
 	
@@ -55,6 +70,11 @@ $(document).ready(function () {
 		// });
 	 // }
 
+	var MX_GAME_MSGS = {
+		'english' : mixpanel.track("Game - english"),
+		'hebrew' : mixpanel.track("Game - hebrew"),
+		'croatian' : mixpanel.track("Game - croatian")
+	}
 
 	var TAMIL_LETTERS = {
 		"A" : "அ", // A // Mother, Amma
@@ -169,7 +189,6 @@ $(document).ready(function () {
 			// "" : 
 			"க்ஷ்" // ks
 		];
-		
 
 	var TAMIL_SOUNDS = [
 			// "A" : 
@@ -247,8 +266,7 @@ $(document).ready(function () {
 		];
 
 	var	tamil_vowel_sounds = ["","a","ā","i","ī","u","ū","e","ē","ai","o","ō","au"];
-	var tamil_vowels = ["ஃ","அ","ஆ","இ","ஈ","உ","ஊ","எ","ஏ","ஐ","ஒ","ஓ","ஔ"];
-			
+	var tamil_vowels = ["ஃ","அ","ஆ","இ","ஈ","உ","ஊ","எ","ஏ","ஐ","ஒ","ஓ","ஔ"];	
 	var tamil_syllables = [
 		{"k" : ["க்",,"க","கா","கி","கீ","கு","கூ","கெ","கே","கை","கொ","கோ","கௌ"]},
 		{"ṅ" : ["ங்","ங","ஙா","ஙி","ஙீ","ஙு","ஙூ","ஙெ","ஙே","ஙை","ஙொ","ஙோ","ஙௌ"]},
@@ -270,37 +288,102 @@ $(document).ready(function () {
 		{"ṉ" : ["ன்","ன","னா","னி","னீ","னு","னூ","னெ","னே","னை","னொ","னோ","னௌ"]}
 	];
 
+	var TamilDict = makeTamilDict();
+	if (LOG) console.log(TamilDict);
 
+	var ppp = 0;
+	for (key in TamilDict){ppp++;}
+	if (LOG) console.log(ppp);
+
+	var HEBREWLETTERS = {"A" : "ש","B" : "נ","C" : "ב","D" : "ג","E" : "ק","F" : "כ","G" : "ע","H" : "י","I" : "ן","J" : "ח","K" : "ל","L" : "ך","M" : "צ","N" : "מ","O" : "ם","P" : "פ","Q" : "","R" : "ר","S" : "ד","T" : "א","U" : "ו","V" : "ה","W" : "","X" : "ס","Y" : "ט","Z" : "ז","," : "ת","." : "ץ",";" : "ף"};
+	var HEBREWSOFIT = {"I" : "ן","L" : "ך","." : "ץ",";" : "ף"};
+	var NASLETTERS = {"A" : "A","B" : "B","C" : "C","D" : "D","E" : "E","F" : "F","G" : "G","H" : "H","I" : "I","J" : "J","K" : "K","L" : "L","M" : "M","N" : "N","O" : "O","P" : "P","Q" : "Q","R" : "R","S" : "S","T" : "T","U" : "U","V" : "V","W" : "W","X" : "X","Y" : "Y","Z" : "Z","[" : "Š","]" : "Đ",";" : "Č","'" : "Ć","\\": "Ž"};
+	var LETTERMAP = {'hebrew' : HEBREWLETTERS,'croatian' : NASLETTERS}
 
 	var KEYCODETOCHAR_UK = {
 		// 8:"Backspace",9:"Tab",13:"Enter",16:"Shift",17:"Ctrl",18:"Alt",19:"Pause/Break",20:"Caps Lock",27:"Esc",32:"Space",33:"Page Up",34:"Page Down",35:"End",36:"Home",37:"Left",38:"Up",39:"Right",40:"Down",45:"Insert",46:"Delete",
 		// 48:"0",49:"1",50:"2",51:"3",52:"4",53:"5",54:"6",55:"7",56:"8",57:"9",
 		65:"A",66:"B",67:"C",68:"D",69:"E",70:"F",71:"G",72:"H",73:"I",74:"J",75:"K",76:"L",77:"M",78:"N",79:"O",80:"P",81:"Q",82:"R",83:"S",84:"T",85:"U",86:"V",87:"W",88:"X",89:"Y",90:"Z"	};
-
 	var KEYCODETOCHAR_ISR = {
 		// 8:"Backspace",9:"Tab",13:"Enter",16:"Shift",17:"Ctrl",18:"Alt",19:"Pause/Break",20:"Caps Lock",27:"Esc",32:"Space",33:"Page Up",34:"Page Down",35:"End",36:"Home",37:"Left",38:"Up",39:"Right",40:"Down",45:"Insert",46:"Delete",
 		// 48:"0",49:"1",50:"2",51:"3",52:"4",53:"5",54:"6",55:"7",56:"8",57:"9",
 		65:"A",66:"B",67:"C",68:"D",69:"E",70:"F",71:"G",72:"H",73:"I",74:"J",75:"K",76:"L",77:"M",78:"N",79:"O",80:"P",81:"Q",82:"R",83:"S",84:"T",85:"U",86:"V",87:"W",88:"X",89:"Y",90:"Z",
-		188: ",", 190: ".", 186: ";" 
-	};
-
+		188: ",", 190: ".", 186: ";" };
 	var KEYCODETOCHAR_CRO = {
 		65:"A",66:"B",67:"C",68:"D",69:"E",70:"F",71:"G",72:"H",73:"I",74:"J",75:"K",76:"L",77:"M",78:"N",79:"O",80:"P",81:"Q",82:"R",83:"S",84:"T",85:"U",86:"V",87:"W",88:"X",89:"Y",90:"Z",
-		219: "[", 221: "]", 186: ";", 222: "'", 220: "\\" 
-	};
-
+		219: "[", 221: "]", 186: ";", 222: "'", 220: "\\" };
 	var KEYCODES = {
 		'english' : KEYCODETOCHAR_UK,
 		'hebrew': KEYCODETOCHAR_ISR,
-		'croatian' : KEYCODETOCHAR_CRO
-	}
-
+		'croatian' : KEYCODETOCHAR_CRO};
 	var KEYCHARTOCODE = {
 		// "Backspace":8,"Tab":9,"Enter":13,"Shift":16,"Ctrl":17,"Alt":18,"Pause/Break":19,"Caps Lock":20,"Esc":27,"Space":32,"Page Up":33,"Page Down":34,"End":35,"Home":36,"Left":37,"Up":38,"Right":39,"Down":40,"Insert":45,"Delete":46,
 		// "0":48,"1":49,"2":50,"3":51,"4":52,"5":53,"6":54,"7":55,"8":56,"9":57,
 		"A":65,"B":66,"C":67,"D":68,"E":69,"F":70,"G":71,"H":72,"I":73,"J":74,"K":75,"L":76,"M":77,"N":78,"O":79,"P":80,"Q":81,"R":82,"S":83,"T":84,"U":85,"V":86,"W":87,"X":88,"Y":89,"Z":90,
-		"'":39,",":44,"-":45,".":46,"/":47,":":58,"=":61,"[":91,"\\":92,"]":93,"`":96
-	};
+		"'":39,",":44,"-":45,".":46,"/":47,":":58,"=":61,"[":91,"\\":92,"]":93,"`":96};
+
+	var HEBREWPICS = {
+		"א" : "lion 2.svg",
+		"ב" : "duck2.svg",
+		"ג"	: "guitar.svg",
+		"ד" : "bee2.svg",
+		"ה" : "hippo.png",
+		"ו" : "curtains.svg",
+		"ז" : "zebra.svg",
+		"ח" : "cat.svg",
+		"ט" : "parrot.svg",
+		"י" : "owl.svg",
+		"כ" : "dog.svg",
+		"ל" : "whale.svg",
+		"מ" : "umbrella.svg",
+		"נ" : "river.svg",		
+		"ס" : "horse.svg",
+		"ע" : "yawn.svg",
+		"פ" : "elephant.svg",
+		"צ" : "frog.svg",
+		"ק" : "monkey.svg",
+		"ר" : "shaker.svg",
+		"ש" : "quiet.svg",
+		"ת" : "apple2.svg",
+		"ן" : "balloon.svg",
+		"ך" : "king.svg",
+		"ץ" : "explosion.svg",
+		"ף" : "drum.svg",
+		"ם" : "scissors.svg",
+		"rocket" : "rocket-ship-shooting-md.png"};
+	var HEBREWSOUNDS = {
+		"א" : "audio/Male_snoring_with_effects_-sounds_like_a_lion-_Nightingale_Music_Productions.mp3" ,
+		"ב" : "audio/Animals_duck_quack_-nature-_Nightingale_Music_Productions_13810.mp3",
+		"ג" : "audio/Acoustic_BPM_110_32_Shriek_2011.mp3" ,
+		"ד" : "audio/human_bee.mp3" ,
+		"ה" : "audio/hippo.mp3",
+		"ו" : "audio/HOSPITAL_BED_CURTAIN_OP.mp3",
+		"ז" : "audio/Horse_two_horses_neigh_step_in_dirt_BLASTmp3EFX_00173.mp3" ,
+		"ח" : "audio/13_year_old_Tabby_Cat_-_Meows-Irritated.mp3" ,
+		"ט" : "audio/parrot_12007201.mp3" ,
+		"י" : "audio/owl.mp3" ,
+		"כ" : "audio/EFX_INT_Dog_Panting_05_AAA.mp3" ,
+		"ל" : "audio/Submarine_sonar_ping_multiple_BLASTWAVEFX_18257.mp3" ,
+		"מ" : "audio/rain_car_interior_wind_shield_wipers_on.mp3" ,
+		"ם" : "audio/Scissor_cuts_thick_paper_AOS02714.mp3" ,
+		"נ" : "audio/river_churnet_water_1998.mp3",
+		"ּּן" : "audio/many balloons fly by releasing air.mp3",
+		"ס" : "audio/horse.mp3" ,
+		"ע" : "audio/HUMAN_VOICE_YAWN_01.mp3" ,
+		"פ" : "audio/CARTOON_TROMBONE_DEEP_SLIDE_01.mp3" ,
+		"ף" : "audio/Drum_snare_fanfare_BLASTmp3EFX_14764.mp3" ,
+		"צ" : "audio/Frogs_croaking_close_in_a_loop.mp3" ,
+		"ץ" : "audio/Bomb_explosion_medium_distance_muffled_warped_01_SFXBible_ss06658.mp3" , 
+		"ק" : "audio/LTMacaque.mp3" ,
+		"ך" : "audio/trumpets_fanfar.mp3" ,
+		"ר" : "audio/Bartender_shakes_ice_and_drink_in_metal_ice_shaker_AOS01016.mp3",
+		"ש" : "audio/Late_20s_Woman_Says_Shhh-Shush-Soft-Choppy.mp3" ,
+		"ת" : "audio/Eating_apple_soundsnap.mp3" ,	
+		"success" : "audio/Peppa.mp3",
+		"other" : "audio/3.mp3",
+		"correct" : "audio/p.mp3",
+		"rocket"  : "audio/Rocket_launch_05_SFXBible_ss06674.mp3",
+		"tick"	: "audio/Data_beep_counter_tick_1.mp3"};
 
 	var SOUNDS = {
 	
@@ -344,42 +427,81 @@ $(document).ready(function () {
 			"other" : "audio/3.mp3",
 			"correct" : "audio/p.mp3",
 			"rocket"  : "audio/Rocket_launch_05_SFXBible_ss06674.mp3",
-			"tick"	: "audio/Data_beep_counter_tick_1.mp3"
+			"tick"	: "audio/Data_beep_counter_tick_1.mp3"};
+	var PICS = {
+		"A" : "apple2.svg",
+		"B" : "bee2.svg",
+		"C" : "cat.svg",
+		"D" : "dog.svg",
+		"E" : "elephant.svg",
+		"F" : "frog.svg",
+		"G"	: "guitar.svg",
+		"H" : "horse.svg",
+		"I" : "icecream.svg",
+		"J" : "jellyfish.svg",
+		"K" : "kangaroo.svg",
+		"L" : "lion 2.svg",
+		"M" : "monkey.svg",
+		"N" : "nose.svg",
+		"O"	: "owl.svg",
+		"P" : "parrot.svg",
+		"Q" : "quiet.svg",
+		"R" : "rabbit.svg",
+		"S" : "sheep.png",
+		"T" : "trumpet.svg",
+		"U" : "umbrella.svg",
+		"V" : "violin.svg",
+		"W" : "whale.svg",
+		"X" : "xylophone.svg",
+		"Y" : "yawn.svg",
+		"Z" : "zebra.svg",
+		"rocket" : "rocket-ship-shooting-md.png"};
+	var ENG_PLAYLIST_ANIMALS = ['DOG', 'MONKEY', 'PARROT', 'CAT', 'WHALE', 'HORSE', 'ZEBRA', 'FROG', 'OWL', 'RABBIT' ];
+	var ENG_PLAYLIST_ANIMALS_SOUNDS = {
+		'DOG' : "audio/matan_dog.mp3",
+		'MONKEY' : "audio/matan_monkey.mp3",
+		'PARROT' : "audio/matan_parrot.mp3" , 
+		'CAT' : "audio/matan_cat.mp3",
+		'WHALE' : "audio/matan_whale.mp3",
+		'HORSE' : "audio/matan_horse.mp3",
+		'ZEBRA' : "audio/matan_zebra.mp3",
+		'FROG' : "audio/alma-frog.mp3", 
+		'OWL' : "audio/alma-owl.mp3",
+		'RABBIT' : "audio/alma-rabbit.mp3"}
+	var ENG_PLAYLIST_MUSIC = ['VIOLIN', 'GUITAR', 'TRUMPET'];
+
+	var NASPICS = {
+		"A"	:"car_pd_192.png", // auto  - revving engine
+		"B" :"balloon_new.png" , //balloon
+		"C" :"shoe_pd_878.png", // shoes - walking sound cipela
+		"Č" :"hammer.png", // hammer - nails hammering sound cekic
+		"Ć" :PICS["O"], //owl (ćuk)
+		"D" :"dinosaur.png", // dinosaur / roaring lion sound 
+		"Dž" :"mosque.png", //pocket (zip sound) - džamija
+		"Đ" : "student.png", //pupil, student - sound of school bell? sound of  
+		"E" :"esquimal.png", //  Shivering sound? eskim
+		"F" :"flute.png",  // camera clicking sound, frula,flauta (flute)
+		"G" :PICS["G"], //guitar
+		"H" :"octopus.png", // Jellyfish sound hobotnica
+		"I" :"needle.png", //"OWWWW!" sound igla
+		"J" : PICS["A"] , //apple
+		"K" : PICS["X"], //horse, kangaroo(klokan), umbrella,whale, xylo, king
+		"L" :PICS["L"], // lion
+		"Lj" :"swing_pd_noun_206.png",  //swing ljuljačka, "WHEEEE" sound
+		"M" :PICS["M"], //monkey, cat, 
+		"N" :PICS["N"], //nose
+		"Nj" :"njuska.png", // njuška dog's nose, dog sniffing fast
+		"O" : PICS["S"], //sheep
+		"P" : HEBREWPICS["ב"], //duck
+		"R" : "hand.png", // hands clapping
+		"S" : PICS["E"], //elephant     ,icecream, 
+		"Š" :HEBREWPICS["ם"], //scissors
+		"T" :PICS["T"], //trumpet, quiet, 
+		"U" :"clock.png", // ura - clock ticking, cuckoo //race -> cheering at end
+		"V" : PICS["V"],//violin
+		"Z" : HEBREWPICS["Y"], //rabbit, yawn, zebra, curtain (zavjesa)
+		"Ž" : HEBREWPICS["צ"] //frog,
 	};
-	var HEBREWSOUNDS = {
-		"א" : "audio/Male_snoring_with_effects_-sounds_like_a_lion-_Nightingale_Music_Productions.mp3" ,
-		"ב" : "audio/Animals_duck_quack_-nature-_Nightingale_Music_Productions_13810.mp3",
-		"ג" : "audio/Acoustic_BPM_110_32_Shriek_2011.mp3" ,
-		"ד" : "audio/human_bee.mp3" ,
-		"ה" : "audio/hippo.mp3",
-		"ו" : "audio/HOSPITAL_BED_CURTAIN_OP.mp3",
-		"ז" : "audio/Horse_two_horses_neigh_step_in_dirt_BLASTmp3EFX_00173.mp3" ,
-		"ח" : "audio/13_year_old_Tabby_Cat_-_Meows-Irritated.mp3" ,
-		"ט" : "audio/parrot_12007201.mp3" ,
-		"י" : "audio/owl.mp3" ,
-		"כ" : "audio/EFX_INT_Dog_Panting_05_AAA.mp3" ,
-		"ל" : "audio/Submarine_sonar_ping_multiple_BLASTWAVEFX_18257.mp3" ,
-		"מ" : "audio/rain_car_interior_wind_shield_wipers_on.mp3" ,
-		"ם" : "audio/Scissor_cuts_thick_paper_AOS02714.mp3" ,
-		"נ" : "audio/river_churnet_water_1998.mp3",
-		"ּּן" : "audio/many balloons fly by releasing air.mp3",
-		"ס" : "audio/horse.mp3" ,
-		"ע" : "audio/HUMAN_VOICE_YAWN_01.mp3" ,
-		"פ" : "audio/CARTOON_TROMBONE_DEEP_SLIDE_01.mp3" ,
-		"ף" : "audio/Drum_snare_fanfare_BLASTmp3EFX_14764.mp3" ,
-		"צ" : "audio/Frogs_croaking_close_in_a_loop.mp3" ,
-		"ץ" : "audio/Bomb_explosion_medium_distance_muffled_warped_01_SFXBible_ss06658.mp3" , 
-		"ק" : "audio/LTMacaque.mp3" ,
-		"ך" : "audio/trumpets_fanfar.mp3" ,
-		"ר" : "audio/Bartender_shakes_ice_and_drink_in_metal_ice_shaker_AOS01016.mp3",
-		"ש" : "audio/Late_20s_Woman_Says_Shhh-Shush-Soft-Choppy.mp3" ,
-		"ת" : "audio/Eating_apple_soundsnap.mp3" ,	
-		"success" : "audio/Peppa.mp3",
-		"other" : "audio/3.mp3",
-		"correct" : "audio/p.mp3",
-		"rocket"  : "audio/Rocket_launch_05_SFXBible_ss06674.mp3",
-		"tick"	: "audio/Data_beep_counter_tick_1.mp3"
-	};	
 	var NASSOUNDS = {
 		"A"	:"audio/Toyota-Matrix-2007-Start-Rev-Small.mp3", // auto  - revving engine
 		"B" :"audio/many balloons fly by releasing air.mp3" , //balloon
@@ -415,120 +537,41 @@ $(document).ready(function () {
 		"other" : "audio/3.mp3",
 		"correct" : "audio/p.mp3",
 		"rocket"  : "audio/Rocket_launch_05_SFXBible_ss06674.mp3",
-		"tick"	: "audio/Data_beep_counter_tick_1.mp3"
-	};
-
-	var PICS = {
-		"A" : "apple2.svg",
-		"B" : "bee2.svg",
-		"C" : "cat.svg",
-		"D" : "dog.svg",
-		"E" : "elephant.svg",
-		"F" : "frog.svg",
-		"G"	: "guitar.svg",
-		"H" : "horse.svg",
-		"I" : "icecream.svg",
-		"J" : "jellyfish.svg",
-		"K" : "kangaroo.svg",
-		"L" : "lion 2.svg",
-		"M" : "monkey.svg",
-		"N" : "nose.svg",
-		"O"	: "owl.svg",
-		"P" : "parrot.svg",
-		"Q" : "quiet.svg",
-		"R" : "rabbit.svg",
-		"S" : "sheep.png",
-		"T" : "trumpet.svg",
-		"U" : "umbrella.svg",
-		"V" : "violin.svg",
-		"W" : "whale.svg",
-		"X" : "xylophone.svg",
-		"Y" : "yawn.svg",
-		"Z" : "zebra.svg",
-		"rocket" : "rocket-ship-shooting-md.png"
-	};
-	var HEBREWPICS = {
-		"א" : "lion 2.svg",
-		"ב" : "duck2.svg",
-		"ג"	: "guitar.svg",
-		"ד" : "bee2.svg",
-		"ה" : "hippo.png",
-		"ו" : "curtains.svg",
-		"ז" : "zebra.svg",
-		"ח" : "cat.svg",
-		"ט" : "parrot.svg",
-		"י" : "owl.svg",
-		"כ" : "dog.svg",
-		"ל" : "whale.svg",
-		"מ" : "umbrella.svg",
-		"נ" : "river.svg",		
-		"ס" : "horse.svg",
-		"ע" : "yawn.svg",
-		"פ" : "elephant.svg",
-		"צ" : "frog.svg",
-		"ק" : "monkey.svg",
-		"ר" : "shaker.svg",
-		"ש" : "quiet.svg",
-		"ת" : "apple2.svg",
-		"ן" : "balloon.svg",
-		"ך" : "king.svg",
-		"ץ" : "explosion.svg",
-		"ף" : "drum.svg",
-		"ם" : "scissors.svg",
-		"rocket" : "rocket-ship-shooting-md.png"
-	};
-	var NASPICS = {
-		"A"	:"car_pd_192.png", // auto  - revving engine
-		"B" :"balloon_new.png" , //balloon
-		"C" :"shoe_pd_878.png", // shoes - walking sound cipela
-		"Č" :"hammer.png", // hammer - nails hammering sound cekic
-		"Ć" :PICS["O"], //owl (ćuk)
-		"D" :"dinosaur.png", // dinosaur / roaring lion sound 
-		"Dž" :"mosque.png", //pocket (zip sound) - džamija
-		"Đ" : "student.png", //pupil, student - sound of school bell? sound of  
-		"E" :"esquimal.png", //  Shivering sound? eskim
-		"F" :"flute.png",  // camera clicking sound, frula,flauta (flute)
-		"G" :PICS["G"], //guitar
-		"H" :"octopus.png", // Jellyfish sound hobotnica
-		"I" :"needle.png", //"OWWWW!" sound igla
-		"J" : PICS["A"] , //apple
-		"K" : PICS["X"], //horse, kangaroo(klokan), umbrella,whale, xylo, king
-		"L" :PICS["L"], // lion
-		"Lj" :"swing_pd_noun_206.png",  //swing ljuljačka, "WHEEEE" sound
-		"M" :PICS["M"], //monkey, cat, 
-		"N" :PICS["N"], //nose
-		"Nj" :"njuska.png", // njuška dog's nose, dog sniffing fast
-		"O" : PICS["S"], //sheep
-		"P" : HEBREWPICS["ב"], //duck
-		"R" : "hand.png", // hands clapping
-		"S" : PICS["E"], //elephant     ,icecream, 
-		"Š" :HEBREWPICS["ם"], //scissors
-		"T" :PICS["T"], //trumpet, quiet, 
-		"U" :"clock.png", // ura - clock ticking, cuckoo //race -> cheering at end
-		"V" : PICS["V"],//violin
-		"Z" : HEBREWPICS["Y"], //rabbit, yawn, zebra, curtain (zavjesa)
-		"Ž" : HEBREWPICS["צ"] //frog,
-	};
-
-	var HEBREWLETTERS = {"A" : "ש","B" : "נ","C" : "ב","D" : "ג","E" : "ק","F" : "כ","G" : "ע","H" : "י","I" : "ן","J" : "ח","K" : "ל","L" : "ך","M" : "צ","N" : "מ","O" : "ם","P" : "פ","Q" : "","R" : "ר","S" : "ד","T" : "א","U" : "ו","V" : "ה","W" : "","X" : "ס","Y" : "ט","Z" : "ז","," : "ת","." : "ץ",";" : "ף"
-	};
-	var HEBREWSOFIT = {"I" : "ן","L" : "ך","." : "ץ",";" : "ף"
-	};
-	var NASLETTERS = {"A" : "A","B" : "B","C" : "C","D" : "D","E" : "E","F" : "F","G" : "G","H" : "H","I" : "I","J" : "J","K" : "K","L" : "L","M" : "M","N" : "N","O" : "O","P" : "P","Q" : "Q","R" : "R","S" : "S","T" : "T","U" : "U","V" : "V","W" : "W","X" : "X","Y" : "Y","Z" : "Z","[" : "Š","]" : "Đ",";" : "Č","'" : "Ć","\\": "Ž"
-	};
-
-	var LETTERMAP = {
-		'hebrew' : HEBREWLETTERS,
-		'croatian' : NASLETTERS
+		"tick"	: "audio/Data_beep_counter_tick_1.mp3"};
+	var CRO_PLAYLIST_ANIMALS = ['LAV', 'MAJMUN', 'OVCA', 'SLON', 'PATKA', 'KONJ', 'ZEBRA', 'ŽABA', 'ĆUK'];
+	var CRO_PLAYLIST_ANIMALS_SOUNDS = {
+		'LAV' : "",
+		'MAJMUN' : "",
+		'OVCA' : "" , 
+		'CAT' : "",
+		'SLON' : "",
+		'PATKA' : "",
+		'KONJ' : "",
+		'ŽABA' : "", 
+		'ĆUK' : "",
+		'ZEBRA' : ""
 	}
 
 
 	var LANGUAGETODICT = {
-		'english' : [PICS, SOUNDS],
-		'hebrew' : [HEBREWPICS, HEBREWSOUNDS],
-		'croatian' : [NASPICS,NASSOUNDS]
+		'english' : {
+			pics: PICS,
+			sounds: SOUNDS,
+			playlist: ENG_PLAYLIST_ANIMALS,
+			playlist_sounds: ENG_PLAYLIST_ANIMALS_SOUNDS},
+		'hebrew' : {
+			pics: HEBREWPICS,
+			sounds: HEBREWSOUNDS,
+			playlist: ENG_PLAYLIST_ANIMALS,
+			playlist_sounds: ENG_PLAYLIST_ANIMALS_SOUNDS},
+		'croatian' : {
+			pics: NASPICS,
+			sounds: NASSOUNDS,
+			playlist: CRO_PLAYLIST_ANIMALS,
+			playlist_sounds: CRO_PLAYLIST_ANIMALS_SOUNDS}
 	};
 
+	
 	var LANGUAGETOMESSAGES = {
 		'english' : { 
 					ready : "Are You Ready?",
@@ -538,11 +581,18 @@ $(document).ready(function () {
 					// howtoplay : "How To Play",
 					placeholder : "Enter A Secret Word",
 					buttontext : "Let's Play",
+					instructionsTitle: "Instructions",
+					randomTitle: "Random word",
+					autoPlayTitle: "Autoplay",
 					instructions0 : "Welcome to our game for little ninjas and big ninjas to play together",
 					instructions1 : "Ask your little ninja what word they want to spell -  a name works really well",
 					instructions2 : "Tell us which language you're using",
 					instructions3 : "Get ready to have fun together!",
-					text_align : 'left'
+					text_align : 'left',
+					playlist_animals: 'animals',
+					playlist_music: 'music',
+					playlist_random: 'random'
+
 		},
 		'hebrew' : {
 					ready : "!קדימה",
@@ -552,11 +602,17 @@ $(document).ready(function () {
 					// howtoplay :"איך לשחק",
 					placeholder :"הקלד מילה",
 					buttontext :"יאללה נשחק",
+					instructionsTitle: "הוראות",
+					randomTitle: "מילה אקראית",
+					autoPlayTitle: "הפעלה אוטומטית",
 					instructions0 : "ברוכים הבאים למשחק משותף עבור נינג׳ות קטנים/ות וגדולים/ות",
 					instructions1 : "בקשו מהנינג׳ה הקטן/ה שלכם לבחור מילה לאיות,  שם עובד נפלא",
 					instructions2 : "בחרו את השפה הרצויה",
 					instructions3 : "תהנו",
-					text_align : 'right'
+					text_align : 'right',
+					playlist_animals: 'animals',
+					playlist_music: 'music',
+					playlist_random: 'random'
 		},	
 		'croatian' : {
 					ready : "Spremni ste?",
@@ -566,19 +622,19 @@ $(document).ready(function () {
 					// howtoplay :"Kako igrati",
 					placeholder :"Napisati tajni rijeć",
 					buttontext :"Hajmo igrati",
+					instructionsTitle: "instrukcije",
+					randomTitle: "slučajna riječ",
+					autoPlayTitle: "neprekidna igra",
 					instructions0 : "Dobro došli do našoj igre za malih i velikih nindže",
 					instructions1 : "Pitajte malu nindžu koji rijeć želi - ime radi jako dobro",
 					instructions2 : "Koji jezik koristite?",
 					instructions3 : "Pripremite se!",
-					text_align : 'left'
+					text_align : 'left',
+					playlist_animals: 'životinje',
+					playlist_music: 'glazba',
+					playlist_random: 'slučajni'
 		}
 	};
-
-	var MX_GAME_MSGS = {
-		'english' : mixpanel.track("Game - english"),
-		'hebrew' : mixpanel.track("Game - hebrew"),
-		'croatian' : mixpanel.track("Game - croatian")
-	}
 
 	var ADDITIONALFLAGS = {
 		 "hebrew" : "israel.svg",
@@ -586,33 +642,6 @@ $(document).ready(function () {
 		 // "russia" : "russia.svg"
 		 // "tamil" : "tamil.png"
 	};
-
-	var ENG_PLAYLIST_ANIMALS = ['DOG', 'MONKEY', 'PARROT', 'CAT', 'WHALE', 'HORSE', 'ZEBRA' ];
-	var ENG_PLAYLIST_ANIMALS_SOUNDS = {
-		'DOG' : "audio/matan_dog.mp3",
-		'MONKEY' : "audio/matan_monkey.mp3",
-		'PARROT' : "audio/matan_parrot.mp3" , 
-		'CAT' : "audio/matan_cat.mp3",
-		'WHALE' : "audio/matan_whale.mp3",
-		'HORSE' : "audio/matan_horse.mp3",
-		'ZEBRA' : "audio/matan_zebra.mp3" 
-	}
-
-	var ENG_PLAYLIST_MUSIC = ['VIOLIN', 'GUITAR', 'TRUMPET'];
-	
-
-
-	var PLAYLISTS = {
-		'english' : ENG_PLAYLIST_ANIMALS
-	}
-
-	
-	var TamilDict = makeTamilDict();
-	if (LOG) console.log(TamilDict);
-
-	var ppp = 0;
-	for (key in TamilDict){ppp++;}
-	if (LOG) console.log(ppp);
 
 	function clearJoyride() {
 		jQuery(window).joyride("destroy");
@@ -670,6 +699,15 @@ $(document).ready(function () {
 		$( "#textbox" ).focus();
 		joyride.css("text-align", d[language].text_align);
 
+		$('#instructions').attr('title',d[language].instructionsTitle);
+		$('#randomword').attr('title',d[language].randomTitle);
+		$('#autoplay_img').attr('title',d[language].autoPlayTitle);
+
+		document.getElementById("playlist_displayed").innerHTML = d[language].playlist_animals;
+		document.getElementById("playlist_animals").innerHTML = d[language].playlist_animals;
+		document.getElementById("playlist_music").innerHTML =  d[language].playlist_music;
+		document.getElementById("playlist_random").innerHTML =  d[language].playlist_random;
+
 
 		// change show/hide the text for instructions
 
@@ -705,30 +743,30 @@ $(document).ready(function () {
 
 	spectrum();
 	function spectrum(){
-	    var hue = 'rgba(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.random() + 0.3) + ')';
+	    var hue = 'rgba(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.random() - 0.1) + ')';
 	    $('body, #inputs input, html').animate( { backgroundColor: hue }, 5000);
 	    setTimeout(spectrum,1); // stop it from overloading max cache
 	    // console.log(hue);
 	};
 
 	function shadeRGBColor(color, percent) { // http://stackoverflow.com/questions/5560248/programmatically-lighten-or-darken-a-hex-color-or-rgb-and-blend-colors
-    var f=color.split(","),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=parseInt(f[0].slice(4)),G=parseInt(f[1]),B=parseInt(f[2]);
-    return "rgb("+(Math.round((t-R)*p)+R)+","+(Math.round((t-G)*p)+G)+","+(Math.round((t-B)*p)+B)+")";
+    	var f=color.split(","),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=parseInt(f[0].slice(4)),G=parseInt(f[1]),B=parseInt(f[2]);
+    	return "rgb("+(Math.round((t-R)*p)+R)+","+(Math.round((t-G)*p)+G)+","+(Math.round((t-B)*p)+B)+")";
 	};
 
 	function componentToHex(c) {
-    var hex = c.toString(16);
-    return hex.length == 1 ? "0" + hex : hex;
+    	var hex = c.toString(16);
+    	return hex.length == 1 ? "0" + hex : hex;
 	};
 
 	function rgbToHex(r, g, b) { // http://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
-	    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+	    	return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 	};
 
 	function addFlags() {
 		for (var lang in ADDITIONALFLAGS) {
 			var imgLocation = ADDITIONALFLAGS[lang];
-			$('#flags').append("<label><input type='radio' name='flag' value='" + lang + "' /><img src='images/" + imgLocation + "' value='" + lang + "'></label>");
+			$('#flags').append("<label><input id='" + lang + "flag' type='radio' name='flag' value='" + lang + "' /><img src='images/" + imgLocation + "' value='" + lang + "'></label>");
 		}
 	}
 
@@ -831,22 +869,21 @@ $(document).ready(function () {
 	};
 
 	function shuffle(array) {
-			  var currentIndex = array.length, temporaryValue, randomIndex ;
+		  var currentIndex = array.length, temporaryValue, randomIndex ;
 
-			  // While there remain elements to shuffle...
-			  while (0 !== currentIndex) {
+		  // While there remain elements to shuffle...
+		  while (0 !== currentIndex) {
 
-			    // Pick a remaining element...
-			    randomIndex = Math.floor(Math.random() * currentIndex);
-			    currentIndex -= 1;
+		    // Pick a remaining element...
+		    randomIndex = Math.floor(Math.random() * currentIndex);
+		    currentIndex -= 1;
 
-			    // And swap it with the current element.
-			    temporaryValue = array[currentIndex];
-			    array[currentIndex] = array[randomIndex];
-			    array[randomIndex] = temporaryValue;
-			  }
-
-	  return array;
+		    // And swap it with the current element.
+		    temporaryValue = array[currentIndex];
+		    array[currentIndex] = array[randomIndex];
+		    array[randomIndex] = temporaryValue;
+		  }
+	  	  return array;
 	}
 
 	var flashDict = {
@@ -864,11 +901,11 @@ $(document).ready(function () {
 		item.text(autoplayMessage)
 				.animate({
 				opacity: 1
-	},500)
-				.animate({
-				opacity: 0
-	},1000);
-				console.log(state);
+		},500)
+					.animate({
+					opacity: 0
+		},1000);
+					console.log(state);
 	}
 
 	
@@ -886,7 +923,9 @@ $(document).ready(function () {
 
 		$('#flags label img').on("click", function() {
 			$(this).addClass('selected');
+			$(this).siblings().prop("checked", true);
 			$(this).parent().siblings().find('img').removeClass('selected');
+			$(this).parent().siblings().find('input').prop("checked", false);
 			translateText();	
 		});
 
@@ -895,14 +934,22 @@ $(document).ready(function () {
 			$(this).attr('title', flagName);	
 		});
 
-		$('#othernav label img').on('mouseover', function() {
-			$(this).attr('title', 'Autoplay');	
-		});
-
 		$('#othernav label img').on("click", function() {
 			$(this).toggleClass('selected');
 			autoplay = !document.getElementById("autoplay_check").checked;
 			flashmessage(autoplay);	
+
+			if (autoplay==true) {
+
+				var tempLanguage = $('input:radio:checked').val();
+				var languagePlaylist = LANGUAGETODICT[tempLanguage].playlist;
+
+				var randomAnimalWord = languagePlaylist[Math.floor(Math.random()*languagePlaylist.length)];
+				$('#textbox').val(randomAnimalWord);
+
+			} else {
+				$('#textbox').val('');
+			}
 
 			 if ( $('#primary_nav_wrap').css('visibility') == 'hidden' ) {
 			 	$('#primary_nav_wrap').css('visibility','visible');
@@ -910,8 +957,6 @@ $(document).ready(function () {
 			 } else {
 			 	$('#primary_nav_wrap').css('visibility','hidden');
 			 }
-
-
 		});
 
 		$('#primary_nav_wrap').on("mouseenter", function() {	
@@ -982,7 +1027,7 @@ $(document).ready(function () {
 	
 		for (var i=0; i < textInput.length; i++) {
 
-			var testText = LANGUAGETODICT[language][0][textInput[i]];
+			var testText = LANGUAGETODICT[language].pics[textInput[i]];
 			// console.log(typeof testText);
 			if (typeof testText === "undefined") return true;
 		}
@@ -1025,8 +1070,8 @@ $(document).ready(function () {
 			
 
 		var dictsToUse = LANGUAGETODICT[language];
-		var MYPICS = dictsToUse[0];
-		var MYSOUNDS = dictsToUse[1];
+		var MYPICS = dictsToUse.pics;
+		var MYSOUNDS = dictsToUse.sounds;
 
 		sessionStorage.setItem("language", language);
 		sessionStorage.setItem("sounds", JSON.stringify(MYSOUNDS));
@@ -1050,10 +1095,15 @@ $(document).ready(function () {
 			$('#new_word img').remove();
 			$('#prepare h1').text("");
 
-			$('#rocket div').css("background", "url(" + sessionStorage.getItem("image") + ") no-repeat");
+			$('#rocket div').css("background-image", "url(" + sessionStorage.getItem("image") + ")")
+							.css("background-size", "150%")
+							.css("background-repeat","no-repeat")
+							.css("background-position","100% 0")
+							.css("margin-left","20%");
+
 
 			$('#rocket div').removeClass("liftoff");
-			$('#rocket div').css("width", "300px");
+			$('#rocket div').css("width", "200px").css("height","400px");
 			$('#countdown, #prepare h2').animate({
 							fontSize : '60px',
 			            	width : '100%',
@@ -1115,9 +1165,11 @@ $(document).ready(function () {
 			$('#new_word img').addClass('jig');
 
 			sessionStorage.setItem("image",$('#new_word img').attr("src"));
-
-			$('.sounds').append('<audio id="' + word + '" src="' + 
-	    			ENG_PLAYLIST_ANIMALS_SOUNDS[word] + '" preload="auto"></audio>');
+			var autoplaySound = dictsToUse.playlist_sounds[word];
+			if (autoplaySound==undefined) {autoplaySound : 'audio/3.mp3';}
+			
+			$('.sounds').append('<audio id="' + word + '" src="' + autoplaySound
+	    			 + '" preload="auto"></audio>');
 
 			setTimeout(function() {
 							playSound(word);
@@ -1131,7 +1183,7 @@ $(document).ready(function () {
 
 			lang = sessionStorage.getItem("language");
 
-			var pList = PLAYLISTS[lang];
+			var pList = LANGUAGETODICT[lang].playlist;
 
 			var word = pList[Math.floor(Math.random()*pList.length)];
 
@@ -1166,7 +1218,7 @@ $(document).ready(function () {
 	}
 
 	function removeFromArray(item,array) {
-
+		console.log(array);
 		while (array.indexOf(item) !== -1) {
 			  array.splice(array.indexOf(item), 1);
 			}
@@ -1462,7 +1514,7 @@ $(document).ready(function () {
 							 		.css("color", randomColours[counter])
 							 		.animate({
 							 			fontSize: realFontSize
-									 		}, 3000);
+									 		}, 2000);
 
 					//  make the image rotate
 					// $(".col").eq(counter).find("#pix").addClass("letter-success");
@@ -1475,7 +1527,7 @@ $(document).ready(function () {
 
 					// fade out mobile choices if correct letter chosen
 					if (isMobile == true) {
-						$('.' + counter).animate({opacity : 0},3000)
+						$('.' + counter).animate({opacity : 0},2000)
 
 					// trying to isolate the single mobile letter and animate that instead but taint workin
 
@@ -1496,19 +1548,30 @@ $(document).ready(function () {
 									.attr("src", myImage)
 											.animate({
 												opacity : 0},
-														750)
+														500)
 											.animate({
 												opacity : 1},
-													 	750)
+													 	500)
 											.animate({
 												opacity : 0},
-														750)
+														500)
 											.animate({
 												opacity : 1},
-													 	750);
+													 	500);
 
-						$(".col").eq(counter).find(".circle-center").css("background-color", randomColours[counter]);
-						$(".col").eq(counter).find("#pix").css("border-color", "rgba(255,255,255,0.25)")
+						// make sure image fits to circle height
+						var backgroundCircle = $(".col").eq(counter).find(".circle-center");
+						var picToEnclose = $(".col").eq(counter).find("#pix");
+						var imgToEnclose = $(picToEnclose).find("img");
+						var imgToEncloseHeight = $(picToEnclose).find("img").css("height");
+						var backgroundCircleHeight = $(backgroundCircle).css("height");
+
+						$(picToEnclose).find("img").css("height", backgroundCircleHeight);
+
+
+						backgroundCircle.css("background-color", randomColours[counter]);
+						picToEnclose.css("border-color", "rgba(255,255,255,0.25)")
+															.css("overflow","hidden")
 															.removeClass('jig');
 						$(".col").eq(nextCounter)
 									.find("#pix")
@@ -1537,7 +1600,7 @@ $(document).ready(function () {
 
 						setTimeout(function() {
 							playSound("correct");
-									}, (3000));
+									}, (2000));
 						}
 						
 					}, (3000));
@@ -1583,7 +1646,14 @@ $(document).ready(function () {
 
 				if (language == 'hebrew') {var counter = 0;} else {var counter = textInput.length - 1;}
 						
-				$(".col").eq(counter).find(".circle-center").css("background-color", randomColours[counter]);
+				backgroundCircle = $(".col").eq(counter).find(".circle-center");
+				picToEnclose = $(".col").eq(counter).find("#pix");
+				imgToEnclose = $(picToEnclose).find("img");
+				imgToEncloseHeight = $(picToEnclose).find("img").css("height");
+				backgroundCircleHeight = $(backgroundCircle).css("height");
+
+				$(picToEnclose).find("img").css("height", backgroundCircleHeight);
+				backgroundCircle.css("background-color", randomColours[counter]);
 
 				$('.letters').animate({   // make the single letter disappear
 									 	paddingTop: '800px'
@@ -1617,12 +1687,13 @@ $(document).ready(function () {
 
 					if ((i+1)%2==0) {
 						
-						currentPic.animate({   width: (Math.floor(maths * 1000)) + 'px'}, (Math.floor(maths * 60000)));
+						currentPic.animate({   width: (Math.floor(maths * 1000)) + 'px',height: '100%'}, (Math.floor(maths * 60000))),
+									
 						currentLetter.animate({  fontSize : "500px", top: (Math.floor(maths * 800)) + 'px'}, (Math.floor(maths * 60000)));	
 						currentNumber.animate({  fontSize : "300px", bottom: (Math.floor(maths * 800)) + 'px'}, (Math.floor(maths * 60000)));		
 
 					} else {
-						currentPic.animate({  width: (Math.floor(maths * 1000)) + 'px'}, (Math.floor(maths * 60000)));
+						currentPic.animate({  width: (Math.floor(maths * 1000)) + 'px',height: '100%'}, (Math.floor(maths * 60000)));
 						currentLetter.animate({  fontSize : "500px", top: (Math.floor(maths * 800)) + 'px'}, (Math.floor(maths * 60000)));
 						currentNumber.animate({  fontSize : "700px", top: (Math.floor(maths * 200)) + 'px'}, (Math.floor(maths * 60000)));	
 					};
