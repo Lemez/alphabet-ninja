@@ -1314,14 +1314,14 @@ $(document).ready(function () {
 		};
 
 
-			createSounds();	
+			
 
 			// $('.sounds').each(function(i,obj){console.log(obj)});
 
 			// $('#facebook').hide();
 
 			countdown('countdown', 5, false);
-		
+			createSounds();	
 			buildGame(false);
 		}
 
