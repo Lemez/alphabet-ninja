@@ -80,6 +80,13 @@ $(document).ready(function () {
  		$('#content').css('margin-top', '10%');
 	}
 
+	function showAfterSaving(){
+		$('#vocab').css('visibility','visible');
+		$('#download').css('visibility','visible');
+		$('#again').css('visibility','visible');
+		$('#content').css('margin-top', '0');
+	}
+
 	function prepareForDownload(){
 		saving = !saving;
 		document.getElementById('savingstate').innerHTML=flashDict[saving];
@@ -167,8 +174,10 @@ $(document).ready(function () {
 				    //saveToServer(blob);
 
 				});
+
+				
 			});
-	          		
+	        showAfterSaving();
     }
 
   
