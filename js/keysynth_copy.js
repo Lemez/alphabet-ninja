@@ -161,7 +161,7 @@ $(document).ready(function () {
 				// postToFb(canvas);
 
 				// save hidden element to file
-				
+
 				canvas.toBlob(function(blob) {
 				    saveAs(blob, "alphabet-ninja.png");
 				    //saveToServer(blob);
@@ -1825,6 +1825,7 @@ $(document).ready(function () {
 				
 				setTimeout(function() {
 					$("#success").animate({volume: 1}, 1);
+					
 					playSound("success");
 					// save the image if saving turned on
 					if (saving) {download()};
@@ -1832,8 +1833,10 @@ $(document).ready(function () {
 
 			
 				autoplay = document.getElementById("autoplay_check").checked;
+				lang = sessionStorage.getItem("language");
+				pListLength = LANGUAGETODICT[lang].playlist.length;
 
-				if (autoplay==true && ) {
+				if (autoplay==true && pListLength > 0) {
 					setTimeout(function() {
 							triggernewgame();
 													}, 5000);
