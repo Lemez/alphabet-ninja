@@ -39,30 +39,6 @@
 	
 	<body ontouchmove="BlockMove(event);">
 
-		 <script>
-		  window.fbAsyncInit = function() {
-		    FB.init({
-		      appId      : '1484948608415623',
-		      xfbml      : true,
-		      version    : 'v2.5'
-		    });
-		  };
-
-		  (function(d, s, id){
-		     var js, fjs = d.getElementsByTagName(s)[0];
-		     if (d.getElementById(id)) {return;}
-		     js = d.createElement(s); js.id = id;
-		     js.src = "//connect.facebook.net/en_US/sdk/debug.js";
-		     fjs.parentNode.insertBefore(js, fjs);
-		   }(document, 'script', 'facebook-jssdk'));
-
-			 function BlockMove(event) {
-			  // Tell Safari not to move the window.
-			  event.preventDefault() ;
-			 }
-		 </script>
-
-
 		<header>
 
 			<nav>
@@ -171,10 +147,19 @@
 		<section>
 			<div id="again">
 				<a href="home.html"><p>Play Again!</p></a>
-				<!-- fb -->
+
 				<div id='fb-stuff'>
-				<div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
-			</div>	
+					<div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
+										<!--
+						  Below we include the Login Button social plugin. This button uses
+						  the JavaScript SDK to present a graphical Login button that triggers
+						  the FB.login() function when clicked.
+						-->
+
+					<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
+
+					<div id="status"></div>
+				</div>	
 			</div>
 
 		</section>
