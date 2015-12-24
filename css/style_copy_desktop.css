@@ -1254,3 +1254,8 @@ canvas {
 	display: none;
 }
 
+#fb-stuff {
+	position: relative;
+	z-index: 200;
+}
+
