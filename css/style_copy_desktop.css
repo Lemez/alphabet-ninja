@@ -336,9 +336,9 @@ div#inputs  {
 	padding-right: 5%;
 }*/
 
-#rocket { position: absolute; -webkit-transition: 3s ease-in; -moz-transition: 3s ease-in; -o-transition: 3s ease-in; transition: 3s ease-in; } 
+#rocket { position: absolute;} 
 
-#rocket div { width: 200px; height: 400px; background: url(../images/rocket-ship-shooting-md.png) no-repeat; -webkit-transition: 4s ease-in-out; -moz-transition: 4s ease-in-out; -o-transition: 4s ease-in-out; transition: 4s ease-in-out; 
+#rocket div { width: 200px; height: 400px; background: url(../images/rocket-ship-shooting-md.png) no-repeat; 
 	/*float:right;*/
 }
 
