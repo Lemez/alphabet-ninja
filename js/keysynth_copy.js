@@ -1856,7 +1856,8 @@ $(document).ready(function () {
 					
 				} else {
 					$('#fb-stuff').show();
-					$("#again").animate({ fontSize: '100px', top: (Math.floor(Math.random() * 800)) + 'px', opacity: 1}, (Math.floor(Math.random() * 100000)));
+					$("#again p").animate({ fontSize: '100px', top: (Math.floor(Math.random() * 800)) + 'px', opacity: 1}, (Math.floor(Math.random() * 100000)));
+					$("#fb-stuff").animate({ top: (Math.floor(Math.random() * 800)) + 'px', opacity: 1}, (Math.floor(Math.random() * 100000)));
 
 					$('a#ninjalogo').attr("href", "home.html")
 								.find("img")
