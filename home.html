@@ -1,156 +1,139 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 
 		<meta charset="UTF-8">
 
 		<link rel="stylesheet" href="css/reset.css" />
 		<link rel="stylesheet" href="css/skeleton.css" />
-		<link rel="stylesheet" href="css/style_copy.css" />
-		<!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
-		
+	
+		<link rel="stylesheet" type="text/css"
+		 	href="css/style_iphone.css" media="only screen and (max-width: 480px)" />
+		<link rel="stylesheet" type="text/css"
+		 	href="css/style_copy_desktop.css" media="screen and (min-width: 481px)" />	
+		<meta name="viewport" content="user-scalable=no, width=device-width" />
+		<meta name="google-site-verification" content="eKvrZ8XzHlastCnVsmltugulDojWhI8VgAqaggR7EH0" />
+
+		<meta property="og:url"           content="http://alphabet.ninja" />
+	<meta property="og:type"          content="website" />
+	<meta property="og:title"         content="Alphabet Ninja" />
+	<meta property="og:description"   content="A noise and letters learning game for little ninjas" />
+	<meta property="og:image"         content="http://alphabet.ninja/images/Alphabet Ninja logo.png" />
+
 		<!-- /* Attach the Joyride CSS file */ -->
 		<link rel=" stylesheet" type="text/css" href="css/joyride-2.1.css">
 		<script src="js/jquery.js" ></script>
 
 		
 
+
+		<!-- start Mixpanel -->
+		<script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+			for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="http://cdn.mxpnl.com/libs/mixpanel-2.2.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+			mixpanel.init("000de46f82a71fdfbec5f8a41d56035f");</script>
+			<!-- end Mixpanel -->
+
 	</head>
-	<body>
+
 	
+	<body ontouchmove="BlockMove(event);">
+
+		 <script>
+		  window.fbAsyncInit = function() {
+		    FB.init({
+		      appId      : '1484948608415623',
+		      xfbml      : true,
+		      version    : 'v2.5'
+		    });
+		  };
+
+		  (function(d, s, id){
+		     var js, fjs = d.getElementsByTagName(s)[0];
+		     if (d.getElementById(id)) {return;}
+		     js = d.createElement(s); js.id = id;
+		     js.src = "//connect.facebook.net/en_US/sdk/debug.js";
+		     fjs.parentNode.insertBefore(js, fjs);
+		   }(document, 'script', 'facebook-jssdk'));
+
+			 function BlockMove(event) {
+			  // Tell Safari not to move the window.
+			  event.preventDefault() ;
+			 }
+		 </script>
 
 
- <script>
-  // This is called with the results from from FB.getLoginStatus().
-  function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
-    if (response.status === 'connected') {
-      // Logged into your app and Facebook.
-      testAPI();
-    } else if (response.status === 'not_authorized') {
-      // The person is logged into Facebook, but not your app.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
-    } else if (response.status === 'unknown') {
-      // The person is not logged into Facebook, so we're not sure if
-      // they are logged into this app or not.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into Facebook.';
-    }
-  }
+		<header>
 
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
-
-  window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '1484948608415623',
-    cookie     : true,  // enable cookies to allow the server to access 
-                        // the session
-    xfbml      : true,  // parse social plugins on this page
-    version    : 'v2.1' // use version 2.0
-  });
-
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
-
-  };
-
-  // Load the SDK asynchronously
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-
-
-  // Here we run a very simple test of the Graph API after login is
-  // successful.  See statusChangeCallback() for when this call is made.
-  function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-      console.log('Successful login for: ' + response.first_name);
-      console.log(response);
-      document.getElementById('userName').innerHTML =
-      'Hi ' + response.first_name + '!';
-
-       document.getElementById('fphoto').src = 'http://graph.facebook.com/' + response.id + '/picture';
-    });
-  }	
-</script>
-
-
-<!--
-  Below we include the Login Button social plugin. This button uses
-  the JavaScript SDK to present a graphical Login button that triggers
-  the FB.login() function when clicked.
--->
-
-
-
-		<header>	
-			
 			<nav>
-				<img id='ninja' src='images/Alphabet Ninja logo clear.png' width='200' height='60' />
+			
+				<a id='ninjalogo'><img id='ninja' src='images/Alphabet Ninja logo clear.png' width='200' height='60' /></a>
 			 </nav>
 
-			<div id="status"></div>
-			<div id="userName"></div>
-			<img id="fphoto" />
-			<div id="fb-root"></div>
-			<!--  <fb:login-button id='faceb' scope="public_profile,email" onlogin="checkLoginState();">
-			</fb:login-button> -->
 
-			<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-			</fb:login-button>
-
-			<div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
-
-
-
-
-
-
-					
 		</header>
-			 		
-		
-		<div id = 'background'>
+
+		<div id = 'background'> 		
+			<div id='left'>
+				<a id="download"><p>Saving is <span id='savingstate'>OFF</span></p></a>
+				<br>
+				<ul id='vocab' class='shake'></ul>
+			</div>
 
 			 	<div id="flags">
-			 		<label>
-					  <input type="radio" name="flag" value="english" checked  />
+			 		<label for='flags'>
+					  <input id ='englishflag' type="radio" name="flag" value="english" checked  />
 					  <img src="images/uk_usa.svg" class="selected" value="english" id='firstflag'>
 					 </label>
+				</div>
+					
+				<div id="othernav">
+			
 
-						
-
-					<a class="triangle-isosceles" id="instructions" href="#">How To Play</a>
-		
+					<a class="triangle-isosceles" id="instructions" title="Instructions" href="#"></a>
+			 		
+			 		<div id="primary_nav_wrap">
+						<ul>
+						  <li class="current-menu-item"><a id='playlist_displayed' href="#">Animals</a>
+						  		<ul>
+							      <li class="no_display"><a id="playlist_animals" href="#">Animals</a></li>
+							      <li><a id="playlist_music" href="#">Music</a></li>
+							      <li><a id="playlist_random" href="#">Random</a></li>
+							     </ul>
+						  </li>
+						</ul>
+					</div>
+					<label for="autoplay_check" id='autoplaylabel'>
+			 			<input id="autoplay_check" type="checkbox" name="autoplay" value="autoplay" /> 
+			 			<img id='autoplay_img' src="images/noun_88058_cc_repeat.png" title="Autoplay">
+			 		</label>
+			 		<span id="flash"></span>
 			 	</div>
+
+
+
+
 
 			 	<div id="inputs">
 
-					<input id='textbox' type="text" placeholder="Enter a secret word" id="nameone" contenteditable="true"/><!-- <p>&</p><input type="text" placeholder='And then yours here' id="nametwo" contenteditable="true"/>-->
+
+					<input id='textbox' type="text" placeholder="Enter a secret word!" id="nameone" contenteditable="true" autofocus style="text-transform:capitalize;" onkeyup="javascript:this.value=this.value.toUpperCase()"/>
+					<button id="randomword" class="random" title="Random word" value="Random"></button>
+
+			 			
+
+
+					<!-- <p>&</p><input type="text" placeholder='And then yours here' id="nametwo" contenteditable="true"/>-->
 					<div id='message'></div>
 					 <button id="letsplay" class="submit">Let's Play!</button>
 
+					   
+
+					 
+
 			</div>
 
+			
 			
 			
 				<!-- 	<button id='#intro-eng'>English</button>
@@ -160,21 +143,23 @@
 		    <ol id="joyRideTipContent">
 		    	 <li data-id="ninja" data-button="Next" data-options="">
 		        
-		        <p>(1) Welcome to our game for little ninjas and big ninjas to play together! </p>
+		        <p>Welcome to our game for little ninjas and big ninjas to play together! </p>
 		      </li>
 		      <li data-id="textbox" data-text="Next" class="custom" data-options="tipAnimation:fade">
 
-		        <p> (2) Ask your little ninja what word they want to spell -  a name works really well</p>
+		        <p> Ask your little ninja what word they want to spell -  a name works really well</p>
 		      </li>
 		      <li data-id="firstflag" data-button="Next" data-options="tipLocation:bottom;tipAnimation:fade">
 		     
-		        <p>(3) Tell us which language you're using</p> 
+		        <p>Tell us which language you're using</p> 
 		      </li>
 		      <li data-id="letsplay" data-button="Close" data-options="tipLocation:bottom">
 		        
-		        <p>(4) Get ready to have fun together! </p>
+		        <p>Get ready to have fun together! </p>
 		      </li>
 		    </ol>
+
+		  
 				
 		</div>
 
@@ -186,35 +171,53 @@
 		<section>
 			<div id="again">
 				<a href="home.html"><p>Play Again!</p></a>
+				<!-- fb -->
+				<div id='fb-stuff'>
+				<div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
+			</div>	
 			</div>
+
 		</section>
 
 		<div id='prepare'>
-
+			<h1></h1>
+			<div id="new_word"></div>
 			<div class="row" id="intro">
 				<h2>Are You Ready?</h2>	
-				<div id="rocket" ><div class="shake"></div> </div>
-				<div id="countdown"></div>
+				<div class="full">
+					<div id="rocket"><div class="shake"></div></div> 
+					<div id="countdown"></div>
+				</div>
 			</div>
-
 		</div>
 
 		<section class="container">
 			<div id='timer'></div>
 			<div class="row">
 				<div class="row letters circle-center"></div><!-- <div id="top"></div> -->
-				<div id="content"></div><!-- <div id="numbers"></div><div id="name1"></div><div id="name2"></div> -->
+
+					<div id="content">
+
+				</div><!-- <div id="numbers"></div><div id="name1"></div><div id="name2"></div> -->
+				<div id="keyboard" class="row"></div>
 			</div>
 
 		</section>
+		<canvas id='my-canvas'></canvas>
+
 
 	</body>
 
 
-		<!-- <script src="js/jquery.typer.js" ></script> -->
+		<script src="js/jquery.js" ></script>
+		
 		
 		<script src="js/keysynth_copy.js" ></script>
 		<script src="js/jquery.color.min.js" ></script>
+		<script src="js/html2canvas.js" ></script>
+		<script src="js/filesaver.min.js" ></script>
+		<script src="js/canvas-toBlob.js" ></script>
+		<!-- <script src="js/jquery.mobile-1.4.3.min.js" ></script> -->
 
 		<!-- /* Then attach the Joyride plugin */ -->
 		<script src="js/jquery.joyride-2.1.js"></script>
