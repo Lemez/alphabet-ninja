@@ -1190,11 +1190,18 @@ $(document).ready(function () {
 		sessionStorage.setItem("sounds", JSON.stringify(MYSOUNDS));
 		sessionStorage.setItem("pics", JSON.stringify(MYPICS));
 
-		function createSounds() {
+		function createSounds(array) {
+			if (array.length < 1) {
 			Object.keys(MYSOUNDS).forEach(function (letter) { 
 	    		$('.sounds').append('<audio id="' + letter + '" src="' + 
 	    			MYSOUNDS[letter] + '" preload="auto"></audio>');
 			})
+		} else {
+			array.forEach(function(letter) {
+				$('.sounds').append('<audio id="' + letter + '" src="' + 
+	    			MYSOUNDS[letter] + '" preload="auto"></audio>');
+			});
+		}
 		};
 
 		function playSound(s) {
@@ -1320,6 +1327,8 @@ $(document).ready(function () {
 
 			// $('#facebook').hide();
 
+			var launchSounds = ['tick','rocket'];
+			createSounds(launchSounds);	
 			countdown('countdown', 5, false);
 			createSounds();	
 			buildGame(false);
