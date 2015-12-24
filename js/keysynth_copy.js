@@ -1280,7 +1280,7 @@ $(document).ready(function () {
 
 			sessionStorage.setItem("image",$('#new_word img').attr("src"));
 			var autoplaySound = dictsToUse.playlist_sounds[word];
-			if (autoplaySound==undefined) {autoplaySound : 'audio/3.mp3';}
+			if (autoplaySound===undefined) {autoplaySound = 'audio/3.mp3';}
 			
 			$('.sounds').append('<audio id="' + word + '" src="' + autoplaySound
 	    			 + '" preload="auto"></audio>');
@@ -1534,6 +1534,7 @@ $(document).ready(function () {
 		//  get background to work all the way down beyond initial screen
 
 		$('#left').css("visibility", "visible");
+		$('div.fb-like').hide();
 		// change some layout elements if mobile keyboard is involved
 		if (isMobile) {													// start of isMobile
 				$('#lex p').each(function(){
@@ -1832,13 +1833,14 @@ $(document).ready(function () {
 			
 				autoplay = document.getElementById("autoplay_check").checked;
 
-				if (autoplay==true) {
+				if (autoplay==true && ) {
 					setTimeout(function() {
 							triggernewgame();
 													}, 5000);
 					
 				} else {
-					$("#again p").animate({ fontSize: '100px', top: (Math.floor(Math.random() * 800)) + 'px', opacity: 1}, (Math.floor(Math.random() * 100000)));
+					$('div.fb-like').show();
+					$("#again p, #again div.fb-like").animate({ fontSize: '100px', top: (Math.floor(Math.random() * 800)) + 'px', opacity: 1}, (Math.floor(Math.random() * 100000)));
 
 					$('a#ninjalogo').attr("href", "home.html")
 								.find("img")
