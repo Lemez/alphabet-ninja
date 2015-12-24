@@ -85,7 +85,7 @@ $(document).ready(function () {
 		document.getElementById('savingstate').innerHTML=flashDict[saving];
 	}
 
-	  function saveToFile(blob){
+	  function saveToServer(blob){
 	  	var dateTimeInMs = new Date();
 	  	var imageName = 'alphabet_ninja_';
 	  	var extension = '.png"';
@@ -158,14 +158,16 @@ $(document).ready(function () {
 				// add element to on-screen invisible canvas
 				imgData = getBase64Image(c);
 				var canvas = document.getElementById("my-canvas"), ctx = canvas.getContext("2d");
-				postToFb(canvas);
+				
+				// postToFb(canvas);
+
 				// save hidden element to file
-				// canvas.toBlob(function(blob) {
+				canvas.toBlob(function(blob) {
 
-				//     // saveAs(blob, "alphabet-ninja.png");
-				//     saveToFile(blob);
+				    saveAs(blob, "alphabet-ninja.png");
+				    //saveToServer(blob);
 
-				// });
+				});
 			});
 	          		
     }
