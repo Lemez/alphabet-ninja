@@ -132,18 +132,17 @@ $(document).ready(function () {
     function postToFb(canvas){
 
     	if ( XMLHttpRequest.prototype.sendAsBinary === undefined ) {
-    XMLHttpRequest.prototype.sendAsBinary = function(string) {
-        var bytes = Array.prototype.map.call(string, function(c) {
-            return c.charCodeAt(0) & 0xff;
-        });
-        this.send(new Uint8Array(bytes).buffer);
-    };
-}
+    		XMLHttpRequest.prototype.sendAsBinary = function(string) {
+        		var bytes = Array.prototype.map.call(string, function(c) {
+            	return c.charCodeAt(0) & 0xff;
+        		});
+        	this.send(new Uint8Array(bytes).buffer);
+    		};
+		}
 
     	var c = canvas.toDataURL('image/png');
         var encodedPng = c.substring(c.indexOf(',')+1,c.length);
         var decodedPng = atob(encodedPng);
-
         PostImageToFacebook(response.authResponse.accessToken, 'AlphabetNinja.png', 'image/png', decodedPng, '');
     }
 
@@ -162,8 +161,8 @@ $(document).ready(function () {
 				// postToFb(canvas);
 
 				// save hidden element to file
+				
 				canvas.toBlob(function(blob) {
-
 				    saveAs(blob, "alphabet-ninja.png");
 				    //saveToServer(blob);
 
@@ -1320,7 +1319,7 @@ $(document).ready(function () {
 			// $('.sounds').each(function(i,obj){console.log(obj)});
 
 			$('#facebook').hide();
-			
+
 			countdown('countdown', 5, false);
 		
 			buildGame(false);
