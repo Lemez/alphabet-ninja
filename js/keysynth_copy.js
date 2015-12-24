@@ -1319,6 +1319,8 @@ $(document).ready(function () {
 
 			// $('.sounds').each(function(i,obj){console.log(obj)});
 
+			$('#facebook').hide();
+			
 			countdown('countdown', 5, false);
 		
 			buildGame(false);
@@ -1534,7 +1536,6 @@ $(document).ready(function () {
 		//  get background to work all the way down beyond initial screen
 
 		$('#left').css("visibility", "visible");
-		$('div.fb-like').hide();
 		// change some layout elements if mobile keyboard is involved
 		if (isMobile) {													// start of isMobile
 				$('#lex p').each(function(){
@@ -1839,8 +1840,8 @@ $(document).ready(function () {
 													}, 5000);
 					
 				} else {
-					$('div.fb-like').show();
-					$("#again p, #again div.fb-like").animate({ fontSize: '100px', top: (Math.floor(Math.random() * 800)) + 'px', opacity: 1}, (Math.floor(Math.random() * 100000)));
+					$('#facebook').show();
+					$("#again p, #facebook").animate({ fontSize: '100px', top: (Math.floor(Math.random() * 800)) + 'px', opacity: 1}, (Math.floor(Math.random() * 100000)));
 
 					$('a#ninjalogo').attr("href", "home.html")
 								.find("img")
