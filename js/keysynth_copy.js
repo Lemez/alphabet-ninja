@@ -1843,14 +1843,14 @@ $(document).ready(function () {
 					
 				} else {
 					$('#facebook').show();
-					$("#again p, #facebook").animate({ fontSize: '100px', top: (Math.floor(Math.random() * 800)) + 'px', opacity: 1}, (Math.floor(Math.random() * 100000)));
+					$("#again").animate({ fontSize: '100px', top: (Math.floor(Math.random() * 800)) + 'px', opacity: 1}, (Math.floor(Math.random() * 100000)));
 
 					$('a#ninjalogo').attr("href", "home.html")
 								.find("img")
 								.css("z-index", 100)
 								.css("position", "fixed");
 
-				$('a#ninjalogo, #again').on('click', function(){
+				$('a#ninjalogo, #again p').on('click', function(){
 					mixpanel.track('Play again');
 				});	
 
