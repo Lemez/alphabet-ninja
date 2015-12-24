@@ -38,19 +38,6 @@ $(document).ready(function () {
 		});
   }
 
- window.fbAsyncInit = function() {
-		    FB.init({
-		      appId      : '1484948608415623',
-		      xfbml      : true,
-		      version    : 'v2.5'
-		    });
- };
-
- function BlockMove(event) {
-  // Tell Safari not to move the window.
-  event.preventDefault() ;
- }
-
   // Now that we've initialized the JavaScript SDK, we call 
   // FB.getLoginStatus().  This function gets the state of the
   // person visiting this page and can return one of three states to
@@ -66,16 +53,6 @@ $(document).ready(function () {
   FB.getLoginStatus(function(response) {
     statusChangeCallback(response);
   });
-
-
-  // Load the SDK asynchronously
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
 
   // Here we run a very simple test of the Graph API after login is
   // successful.  See statusChangeCallback() for when this call is made.
