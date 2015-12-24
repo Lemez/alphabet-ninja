@@ -494,10 +494,11 @@ $(document).ready(function () {
 		"ת" : "audio/Eating_apple_soundsnap.mp3" ,	
 		"success" : "audio/Peppa.mp3",
 		"other" : "audio/3.mp3",
-		"correct" : "audio/p.mp3",
-		"rocket"  : "audio/Rocket_launch_05_SFXBible_ss06674.mp3",
-		"tick"	: "audio/Data_beep_counter_tick_1.mp3"};
+		"correct" : "audio/p.mp3"};
 
+	var LAUNCHSOUNDS = {
+		"rocket"  : "audio/Rocket_launch_05_SFXBible_ss06674.mp3",
+		"tick"	: "audio/Data_beep_counter_tick_1.mp3"}
 	var SOUNDS = {
 	
 			"A" : "audio/Eating_apple_soundsnap.mp3" ,
@@ -538,9 +539,7 @@ $(document).ready(function () {
 			// "9" : "audio/9.mp3" ,
 			"success" : "audio/Peppa.mp3",
 			"other" : "audio/3.mp3",
-			"correct" : "audio/p.mp3",
-			"rocket"  : "audio/Rocket_launch_05_SFXBible_ss06674.mp3",
-			"tick"	: "audio/Data_beep_counter_tick_1.mp3"};
+			"correct" : "audio/p.mp3"};
 	var PICS = {
 		"A" : "apple2.svg",
 		"B" : "bee2.svg",
@@ -648,9 +647,7 @@ $(document).ready(function () {
 		"Ž" :"audio/Frogs_croaking_close_in_a_loop.mp3", //frog,
 		"success" : "audio/Peppa.mp3",
 		"other" : "audio/3.mp3",
-		"correct" : "audio/p.mp3",
-		"rocket"  : "audio/Rocket_launch_05_SFXBible_ss06674.mp3",
-		"tick"	: "audio/Data_beep_counter_tick_1.mp3"};
+		"correct" : "audio/p.mp3"};
 	var CRO_PLAYLIST_ANIMALS = ['LAV', 'MAJMUN', 'OVCA', 'SLON', 'PATKA', 'KONJ', 'ZEBRA', 'ŽABA', 'ĆUK'];
 	var CRO_PLAYLIST_ANIMALS_SOUNDS = {
 		'LAV' : "",
@@ -1190,19 +1187,14 @@ $(document).ready(function () {
 		sessionStorage.setItem("sounds", JSON.stringify(MYSOUNDS));
 		sessionStorage.setItem("pics", JSON.stringify(MYPICS));
 
-		function createSounds(array) {
-			if (array.length < 1) {
-			Object.keys(MYSOUNDS).forEach(function (letter) { 
+		function createSounds(soundsHash) {
+
+				Object.keys(soundsHash).forEach(function (letter) { 
 	    		$('.sounds').append('<audio id="' + letter + '" src="' + 
-	    			MYSOUNDS[letter] + '" preload="auto"></audio>');
-			})
-		} else {
-			array.forEach(function(letter) {
-				$('.sounds').append('<audio id="' + letter + '" src="' + 
-	    			MYSOUNDS[letter] + '" preload="auto"></audio>');
+	    			soundsHash[letter] + '" preload="auto"></audio>');
 			});
+
 		}
-		};
 
 		function playSound(s) {
 			// $('.sounds').append('<audio id="' + s + '" src="' + MYSOUNDS[s] + '" preload="auto"></audio>');
@@ -1273,6 +1265,18 @@ $(document).ready(function () {
 			    }, 1000);
 		};
 
+		function copy(obj) {
+			  var copy = Object.create(Object.getPrototypeOf(obj));
+			  var propNames = Object.getOwnPropertyNames(obj);
+
+			  propNames.forEach(function(name) {
+			    var desc = Object.getOwnPropertyDescriptor(obj, name);
+			    Object.defineProperty(copy, name, desc);
+			  });
+
+			  return copy;
+			}
+
 		function displayNewWord(word) {
 
 			letter = word[0].toUpperCase();
@@ -1321,16 +1325,16 @@ $(document).ready(function () {
 		};
 
 
-			
-
 			// $('.sounds').each(function(i,obj){console.log(obj)});
 
 			// $('#facebook').hide();
 
-			var launchSounds = ['tick','rocket'];
-			createSounds(launchSounds);	
+
+			createSounds(LAUNCHSOUNDS);	
+
 			countdown('countdown', 5, false);
-			createSounds();	
+
+			createSounds(MYSOUNDS);	
 			buildGame(false);
 		}
 
